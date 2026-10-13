@@ -15,7 +15,7 @@ if settings.demo:
     from coursemap.demo import DemoLLM, demo_http
 
     # In-memory store so canned results never land in the real Firestore cache.
-    settings = dataclasses.replace(settings, store="memory", youtube_api_key="demo")
+    settings = dataclasses.replace(settings, store="memory", youtube_api_key="demo", max_videos=50)
     logging.getLogger(__name__).warning("DEMO mode: canned Docker course, no Gemini or YouTube calls")
     deps = Deps(llm=DemoLLM(), store=make_store(settings), http=demo_http(), settings=settings)
 else:

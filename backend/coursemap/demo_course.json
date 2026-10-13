@@ -1,0 +1,953 @@
+{
+ "course": "Docker for developers",
+ "units": [
+  {
+   "title": "Docker fundamentals",
+   "topics": [
+    "What Docker is and why teams use it",
+    "Installing Docker",
+    "Images vs containers",
+    "Docker Hub and Docker Desktop",
+    "Base and parent images"
+   ]
+  },
+  {
+   "title": "Building images",
+   "topics": [
+    "Writing a Dockerfile",
+    "Building an image from a Dockerfile",
+    "The .dockerignore file",
+    "Image tags and versions",
+    "Layer caching",
+    "Multi-stage builds"
+   ]
+  },
+  {
+   "title": "Running containers",
+   "topics": [
+    "Pulling images and running containers",
+    "Port mapping",
+    "Removing images and containers",
+    "Volumes",
+    "Container logs and debugging",
+    "Container networking"
+   ]
+  },
+  {
+   "title": "Shipping",
+   "topics": [
+    "Docker Compose",
+    "Pushing images to Docker Hub",
+    "Running an image on a remote server",
+    "Container security basics"
+   ]
+  }
+ ],
+ "videos": [
+  {
+   "id": "iFiSYMdZWDk",
+   "title": "Docker tutorial in Hindi #1 what is Docker",
+   "duration_s": 549
+  },
+  {
+   "id": "62qemXJfqy0",
+   "title": "Pay After Placement Program for Job | Sharpener Tech",
+   "duration_s": 36
+  },
+  {
+   "id": "4zSTXO7z_3w",
+   "title": "Docker tutorial in Hindi #2 Install docker on windows OS",
+   "duration_s": 205
+  },
+  {
+   "id": "0NIokeWaGqM",
+   "title": "Docker tutorial in Hindi #3 Install docker on mac OS",
+   "duration_s": 253
+  },
+  {
+   "id": "bSe3qawNQEY",
+   "title": "Docker tutorial in Hindi #4 What is Image and container",
+   "duration_s": 522
+  },
+  {
+   "id": "n5yO5IOtV0A",
+   "title": "Docker tutorial in Hindi #5 What is docker hub and docker desktop.",
+   "duration_s": 451
+  },
+  {
+   "id": "JRsD5jRSDv0",
+   "title": "Docker tutorial in Hindi #6 What is base image | parent image",
+   "duration_s": 259
+  },
+  {
+   "id": "hJLNs5zEasw",
+   "title": "Docker tutorial in Hindi #7 Pull or download Image and run container",
+   "duration_s": 719
+  },
+  {
+   "id": "59vN0FcOJIA",
+   "title": "Docker tutorial in Hindi #8 Make Basic Node js app",
+   "duration_s": 498
+  },
+  {
+   "id": "zeYP1rPxL3Y",
+   "title": "Docker tutorial in Hindi #9 Create docker file | make image from docker file",
+   "duration_s": 703
+  },
+  {
+   "id": "GiLj9GibpSw",
+   "title": "Docker tutorial in Hindi #10 Run Project with container",
+   "duration_s": 592
+  },
+  {
+   "id": "5D6FxfrP0KA",
+   "title": "Docker tutorial in Hindi #11 .dockerignore | Docker Ignore File",
+   "duration_s": 439
+  },
+  {
+   "id": "YUYnYsBm114",
+   "title": "Docker tutorial in Hindi #12 Delete Images and Container with terminal",
+   "duration_s": 759
+  },
+  {
+   "id": "PKh2suGoz54",
+   "title": "Docker tutorial in Hindi #13 Manage Versions of images",
+   "duration_s": 539
+  },
+  {
+   "id": "HU1U0H184R0",
+   "title": "Docker tutorial in Hindi #14 Volumes | update container with volume",
+   "duration_s": 725
+  },
+  {
+   "id": "wdjPuDMeHS4",
+   "title": "Docker tutorial in Hindi #15 Compose file",
+   "duration_s": 409
+  },
+  {
+   "id": "l77wncu2G1Q",
+   "title": "Docker tutorial in Hindi #16 Share image on docker hub | push image on docker hub",
+   "duration_s": 479
+  },
+  {
+   "id": "YSImafU_XMA",
+   "title": "Docker tutorial in Hindi #17 Upload Image on server | play-with-docker",
+   "duration_s": 477
+  }
+ ],
+ "analyses": {
+  "iFiSYMdZWDk": {
+   "summary": "An introduction to the Docker series that explains what Docker is and why developers, startups and large companies use it. The instructor uses a version-mismatch story between developers, testers and servers to show how Docker pins exact versions so a project runs the same everywhere.",
+   "hits": [
+    {
+     "topic_id": "U1.T1",
+     "start": "1:40",
+     "depth": "explained",
+     "key_points": [
+      "Docker is a platform to build, share and run applications with containers",
+      "A container is described simply as a box holding everything with specific versions",
+      "Without Docker, version updates over two years break the project on a new developer's machine, the tester's machine or the server",
+      "Docker is technology independent and works with Java, PHP, Python, Node, Angular and others"
+     ]
+    }
+   ]
+  },
+  "62qemXJfqy0": {
+   "summary": "A promotional ad for a job-ready training program by Sharpener Tech. It covers projects, mock interviews and resume help, with payment due only after placement, and teaches no Docker content.",
+   "hits": []
+  },
+  "4zSTXO7z_3w": {
+   "summary": "Shows how to download and install Docker Desktop on Windows. It walks through the download page, the installer options and the restart needed after installation.",
+   "hits": [
+    {
+     "topic_id": "U1.T2",
+     "start": "0:20",
+     "depth": "explained",
+     "key_points": [
+      "Search 'docker download'; the site detects your operating system",
+      "Download Docker Desktop for Windows and run the installer like a normal setup (next, accept agreement)",
+      "The installer offers Hyper-V and a desktop shortcut option; restart the system after installing",
+      "Docker works best on recent Windows (10/11); older versions like 7 may need extra steps"
+     ]
+    }
+   ]
+  },
+  "0NIokeWaGqM": {
+   "summary": "Shows how to download and install Docker Desktop on macOS. It covers picking the Apple-chip or Intel build, installing by drag and drop, and checking the version in the terminal.",
+   "hits": [
+    {
+     "topic_id": "U1.T2",
+     "start": "0:20",
+     "depth": "explained",
+     "key_points": [
+      "Three steps: download from the official site, install, then verify from the command line",
+      "Check 'About This Mac' to choose between the Apple chip and Intel chip download",
+      "Double-click the download and drag Docker into Applications, then accept terms and use recommended settings",
+      "Run 'docker -v' in a new terminal to confirm the installed version"
+     ]
+    }
+   ]
+  },
+  "bSe3qawNQEY": {
+   "summary": "Explains the difference between Docker images and containers. An image is a read-only template of the project and a container is an isolated, runnable instance of that image.",
+   "hits": [
+    {
+     "topic_id": "U1.T3",
+     "start": "1:00",
+     "depth": "explained",
+     "key_points": [
+      "An image is a ready-to-use, read-only template containing source code, libraries, dependencies and tools",
+      "An image cannot be updated; any change means creating a new image, and an image is never run directly",
+      "A container is a runnable instance of an image, like an object created from a class",
+      "A container is an isolated process: it uses the Node version from its image (e.g. Node 16) even if the host has Node 20"
+     ]
+    }
+   ]
+  },
+  "n5yO5IOtV0A": {
+   "summary": "Introduces Docker Hub, the online registry for searching and pulling images, and Docker Desktop, the local app installed with Docker. It also briefly introduces parent images such as Node, which you download rather than build yourself.",
+   "hits": [
+    {
+     "topic_id": "U1.T4",
+     "start": "0:00",
+     "depth": "explained",
+     "key_points": [
+      "Docker Hub is an online tool used in the browser; Docker Desktop is installed on your machine along with Docker",
+      "Docker Hub lists images such as Node, Mongo and PHP with versions, docs and an official-image badge",
+      "Docker Desktop can also search and pull images and shows containers and volumes",
+      "The main purpose of both is to download (pull) and manage images"
+     ]
+    },
+    {
+     "topic_id": "U1.T5",
+     "start": "1:00",
+     "depth": "mentioned",
+     "key_points": [
+      "A React app image needs Node, so the Node image is its parent image",
+      "You build your own application image, but parent images like Node or Mongo are downloaded from Docker Hub",
+      "Images come in two types: your project's image and parent images; details are deferred to the next part"
+     ]
+    },
+    {
+     "topic_id": "U3.T1",
+     "start": "3:00",
+     "depth": "mentioned",
+     "key_points": [
+      "Docker Hub shows the 'docker pull node' command for an image",
+      "Pull means download; images can be pulled or run from Docker Desktop or by command"
+     ]
+    }
+   ]
+  },
+  "JRsD5jRSDv0": {
+   "summary": "Explains what a base image (also called a parent image) is and how your own project image is built on top of it. Uses Node, PHP and Python images from Docker Hub as examples of base images you pull rather than build yourself.",
+   "hits": [
+    {
+     "topic_id": "U1.T5",
+     "start": "0:20",
+     "depth": "explained",
+     "key_points": [
+      "Base image and parent image are the same thing",
+      "Your project image depends on a base image such as Node, PHP or Python that you cannot build yourself",
+      "The base image is pulled first and your code is layered on top to make a separate image",
+      "In a Dockerfile the base image comes first, then your own additions"
+     ]
+    },
+    {
+     "topic_id": "U1.T3",
+     "start": "1:40",
+     "depth": "mentioned",
+     "key_points": [
+      "Building a Dockerfile produces an image",
+      "Running an image produces a container"
+     ]
+    },
+    {
+     "topic_id": "U1.T4",
+     "start": "2:20",
+     "depth": "mentioned",
+     "key_points": [
+      "Base images are pulled from Docker Hub with the help of Docker Desktop",
+      "Searching hub.docker.com shows official images with their pull command"
+     ]
+    },
+    {
+     "topic_id": "U2.T4",
+     "start": "3:40",
+     "depth": "mentioned",
+     "key_points": [
+      "Docker Hub lists the supported tags for an image so you can choose a version"
+     ]
+    }
+   ]
+  },
+  "hJLNs5zEasw": {
+   "summary": "Pulls ready-made Node and PHP images from Docker Hub, using both the Docker Desktop pull button and the docker pull command. Runs each image as a container, opens a terminal inside it and runs Node and PHP code to show the container works independently of the host.",
+   "hits": [
+    {
+     "topic_id": "U3.T1",
+     "start": "0:20",
+     "depth": "explained",
+     "key_points": [
+      "Pulling an image is the same as downloading it",
+      "You can pull with Docker Desktop or with the docker pull command (e.g. docker pull node), and commands are the same on Mac, Windows and Linux",
+      "Running the image creates a container with an auto-generated name unless you give one",
+      "Inside the container's terminal, node and php -r commands run even though PHP is not installed on the host"
+     ]
+    },
+    {
+     "topic_id": "U1.T4",
+     "start": "2:00",
+     "depth": "explained",
+     "key_points": [
+      "Docker Desktop has a search box to find images on Docker Hub and a Pull button",
+      "Pulled images appear in Docker Desktop's Images section",
+      "The RAM, CPU and disk shown are what is assigned to Docker Desktop's virtual machine, not the whole system"
+     ]
+    },
+    {
+     "topic_id": "U2.T4",
+     "start": "4:20",
+     "depth": "mentioned",
+     "key_points": [
+      "The pulled Node image is the latest tag, and many other versions are listed"
+     ]
+    },
+    {
+     "topic_id": "U1.T3",
+     "start": "6:20",
+     "depth": "mentioned",
+     "key_points": [
+      "A container runs like its own server, independent of the Node version on your machine",
+      "Two containers can hold two different PHP versions"
+     ]
+    }
+   ]
+  },
+  "59vN0FcOJIA": {
+   "summary": "Builds a basic Node.js Express app with a root route that returns a list of users, to be dockerized in later parts. Runs it locally on port 5500 after port 5000 turns out to be in use; no Docker commands are used yet.",
+   "hits": []
+  },
+  "zeYP1rPxL3Y": {
+   "summary": "Writes a Dockerfile for the Node app using FROM, COPY, RUN npm install, EXPOSE and CMD, with the VS Code Docker extension for hints. Builds the image with docker build -t and checks it in Docker Desktop and with docker images, noting its 1.1 GB size comes from the Node base image.",
+   "hits": [
+    {
+     "topic_id": "U2.T1",
+     "start": "1:40",
+     "depth": "explained",
+     "key_points": [
+      "Create a file named Dockerfile with no extension (touch Dockerfile or new file)",
+      "FROM node:latest sets the base image, COPY . . copies the project, RUN npm install installs dependencies",
+      "EXPOSE should use the same port the app listens on (5500)",
+      "CMD takes the command as an array, e.g. [\"node\", \"index.js\"]; WORKDIR sets a working folder"
+     ]
+    },
+    {
+     "topic_id": "U1.T5",
+     "start": "4:20",
+     "depth": "mentioned",
+     "key_points": [
+      "FROM asks for the base image, here node with the latest version",
+      "The built image is about the same size as the Node image because Node is its base"
+     ]
+    },
+    {
+     "topic_id": "U2.T2",
+     "start": "9:00",
+     "depth": "explained",
+     "key_points": [
+      "docker build -t basic-app . builds an image from the Dockerfile",
+      "-t gives the image its name and . is the build folder",
+      "The new image shows in Docker Desktop and in docker images",
+      "The image is 1.1 GB, almost all of it from the Node base image"
+     ]
+    },
+    {
+     "topic_id": "U2.T4",
+     "start": "9:20",
+     "depth": "mentioned",
+     "key_points": [
+      "The -t flag tags the image with a name (basic-app)"
+     ]
+    },
+    {
+     "topic_id": "U2.T3",
+     "start": "11:00",
+     "depth": "mentioned",
+     "key_points": [
+      "There is also a .dockerignore file, covered later"
+     ]
+    }
+   ]
+  },
+  "GiLj9GibpSw": {
+   "summary": "Runs the basic-app image as a container from Docker Desktop and shows how to assign a host port so the app is reachable in the browser. Compares a fixed port, no port (the app runs but cannot be reached from outside) and port 0, which assigns a random host port to avoid conflicts.",
+   "hits": [
+    {
+     "topic_id": "U3.T1",
+     "start": "1:20",
+     "depth": "explained",
+     "key_points": [
+      "Clicking Run on an image in Docker Desktop creates a container from it",
+      "Optional settings let you name the container",
+      "Stopping the container makes the app unreachable and starting it again brings it back"
+     ]
+    },
+    {
+     "topic_id": "U3.T2",
+     "start": "1:40",
+     "depth": "explained",
+     "key_points": [
+      "Without a host port the container runs but cannot be reached from outside",
+      "The host port can be anything (e.g. 7000) while the app listens on 5500 inside; keeping them the same avoids confusion",
+      "Setting the host port to 0 assigns a random port (e.g. 32769) so containers never conflict",
+      "Done through Docker Desktop's optional settings, not the -p flag"
+     ]
+    },
+    {
+     "topic_id": "U3.T5",
+     "start": "3:00",
+     "depth": "mentioned",
+     "key_points": [
+      "The container's logs show the app's output, 'app is running on 5500'"
+     ]
+    },
+    {
+     "topic_id": "U1.T1",
+     "start": "4:00",
+     "depth": "mentioned",
+     "key_points": [
+      "Installing everything on a server one by one risks errors and version differences",
+      "Passing an image to the server and running it avoids those problems"
+     ]
+    },
+    {
+     "topic_id": "U4.T3",
+     "start": "4:40",
+     "depth": "mentioned",
+     "key_points": [
+      "The image will be taken to a server and run there, shown in a later part"
+     ]
+    },
+    {
+     "topic_id": "U3.T3",
+     "start": "5:20",
+     "depth": "mentioned",
+     "key_points": [
+      "Stop a container and wait a few seconds before deleting it",
+      "Containers are deleted from Docker Desktop's container list"
+     ]
+    }
+   ]
+  },
+  "5D6FxfrP0KA": {
+   "summary": "Explains the .dockerignore file, which keeps listed files and folders out of a Docker image. Shows ignoring a single file, the node_modules folder, and every file with a given extension using *.txt.",
+   "hits": [
+    {
+     "topic_id": "U2.T3",
+     "start": "0:40",
+     "depth": "explained",
+     "key_points": [
+      "Files or folders named in .dockerignore are never added to the image",
+      "Always ignore node_modules: it is heavy and slows building, moving and running, and RUN npm install recreates it from package.json",
+      "*.txt ignores every file with the .txt extension"
+     ]
+    }
+   ]
+  },
+  "YUYnYsBm114": {
+   "summary": "Shows why and how to delete Docker images and containers, first through Docker Desktop and then from the terminal. Covers why an image in use by a container cannot be removed directly and how to force-delete images and running containers.",
+   "hits": [
+    {
+     "topic_id": "U3.T3",
+     "start": "1:40",
+     "depth": "explained",
+     "key_points": [
+      "Images are read-only and never updated, so old images pile up and must be deleted to free server or local space",
+      "Docker Desktop has a delete option next to each image and container",
+      "An image used by any container (running, exited or stopped) cannot be deleted until that container is removed, or it is forced with -f",
+      "From the terminal, docker images lists images; a running container must be stopped or removed with -f"
+     ]
+    },
+    {
+     "topic_id": "U1.T4",
+     "start": "0:20",
+     "depth": "mentioned",
+     "key_points": [
+      "Docker Desktop is convenient for deleting images and containers on a local machine",
+      "On servers such as AWS or Google Cloud you will usually need the command line instead"
+     ]
+    },
+    {
+     "topic_id": "U1.T3",
+     "start": "1:40",
+     "depth": "mentioned",
+     "key_points": [
+      "An image is read-only and cannot be updated; a change always produces a new image",
+      "Containers are created from images, which is why an in-use image is locked"
+     ]
+    },
+    {
+     "topic_id": "U2.T2",
+     "start": "3:20",
+     "depth": "mentioned",
+     "key_points": [
+      "Creates extra images with docker build -t and an image name to have something to delete"
+     ]
+    },
+    {
+     "topic_id": "U3.T1",
+     "start": "6:20",
+     "depth": "mentioned",
+     "key_points": [
+      "Runs a couple of the new images as named containers with a port so they are in use"
+     ]
+    }
+   ]
+  },
+  "PKh2suGoz54": {
+   "summary": "Explains what a version is and why Docker images should be versioned with tags instead of given new names for each release. Demonstrates wiping everything with a prune command, building an image with a v2 tag and running that version in its own container.",
+   "hits": [
+    {
+     "topic_id": "U2.T4",
+     "start": "1:00",
+     "depth": "explained",
+     "key_points": [
+      "A new release with UI changes, performance fixes or bug fixes is a new version, like Windows 7, 8, 10, 11",
+      "Match the image version to the project version (e.g. v10) so you know what is running on the server",
+      "Using a separate name per release gets unmanageable (5 projects x 10 versions = 50 names)",
+      "Building without a version gives the tag latest; adding :v2 to the name in docker build -t gives tag v2"
+     ]
+    },
+    {
+     "topic_id": "U3.T3",
+     "start": "3:40",
+     "depth": "explained",
+     "key_points": [
+      "docker system prune deletes all containers and images in one go after you confirm with yes",
+      "Docker Desktop may need reopening or refreshing before the deletions show"
+     ]
+    },
+    {
+     "topic_id": "U3.T1",
+     "start": "7:20",
+     "depth": "explained",
+     "key_points": [
+      "Runs the basic-app:v2 image with docker run from the terminal, giving the container its own name",
+      "The old and new versions run side by side as separate containers"
+     ]
+    },
+    {
+     "topic_id": "U3.T2",
+     "start": "8:20",
+     "depth": "mentioned",
+     "key_points": [
+      "The v2 container is opened on localhost on port 5500"
+     ]
+    }
+   ]
+  },
+  "HU1U0H184R0": {
+   "summary": "Explains Docker volumes as a way to keep data permanently and sync code changes into a running container without rebuilding the image. Sets up nodemon, updates the Dockerfile, and runs a container with a volume mount so edits appear live.",
+   "hits": [
+    {
+     "topic_id": "U3.T4",
+     "start": "2:20",
+     "depth": "explained",
+     "key_points": [
+      "Data stored inside a container is temporary and is lost when the container is deleted",
+      "A volume stores data permanently and keeps it synced with the container",
+      "Without a volume, local code changes need a rebuilt image and a new container; with a volume plus nodemon they show up automatically",
+      "Mount with -v using the absolute project path (not relative) followed by :/app"
+     ]
+    },
+    {
+     "topic_id": "U2.T1",
+     "start": "6:00",
+     "depth": "explained",
+     "key_points": [
+      "Adds an npm install step to the Dockerfile so nodemon is installed in the image",
+      "Sets WORKDIR /app so the app works inside an app folder rather than the root"
+     ]
+    },
+    {
+     "topic_id": "U2.T2",
+     "start": "7:20",
+     "depth": "mentioned",
+     "key_points": [
+      "Rebuilds a fresh image with docker build -t after the code change; -t stands for tag"
+     ]
+    },
+    {
+     "topic_id": "U3.T1",
+     "start": "7:40",
+     "depth": "mentioned",
+     "key_points": [
+      "Runs the container from the command line with docker run and a container name (basic-container)"
+     ]
+    },
+    {
+     "topic_id": "U3.T2",
+     "start": "8:00",
+     "depth": "mentioned",
+     "key_points": [
+      "Maps the app port with -p 5500:5500, using the same port the app listens on"
+     ]
+    }
+   ]
+  },
+  "wdjPuDMeHS4": {
+   "summary": "Introduces the Docker compose file as a place to keep the long Docker commands a growing project needs. Writes a small compose.yaml with one service (build path and ports) and runs it to create the image and container.",
+   "hits": [
+    {
+     "topic_id": "U4.T1",
+     "start": "1:00",
+     "depth": "explained",
+     "key_points": [
+      "Docker commands for building, running, ports and so on get long and hard to remember, so they go in a compose.yaml file",
+      "One compose file can cover a whole stack, such as a React frontend, Node backend and MongoDB",
+      "The file lists services; each has a build path ('.' for the current folder) and ports",
+      "Running the compose file builds the image and starts the container; a 'services not valid' error was fixed by correcting indentation"
+     ]
+    }
+   ]
+  },
+  "l77wncu2G1Q": {
+   "summary": "Explains Docker Hub as a registry of public and private images and walks through creating a repository and pushing a local image to it. Then deletes the local copy, pulls the image back from Docker Hub and runs it.",
+   "hits": [
+    {
+     "topic_id": "U1.T4",
+     "start": "0:40",
+     "depth": "explained",
+     "key_points": [
+      "Docker Hub is a repository of images where many public images are available",
+      "Official images exist for languages and frameworks, e.g. PHP and Node",
+      "Repositories can be public or private; you sign up and log in with email and password"
+     ]
+    },
+    {
+     "topic_id": "U4.T2",
+     "start": "2:20",
+     "depth": "explained",
+     "key_points": [
+      "Create a repository on Docker Hub first; it shows the docker push command to use",
+      "Build the image locally with the repository name, then run docker login in the terminal",
+      "docker push uploads the image, using the latest tag by default; time depends on image size and internet speed"
+     ]
+    },
+    {
+     "topic_id": "U3.T1",
+     "start": "6:20",
+     "depth": "explained",
+     "key_points": [
+      "Copy the pull command from the repository's public view",
+      "docker pull with the image name downloads it; an 'authorization required' message appeared during the demo",
+      "The pulled image is then run on a port with a container name"
+     ]
+    },
+    {
+     "topic_id": "U2.T4",
+     "start": "5:00",
+     "depth": "mentioned",
+     "key_points": [
+      "The push uses the default latest tag, which then appears on Docker Hub"
+     ]
+    }
+   ]
+  },
+  "YSImafU_XMA": {
+   "summary": "Shows how to put an application live on a remote server using Play with Docker. Builds the image for linux/amd64, pushes it to a Docker Hub repository, then pulls and runs it on a Play with Docker instance and opens the app on port 5500.",
+   "hits": [
+    {
+     "topic_id": "U4.T3",
+     "start": "4:20",
+     "depth": "explained",
+     "key_points": [
+      "Play with Docker is a free learning tool that keeps an app live for about four hours, not permanently",
+      "Sign in (preferably with Docker Hub) and create an instance, which gives a separate OS with Docker already installed",
+      "Pull the image using the command from the Docker Hub public view, check with docker images, then docker run -p 5500:5500",
+      "Open the app through the port link, or use 'open port' and enter 5500"
+     ]
+    },
+    {
+     "topic_id": "U4.T2",
+     "start": "1:00",
+     "depth": "explained",
+     "key_points": [
+      "Create a public repository on Docker Hub (e.g. node-demo-app)",
+      "Name the image as account-name/repository-name when building",
+      "Push it, and after refresh the latest tag shows OS/architecture linux/amd64"
+     ]
+    },
+    {
+     "topic_id": "U2.T2",
+     "start": "2:00",
+     "depth": "explained",
+     "key_points": [
+      "The usual docker build -t name . needs a platform flag to target a different OS",
+      "Play with Docker uses linux/amd64, so the build passes --platform linux/amd64",
+      "On Windows you may need the = sign in the platform flag; on Mac it worked without it"
+     ]
+    },
+    {
+     "topic_id": "U3.T2",
+     "start": "6:00",
+     "depth": "mentioned",
+     "key_points": [
+      "Runs with -p 5500:5500, keeping both ports the same to avoid confusion"
+     ]
+    }
+   ]
+  }
+ },
+ "suggestions": {
+  "Layer caching": [
+   {
+    "id": "RVc_rhd0mbM",
+    "title": "Dockerfile Layers & Cache Explained | Speed Up Docker Builds (Hands-on)",
+    "channel": "Shubham gour"
+   },
+   {
+    "id": "6nC0-FdhFRU",
+    "title": "Optimizing Docker Images | Base Images, Caching & Dependencies | Hindi",
+    "channel": "EducationForever"
+   }
+  ],
+  "Multi-stage builds": [
+   {
+    "id": "hX2UAHhX8E8",
+    "title": "Docker Image Optimisation - Production-Ready Docker Guide",
+    "channel": "Piyush Garg"
+   },
+   {
+    "id": "yyJrZgoNal0",
+    "title": "Multi Stage Docker Builds | Reduce Image Size | Distroless Container Images",
+    "channel": "Abhishek.Veeramalla"
+   }
+  ],
+  "Container logs and debugging": [
+   {
+    "id": "7XolguBenuI",
+    "title": "Docker Logs Tutorial: Everything You Need to Know | In Hindi",
+    "channel": "CloudFolks HUB Hindi"
+   }
+  ],
+  "Container networking": [
+   {
+    "id": "6t2NhkRsmuA",
+    "title": "Docker Networking | Networking Tutorial in Hindi",
+    "channel": "Piyush Garg"
+   },
+   {
+    "id": "0K2aYAUaOwM",
+    "title": "Docker Networking (Bridge) in Hindi",
+    "channel": "Cloud Tech Burner"
+   }
+  ],
+  "Container security basics": [
+   {
+    "id": "8vXoMqWgbQQ",
+    "title": "Top 8 Docker Best Practices for using Docker in Production",
+    "channel": "TechWorld with Nana"
+   },
+   {
+    "id": "TyNGjP3PbLo",
+    "title": "Docker Container Image Security: 13 Best Practices",
+    "channel": "CyberJAR"
+   }
+  ]
+ },
+ "questions": {
+  "Docker fundamentals": [
+   {
+    "marks": 2,
+    "topic_id": "U1.T3",
+    "text": "What is the difference between a Docker image and a container?",
+    "answer_points": [
+     "An image is a read-only template with the code, libraries and tools",
+     "A container is a running instance created from an image"
+    ]
+   },
+   {
+    "marks": 5,
+    "topic_id": "U1.T1",
+    "text": "A project works on your laptop but breaks on the tester's machine and the server. How does Docker fix this?",
+    "answer_points": [
+     "The app is packaged with its dependencies at fixed versions",
+     "The same image runs the same way on every machine",
+     "Nothing has to be installed on the server one by one",
+     "A container uses its image's versions, not the host's",
+     "It works for any stack, such as Node, Java or Python"
+    ]
+   },
+   {
+    "marks": 2,
+    "topic_id": "U1.T5",
+    "text": "What is a base image? Give an example for a Node.js app.",
+    "answer_points": [
+     "The image your own image is built on top of, set with FROM",
+     "For a Node app it is the node image from Docker Hub"
+    ]
+   }
+  ],
+  "Building images": [
+   {
+    "marks": 5,
+    "topic_id": "U2.T1",
+    "text": "Write a Dockerfile for a Node app that listens on port 5500, and say what each line does.",
+    "answer_points": [
+     "FROM node sets the base image",
+     "WORKDIR /app sets the working folder",
+     "COPY . . copies the project and RUN npm install installs dependencies",
+     "EXPOSE 5500 documents the port the app listens on",
+     "CMD [\"node\", \"index.js\"] starts the app"
+    ]
+   },
+   {
+    "marks": 2,
+    "topic_id": "U2.T3",
+    "text": "Why should node_modules go in .dockerignore?",
+    "answer_points": [
+     "It is heavy and slows building and moving the image",
+     "RUN npm install recreates it inside the image from package.json"
+    ]
+   },
+   {
+    "marks": 2,
+    "topic_id": "U2.T4",
+    "text": "How do you keep version 1 and version 2 of the same image side by side?",
+    "answer_points": [
+     "Tag each build with a version, such as basic-app:v2",
+     "A build without a version gets the tag latest"
+    ]
+   },
+   {
+    "marks": 5,
+    "topic_id": "U2.T5",
+    "text": "Every code change makes your image reinstall all npm packages. Why, and how do you fix it?",
+    "answer_points": [
+     "Each instruction is a cached layer",
+     "COPY . . before npm install breaks the cache on any code change",
+     "Copy package.json and package-lock.json first",
+     "Run npm install in its own layer",
+     "Copy the rest of the code after"
+    ]
+   },
+   {
+    "marks": 5,
+    "topic_id": "U2.T6",
+    "text": "Your Node image is 1.1 GB. How would a multi-stage build shrink it?",
+    "answer_points": [
+     "Build in a first stage that has the full toolchain",
+     "Start a second stage from a slim base image",
+     "Copy only the built output and production dependencies with COPY --from",
+     "Dev tools and sources stay out of the final image",
+     "The image gets smaller and safer"
+    ]
+   }
+  ],
+  "Running containers": [
+   {
+    "marks": 5,
+    "topic_id": "U3.T2",
+    "text": "Your app listens on 5500 inside the container, but localhost:5500 does not open. What is wrong and how do you fix it?",
+    "answer_points": [
+     "The container's port is not published to the host",
+     "Publish it with -p hostPort:containerPort, such as -p 5500:5500",
+     "The host port can differ from the container port, such as 7000:5500",
+     "Host port 0 picks a random free port",
+     "The app must listen on the container port you publish"
+    ]
+   },
+   {
+    "marks": 2,
+    "topic_id": "U3.T3",
+    "text": "Why can't you delete an image that a stopped container still uses?",
+    "answer_points": [
+     "Containers are created from the image, so it stays locked",
+     "Remove the container first, or force it with -f"
+    ]
+   },
+   {
+    "marks": 5,
+    "topic_id": "U3.T4",
+    "text": "You edit your code but the running container doesn't change. How do volumes help?",
+    "answer_points": [
+     "Data inside a container is temporary and lost when it is deleted",
+     "A volume keeps files on the host in sync with the container",
+     "Mount it with -v using the absolute project path, such as -v /path/to/app:/app",
+     "With nodemon the app reloads on every change",
+     "No new image or container is needed for each edit"
+    ]
+   },
+   {
+    "marks": 2,
+    "topic_id": "U3.T5",
+    "text": "A container stops right after it starts. Which commands show you why?",
+    "answer_points": [
+     "docker ps -a shows the container and its exit status",
+     "docker logs shows what the app printed"
+    ]
+   },
+   {
+    "marks": 5,
+    "topic_id": "U3.T6",
+    "text": "Your Node container must connect to a MongoDB container. How do they find each other?",
+    "answer_points": [
+     "Create a user-defined network with docker network create",
+     "Attach both containers to it with --network",
+     "Containers reach each other by container name",
+     "The default bridge network has no name lookup",
+     "Only publish ports needed from outside"
+    ]
+   }
+  ],
+  "Shipping": [
+   {
+    "marks": 5,
+    "topic_id": "U4.T1",
+    "text": "Why use a compose file, and what goes in it for a single Node service?",
+    "answer_points": [
+     "Long build and run commands are hard to remember",
+     "compose.yaml lists the services",
+     "Each service has a build path such as .",
+     "Each service lists its ports",
+     "One command builds the image and starts the container"
+    ]
+   },
+   {
+    "marks": 5,
+    "topic_id": "U4.T3",
+    "text": "Walk through getting an image from your laptop running on a fresh server.",
+    "answer_points": [
+     "Create a repository on Docker Hub",
+     "Name the image account-name/repository-name and docker push it after docker login",
+     "On the server, docker pull the image",
+     "Run it with docker run -p 5500:5500",
+     "Open the app on the published port"
+    ]
+   },
+   {
+    "marks": 2,
+    "topic_id": "U4.T2",
+    "text": "An image built on an Apple-chip Mac won't run on a Linux server. Why, and how do you fix it?",
+    "answer_points": [
+     "The image was built for a different CPU architecture",
+     "Build with --platform linux/amd64"
+    ]
+   },
+   {
+    "marks": 5,
+    "topic_id": "U4.T4",
+    "text": "Name ways to make a production container more secure.",
+    "answer_points": [
+     "Use small, official base images",
+     "Run as a non-root user",
+     "Keep secrets out of the image",
+     "Scan images for vulnerabilities",
+     "Rebuild regularly to pick up patches"
+    ]
+   }
+  ]
+ }
+}
