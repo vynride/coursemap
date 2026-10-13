@@ -1,18 +1,12 @@
 import { Play, Plus } from "lucide-react";
-import { fmt, type Job, type Moment, type Suggestion } from "./api";
+import { fmt, type Job, type Moment } from "./api";
+import { suggestionMoment } from "./CoursePanel";
 
 const STATUS = {
   covered: { label: "Taught", badge: "badge-green" },
   partial: { label: "Mentioned", badge: "badge-clay" },
   gap: { label: "Missing", badge: "badge-red" },
 } as const;
-
-function suggestionMoment(s: Suggestion): Moment {
-  return {
-    video_id: s.video_id, video_title: s.title, position: -1, start_s: 0, depth: "explained",
-    key_points: [`From ${s.channel}. Not part of your playlist.`],
-  };
-}
 
 const same = (a: Moment | null, b: Moment) => !!a && a.video_id === b.video_id && a.start_s === b.start_s;
 
