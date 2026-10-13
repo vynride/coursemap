@@ -44,8 +44,8 @@ export default function NewJobForm({ onCreated }: { onCreated: (id: string) => v
   return (
     <div className="home">
       <h1 className="hero-title">
-        Turn your YouTube playlist into a course.
-        <span>Know what it teaches, and what it skips.</span>
+        Turn your <span className="yt">YouTube</span> playlist into a course.
+        <span className="sub">Know what it teaches, and what it skips.</span>
       </h1>
       <p className="hero-lede">
         Paste a playlist and the topics you want to learn. CourseMap maps every topic to the moment it is taught,

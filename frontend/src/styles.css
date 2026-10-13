@@ -116,7 +116,8 @@ textarea.input { resize: vertical; line-height: 1.6; }
 /* ---------- New course ---------- */
 .home { max-width: 640px; margin: 40px auto 0; }
 .hero-title { font-size: 2rem; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
-.hero-title span { display: block; color: var(--text-subtle); }
+.hero-title .sub { display: block; color: var(--text-subtle); }
+.hero-title .yt { color: var(--red); }
 .hero-lede { margin-top: 12px; color: var(--text-muted); font-size: .95rem; line-height: 1.65; }
 .form { margin-top: 28px; padding: 22px; display: grid; gap: 18px; }
 .or { display: flex; align-items: center; gap: 12px; color: var(--text-subtle); font-size: .74rem; }
