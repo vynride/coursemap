@@ -1648,9 +1648,9 @@ QUESTIONS_OUT = QuestionsOut(questions=[
 ])
 
 
-def make_llm(**overrides):
+def make_llm(overrides=None):
     responses = {SyllabusOut: SYLLABUS_OUT, VideoOut: video_response, QuestionsOut: QUESTIONS_OUT}
-    responses.update(overrides)
+    responses.update(overrides or {})
     return FakeLLM(responses)
 
 
@@ -1685,7 +1685,7 @@ async def test_one_failed_video_does_not_fail_job(youtube_http):
             raise RuntimeError("model blew up")
         return video_response(parts)
 
-    deps = Deps(llm=make_llm(**{VideoOut: flaky}), store=MemoryStore(), http=youtube_http,
+    deps = Deps(llm=make_llm({VideoOut: flaky}), store=MemoryStore(), http=youtube_http,
                 settings=Settings(youtube_api_key="k"))
     job = await start(deps)
     assert job.status == "done"
@@ -1695,7 +1695,7 @@ async def test_one_failed_video_does_not_fail_job(youtube_http):
 
 
 async def test_all_videos_failing_fails_job(youtube_http):
-    deps = Deps(llm=make_llm(**{VideoOut: RuntimeError("down")}), store=MemoryStore(), http=youtube_http,
+    deps = Deps(llm=make_llm({VideoOut: RuntimeError("down")}), store=MemoryStore(), http=youtube_http,
                 settings=Settings(youtube_api_key="k"))
     job = await start(deps)
     assert job.status == "failed"
