@@ -66,6 +66,8 @@ cd backend && DEMO=1 STATIC_DIR=../frontend/dist uv run uvicorn coursemap.main:a
 # open http://localhost:8000
 ```
 
+**One-command demo on Windows (no uv needed).** With git and Python 3.11+ installed, download `run_windows.py` into any folder and run `python run_windows.py`. It clones the repo into `.\coursemap`, installs Node.js with winget if it is missing, builds the frontend, creates a venv from `backend/requirements.txt` and starts demo mode at http://localhost:8765. Run it again to update and restart. It also works on macOS and Linux.
+
 **With Gemini and YouTube.** Copy `backend/.env.example` to `backend/.env` and fill in `GOOGLE_CLOUD_PROJECT` and `YOUTUBE_API_KEY` (or set `GOOGLE_GENAI_USE_VERTEXAI=false` and `GEMINI_API_KEY` to use AI Studio instead of Vertex AI). Log in with `gcloud auth application-default login`.
 
 ```bash
