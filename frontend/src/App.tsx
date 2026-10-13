@@ -1,3 +1,4 @@
+import { Plus, Route } from "lucide-react";
 import { useEffect, useState } from "react";
 import JobView from "./JobView";
 import NewJobForm from "./NewJobForm";
@@ -17,16 +18,26 @@ export default function App() {
   }, []);
 
   return (
-    <div className="app">
-      <header className="top">
-        <a href="#/" className="brand">CourseMap</a>
-        <span className="tag">Your YouTube playlist, run like a college course</span>
+    <>
+      <header className="topbar">
+        <a href="#/" className="brand">
+          <span className="brand-mark"><Route size={17} strokeWidth={2.2} /></span>
+          <span>
+            <span className="brand-name">CourseMap</span>
+            <span className="brand-by" style={{ display: "block" }}>Your YouTube playlist, run like a college course</span>
+          </span>
+        </a>
+        {jobId && (
+          <a href="#/" className="btn-outline"><Plus size={15} /> New course</a>
+        )}
       </header>
-      {jobId ? (
-        <JobView key={jobId} jobId={jobId} />
-      ) : (
-        <NewJobForm onCreated={(id) => { window.location.hash = `#/job/${id}`; }} />
-      )}
-    </div>
+      <main className="page" key={jobId ?? "home"}>
+        {jobId ? (
+          <JobView jobId={jobId} />
+        ) : (
+          <NewJobForm onCreated={(id) => { window.location.hash = `#/job/${id}`; }} />
+        )}
+      </main>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import { ClipboardCheck, Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { fmt, type Job, type Moment, type Video } from "./api";
 import { buildPlan, hours } from "./plan";
@@ -50,53 +51,73 @@ export default function PlanTab({ job, onPlay, onPractice }: {
     setSettings((s) => ({ ...s, done: s.done.includes(id) ? s.done.filter((x) => x !== id) : [...s.done, id] }));
   }
 
-  if (weeks.length === 0) return <p className="muted">No videos to plan.</p>;
+  if (weeks.length === 0) return <div className="card empty">There are no videos to plan.</div>;
   return (
     <div>
-      <div className="unit plan-settings">
-        <label>Start date
-          <input type="date" value={settings.start} onChange={(e) => e.target.value && setSettings({ ...settings, start: e.target.value })} />
+      <div className="card plan-controls">
+        <label className="field">
+          <span className="field-label">Start date</span>
+          <input className="input" type="date" value={settings.start}
+            onChange={(e) => e.target.value && setSettings({ ...settings, start: e.target.value })} />
         </label>
-        <label>Hours per week
-          <input type="number" min={0.5} max={40} step={0.5} value={settings.hoursPerWeek}
+        <label className="field">
+          <span className="field-label">Hours per week</span>
+          <input className="input" type="number" min={0.5} max={40} step={0.5} value={settings.hoursPerWeek}
             onChange={(e) => setSettings({ ...settings, hoursPerWeek: Number(e.target.value) || 3 })} />
         </label>
         <div className="plan-status">
-          <b>{watched} of {job.videos.length}</b> videos watched · {weeks.length} weeks, finishing {DATE.format(weeks[weeks.length - 1].due)}
-          <div className={behind ? "late" : "ontrack"}>{behind ? `${behind} week${behind > 1 ? "s" : ""} behind` : "On track"}</div>
+          <span className={`badge ${behind ? "badge-red" : "badge-green"}`}>
+            {behind ? `${behind} week${behind > 1 ? "s" : ""} behind` : "On track"}
+          </span>
+          <b style={{ marginTop: 6 }}>{watched} of {job.videos.length} videos watched</b>
+          <span>{weeks.length} weeks · finishes {DATE.format(weeks[weeks.length - 1].due)}</span>
         </div>
       </div>
-      {weeks.map((week) => {
-        const complete = week.videos.every((v) => done.has(v.id));
-        const late = !complete && week.due < now;
-        return (
-          <section key={week.index} className={`unit week ${complete ? "complete" : late ? "late" : ""}`}>
-            <h3>Week {week.index} · due {DATE.format(week.due)} · {hours(week.seconds)}{complete ? " · done" : late ? " · overdue" : ""}</h3>
-            <ul>
+
+      <div className="stagger">
+        {weeks.map((week) => {
+          const complete = week.videos.every((v) => done.has(v.id));
+          const late = !complete && week.due < now;
+          return (
+            <section key={week.index} className={`card section week ${complete ? "is-done" : late ? "is-late" : ""}`}>
+              <div className="section-head">
+                <div>
+                  <div className="eyebrow">Week {week.index} · due {DATE.format(week.due)}</div>
+                  <h3>{week.videos.length} video{week.videos.length > 1 ? "s" : ""} · {hours(week.seconds)}</h3>
+                </div>
+                {complete ? <span className="badge badge-green">Done</span>
+                  : late ? <span className="badge badge-red">Overdue</span>
+                  : <span className="side-note">{week.videos.filter((v) => done.has(v.id)).length} of {week.videos.length} watched</span>}
+              </div>
               {week.videos.map((v) => (
-                <li key={v.id} className="plan-item">
-                  <input type="checkbox" checked={done.has(v.id)} onChange={() => toggle(v.id)} aria-label={`Watched ${v.title}`} />
-                  <button className="link" onClick={() => onPlay(videoMoment(v))}>{v.position + 1}. {v.title}</button>
-                  <span className="muted">{fmt(v.duration_s)}</span>
-                </li>
+                <div key={v.id} className={`plan-row ${done.has(v.id) ? "is-checked" : ""}`}>
+                  <input type="checkbox" className="check" checked={done.has(v.id)} onChange={() => toggle(v.id)}
+                    aria-label={`Mark "${v.title}" as watched`} />
+                  <button className="row-title" onClick={() => onPlay(videoMoment(v))}>{v.title}</button>
+                  <span className="mono">{fmt(v.duration_s)}</span>
+                </div>
               ))}
               {week.gaps.map((s) => (
-                <li key={s.video_id} className="plan-item extra">
-                  <span className="chip">Gap</span>
-                  <button className="link" onClick={() => onPlay({ ...videoMoment({ id: s.video_id, title: s.title, position: -1, duration_s: 0 }),
-                    key_points: [`Suggested video from ${s.channel}, not part of your playlist`] })}>{s.title}</button>
-                </li>
+                <div key={s.video_id} className="plan-row">
+                  <span className="slot"><Plus size={15} color="var(--accent)" /></span>
+                  <button className="row-title" onClick={() => onPlay({
+                    video_id: s.video_id, video_title: s.title, position: -1, start_s: 0, depth: "explained",
+                    key_points: [`From ${s.channel}. Not part of your playlist.`],
+                  })}>{s.title}</button>
+                  <span className="badge badge-clay">Gap</span>
+                </div>
               ))}
               {week.tests.map((u) => (
-                <li key={u.id} className="plan-item extra">
-                  <span className="chip test">Test</span>
-                  <button className="link" onClick={onPractice}>{u.id} · {u.title}</button>
-                </li>
+                <div key={u.id} className="plan-row">
+                  <span className="slot"><ClipboardCheck size={15} color="var(--primary)" /></span>
+                  <button className="row-title" onClick={onPractice}>Unit test: {u.title}</button>
+                  <span className="badge badge-green">Test</span>
+                </div>
               ))}
-            </ul>
-          </section>
-        );
-      })}
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 }

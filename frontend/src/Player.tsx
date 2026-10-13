@@ -1,11 +1,18 @@
+import { CirclePlay } from "lucide-react";
 import { fmt, type Moment } from "./api";
 
 export default function Player({ moment }: { moment: Moment | null }) {
   if (!moment) {
-    return <div className="player empty">Click any timestamp to watch that part of the video.</div>;
+    return (
+      <div className="card player-empty">
+        <div className="icon"><CirclePlay size={22} strokeWidth={1.8} /></div>
+        <b>Watch the exact moment</b>
+        <span>Click any timestamp to play that part of the video here.</span>
+      </div>
+    );
   }
   return (
-    <div className="player">
+    <div className="card player">
       <iframe
         key={`${moment.video_id}-${moment.start_s}`}
         src={`https://www.youtube.com/embed/${moment.video_id}?start=${moment.start_s}&autoplay=1`}
@@ -13,13 +20,15 @@ export default function Player({ moment }: { moment: Moment | null }) {
         allow="autoplay; encrypted-media; picture-in-picture"
         allowFullScreen
       />
-      <p>
-        <b>{moment.video_title}</b>
-        {moment.position >= 0 && <> · at {fmt(moment.start_s)}</>}
-      </p>
-      <ul>
-        {moment.key_points.map((p) => <li key={p}>{p}</li>)}
-      </ul>
+      <div className="player-body">
+        <div className="eyebrow">
+          {moment.position >= 0 ? `Video ${moment.position + 1} · from ${fmt(moment.start_s)}` : "Suggested video"}
+        </div>
+        <h4>{moment.video_title}</h4>
+        {moment.key_points.length > 0 && (
+          <ul>{moment.key_points.map((p) => <li key={p}>{p}</li>)}</ul>
+        )}
+      </div>
     </div>
   );
 }
