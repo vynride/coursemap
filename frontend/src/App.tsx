@@ -10,6 +10,7 @@ function readJobId(): string | null {
 
 export default function App() {
   const [jobId, setJobId] = useState<string | null>(readJobId);
+  const [createdId, setCreatedId] = useState<string | null>(null);   // the job started from the form in this tab
 
   useEffect(() => {
     const onHash = () => setJobId(readJobId());
@@ -33,9 +34,9 @@ export default function App() {
       </header>
       <main className="page" key={jobId ?? "home"}>
         {jobId ? (
-          <JobView jobId={jobId} />
+          <JobView jobId={jobId} fresh={jobId === createdId} />
         ) : (
-          <NewJobForm onCreated={(id) => { window.location.hash = `#/job/${id}`; }} />
+          <NewJobForm onCreated={(id) => { setCreatedId(id); window.location.hash = `#/job/${id}`; }} />
         )}
       </main>
     </>

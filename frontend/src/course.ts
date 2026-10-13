@@ -1,4 +1,4 @@
-import type { Job, Moment, Suggestion, Video } from "./api";
+import type { Job, Moment, Video } from "./api";
 
 export interface VideoTopic { name: string; moment: Moment }
 
@@ -18,7 +18,8 @@ export function videoMoment(job: Job, video: Video): Moment {
   };
 }
 
-export function suggestionMoment(s: Suggestion): Moment {
+/** A video from outside the playlist: a gap suggestion or a replacement for a missing video. */
+export function suggestionMoment(s: { video_id: string; title: string; channel: string }): Moment {
   return {
     video_id: s.video_id, video_title: s.title, position: -1, start_s: 0, depth: "explained",
     key_points: [`From ${s.channel}. Not part of your playlist.`],

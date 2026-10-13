@@ -233,6 +233,14 @@ textarea.input { resize: vertical; line-height: 1.6; }
 .pl-dur { flex-shrink: 0; font-family: var(--font-mono); font-size: .7rem; color: var(--text-subtle); }
 .pl-extra { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px 8px 12px; border-radius: var(--radius-md); text-align: left; }
 .pl-extra svg { flex-shrink: 0; margin: 0 2px; }
+.pl-missing { padding: 6px 10px 6px 32px; border-radius: var(--radius-md); }
+.pl-missing-head { display: flex; align-items: center; gap: 10px; padding: 2px 0; }
+.pl-missing-head .pl-title { color: var(--text-subtle); text-decoration: line-through; text-decoration-color: var(--border-strong); }
+.pl-missing-head .pl-num { color: var(--danger); }
+.pl-replacement { display: flex; align-items: center; gap: 8px; width: 100%; margin-top: 2px; padding: 6px 8px 6px 28px; border-radius: var(--radius-md); color: var(--primary); text-align: left; }
+.pl-replacement:hover, .pl-replacement.is-active { background: var(--bg-subtle); }
+.pl-replacement svg { flex-shrink: 0; }
+.pl-missing-note { display: block; padding: 2px 0 2px 28px; font-size: .74rem; color: var(--text-subtle); }
 
 .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 16px; }
 .tabs button { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: var(--radius-md); background: var(--bg-subtle); font-size: .88rem; font-weight: 500; color: var(--text); }

@@ -1,8 +1,8 @@
-import { ClipboardCheck, NotebookPen, Play, Plus, Settings2 } from "lucide-react";
+import { ClipboardCheck, NotebookPen, Play, Plus, Replace, Settings2, VideoOff } from "lucide-react";
 import { useState } from "react";
-import { fmt, type Job, type Moment } from "./api";
+import { fmt, type Job, type Moment, type SkippedVideo, type Video } from "./api";
 import { suggestionMoment, videoMoment } from "./course";
-import { hours } from "./plan";
+import { hours, type Week } from "./plan";
 import type { Plan } from "./usePlan";
 
 const DATE = new Intl.DateTimeFormat(undefined, { day: "numeric", month: "short" });
@@ -20,6 +20,18 @@ export default function CoursePanel({ job, plan, currentVideo, onPlay, onPractic
   const total = job.coverage.length;
   const count = (s: string) => job.coverage.filter((c) => c.status === s).length;
   const taught = count("covered");
+
+  // Missing videos go back where they sat in the playlist: in the week of the next video after them.
+  type Row = { kind: "video"; position: number; video: Video } | { kind: "skipped"; position: number; skipped: SkippedVideo };
+  function rowsFor(week: Week, i: number): Row[] {
+    const lower = i === 0 ? -Infinity : week.videos[0].position;
+    const upper = weeks[i + 1]?.videos[0].position ?? Infinity;
+    return [
+      ...week.videos.map((video): Row => ({ kind: "video", position: video.position, video })),
+      ...job.skipped_videos.filter((s) => s.position >= lower && s.position < upper)
+        .map((skipped): Row => ({ kind: "skipped", position: skipped.position, skipped })),
+    ].sort((a, b) => a.position - b.position);
+  }
 
   return (
     <div className="card panel">
@@ -72,7 +84,7 @@ export default function CoursePanel({ job, plan, currentVideo, onPlay, onPractic
       </div>
 
       <div className="panel-list">
-        {weeks.map((week) => {
+        {weeks.map((week, i) => {
           const complete = week.videos.every((v) => done.has(v.id));
           const late = !complete && week.due < new Date();
           return (
@@ -83,7 +95,26 @@ export default function CoursePanel({ job, plan, currentVideo, onPlay, onPractic
                   : late ? <span className="badge badge-red">Overdue</span>
                   : <span className="muted small">{hours(week.seconds)}</span>}
               </div>
-              {week.videos.map((v) => {
+              {rowsFor(week, i).map((row) => {
+                if (row.kind === "skipped") {
+                  const sk = row.skipped;
+                  return (
+                    <div key={sk.video_id} className="pl-missing">
+                      <div className="pl-missing-head">
+                        <span className="pl-num"><VideoOff size={13} /></span>
+                        <span className="pl-title">{sk.title || "Missing video"}</span>
+                        <span className="badge badge-red" title={sk.reason}>Unavailable</span>
+                      </div>
+                      {sk.replacements.length > 0 ? sk.replacements.map((r) => (
+                        <button key={r.video_id} className={`pl-replacement ${r.video_id === currentVideo ? "is-active" : ""}`}
+                          onClick={() => onPlay(suggestionMoment(r))}>
+                          <Replace size={13} /> <span className="pl-title">Watch instead: {r.title}</span>
+                        </button>
+                      )) : <span className="pl-missing-note">Skipped. No replacement found.</span>}
+                    </div>
+                  );
+                }
+                const v = row.video;
                 const active = v.id === currentVideo;
                 return (
                   <div key={v.id} className={`pl-item ${active ? "is-active" : ""} ${done.has(v.id) ? "is-done" : ""}`}>

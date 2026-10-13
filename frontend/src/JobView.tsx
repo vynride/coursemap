@@ -17,9 +17,33 @@ const STEPS: { status: Job["status"]; label: string }[] = [
   { status: "writing_questions", label: "Writing practice questions" },
 ];
 
-export default function JobView({ jobId }: { jobId: string }) {
+// Every status the progress screen walks through, in order.
+const ORDER: Job["status"][] = ["queued", "reading_syllabus", "fetching_playlist", "watching_videos", "writing_questions", "done"];
+const WATCHING = ORDER.indexOf("watching_videos");
+const STEP_MS = 650;
+
+export default function JobView({ jobId, fresh }: { jobId: string; fresh: boolean }) {
   const [job, setJob] = useState<Job | null>(jobId === "fixture" ? fixtureJob : null);
   const [error, setError] = useState<string | null>(null);
+  // A job started just now steps through each stage on screen even when cached results make the
+  // backend finish instantly. Reopening an old job goes straight to the results.
+  const [shown, setShown] = useState(fresh ? 0 : ORDER.length - 1);
+  const [count, setCount] = useState(0);
+  const target = job ? ORDER.indexOf(job.status) : 0;
+
+  useEffect(() => {
+    if (job?.status === "watching_videos") setCount(job.progress_done);
+  }, [job]);
+
+  useEffect(() => {
+    if (!job || job.status === "failed" || shown >= target) return;
+    if (shown === WATCHING && count < job.progress_total) {
+      const t = window.setTimeout(() => setCount((c) => c + 1), Math.max(60, 1600 / Math.max(1, job.progress_total)));
+      return () => window.clearTimeout(t);
+    }
+    const t = window.setTimeout(() => setShown((s) => s + 1), STEP_MS);
+    return () => window.clearTimeout(t);
+  }, [job, shown, target, count]);
 
   useEffect(() => {
     if (jobId === "fixture") return;
@@ -31,7 +55,7 @@ export default function JobView({ jobId }: { jobId: string }) {
         if (stopped) return;
         setJob(next);
         setError(null);
-        if (next.status !== "done" && next.status !== "failed") timer = window.setTimeout(poll, 2000);
+        if (next.status !== "done" && next.status !== "failed") timer = window.setTimeout(poll, 1000);
       } catch (err) {
         if (stopped) return;
         setError((err as Error).message);
@@ -62,7 +86,10 @@ export default function JobView({ jobId }: { jobId: string }) {
       </div>
     );
   }
-  if (job.status !== "done") return <Progress job={job} />;
+  if (job.status !== "done" || shown < ORDER.length - 1) {
+    const step = Math.min(shown, target);
+    return <Progress job={job} step={ORDER[step]} watched={step === WATCHING && target > WATCHING ? count : job.progress_done} />;
+  }
   if (job.videos.length === 0) return <div className="card progress-card">This playlist has no videos we could watch.</div>;
   return <Course job={job} />;
 }
@@ -127,9 +154,9 @@ function Course({ job }: { job: Job }) {
   );
 }
 
-function Progress({ job }: { job: Job }) {
-  const current = STEPS.findIndex((s) => s.status === job.status);
-  const pct = job.progress_total ? Math.round((100 * job.progress_done) / job.progress_total) : 0;
+function Progress({ job, step, watched }: { job: Job; step: Job["status"]; watched: number }) {
+  const current = step === "done" ? STEPS.length : STEPS.findIndex((s) => s.status === step);
+  const pct = job.progress_total ? Math.round((100 * watched) / job.progress_total) : 0;
   const topics = job.syllabus?.units.reduce((n, u) => n + u.topics.length, 0) ?? 0;
   return (
     <div className="card progress-card">
@@ -140,7 +167,7 @@ function Progress({ job }: { job: Job }) {
           const state = current > i ? "done" : current === i ? "now" : "todo";
           const detail =
             step.status === "reading_syllabus" && job.syllabus ? `${job.syllabus.units.length} units, ${topics} topics`
-            : step.status === "watching_videos" && job.progress_total ? `${job.progress_done} of ${job.progress_total}`
+            : step.status === "watching_videos" && job.progress_total && current >= i ? `${current > i ? job.progress_total : watched} of ${job.progress_total}`
             : null;
           return (
             <li key={step.status} className={state}>
@@ -153,7 +180,7 @@ function Progress({ job }: { job: Job }) {
           );
         })}
       </ul>
-      {job.status === "watching_videos" && <div className="bar"><div style={{ width: `${pct}%` }} /></div>}
+      {step === "watching_videos" && <div className="bar"><div style={{ width: `${pct}%` }} /></div>}
     </div>
   );
 }

@@ -35,10 +35,18 @@ class Video(BaseModel):
     duration_s: int
 
 
+class Replacement(BaseModel):
+    video_id: str
+    title: str
+    channel: str
+
+
 class SkippedVideo(BaseModel):
     video_id: str
     title: str
     reason: str
+    position: int = -1                                   # where it sat in the playlist
+    replacements: list[Replacement] = Field(default_factory=list)   # videos to watch instead
 
 
 class TopicHit(BaseModel):

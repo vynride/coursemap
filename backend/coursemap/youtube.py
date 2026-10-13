@@ -74,15 +74,15 @@ async def fetch_videos(
     for position, (video_id, listed_title) in enumerate(listed):
         item = found.get(video_id)
         if item is None:
-            skipped.append(SkippedVideo(video_id=video_id, title=listed_title, reason="private or deleted"))
+            skipped.append(SkippedVideo(video_id=video_id, title=listed_title, reason="private or deleted", position=position))
             continue
         title = item["snippet"]["title"]
         if item.get("status", {}).get("privacyStatus") != "public":
-            skipped.append(SkippedVideo(video_id=video_id, title=title, reason="not public"))
+            skipped.append(SkippedVideo(video_id=video_id, title=title, reason="not public", position=position))
             continue
         duration = parse_iso_duration(item.get("contentDetails", {}).get("duration", ""))
         if duration == 0:
-            skipped.append(SkippedVideo(video_id=video_id, title=title, reason="live or upcoming"))
+            skipped.append(SkippedVideo(video_id=video_id, title=title, reason="live or upcoming", position=position))
             continue
         videos.append(Video(id=video_id, title=title, position=position, duration_s=duration))
     return videos, skipped

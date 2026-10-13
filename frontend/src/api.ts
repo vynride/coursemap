@@ -5,7 +5,10 @@ export interface Topic { id: string; name: string }
 export interface Unit { id: string; title: string; topics: Topic[] }
 export interface Syllabus { course: string; units: Unit[] }
 export interface Video { id: string; title: string; position: number; duration_s: number }
-export interface SkippedVideo { video_id: string; title: string; reason: string }
+export interface Replacement { video_id: string; title: string; channel: string }
+export interface SkippedVideo {
+  video_id: string; title: string; reason: string; position: number; replacements: Replacement[];
+}
 export interface Moment {
   video_id: string; video_title: string; position: number; start_s: number;
   depth: "explained" | "mentioned"; key_points: string[];

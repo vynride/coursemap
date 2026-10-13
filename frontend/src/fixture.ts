@@ -34,7 +34,8 @@ export const fixtureJob: Job = {
     { id: "jjjjjjjjjjj", title: "Debugging containers", position: 7, duration_s: 2700 },
   ],
   analyses: [],
-  skipped_videos: [{ video_id: "ccccccccccc", title: "Private video", reason: "private or deleted" }],
+  skipped_videos: [{ video_id: "ccccccccccc", title: "Private video", reason: "private or deleted", position: 8,
+    replacements: [{ video_id: "kkkkkkkkkkk", title: "Docker tutorial for beginners", channel: "Some Channel" }] }],
   coverage: [
     { topic_id: "U1.T1", unit_id: "U1", topic_name: "Images and containers", status: "covered", moments: [containers] },
     { topic_id: "U1.T2", unit_id: "U1", topic_name: "Container networking", status: "gap", moments: [] },

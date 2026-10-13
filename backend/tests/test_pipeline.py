@@ -1,9 +1,11 @@
-from conftest import FakeLLM, video_uri
+import httpx
+
+from conftest import FakeLLM, make_syllabus, video_uri
 from coursemap.ai import HitOut, SyllabusOut, UnitOut, VideoOut
 from coursemap.config import Settings
 from coursemap.exam import QuestionOut, QuestionsOut
-from coursemap.models import Job
-from coursemap.pipeline import Deps, run_job
+from coursemap.models import Job, SkippedVideo
+from coursemap.pipeline import Deps, find_replacements, run_job
 from coursemap.store import MemoryStore
 
 SYLLABUS_OUT = SyllabusOut(course="Operating Systems", units=[
@@ -50,6 +52,8 @@ async def test_full_run(youtube_http):
     assert (job.progress_done, job.progress_total) == (2, 2)
     assert [a.video_id for a in job.analyses] == ["vid1", "vid3"]
     assert {s.video_id for s in job.skipped_videos} == {"vid2", "vid4", "vid5"}
+    assert {s.video_id: s.position for s in job.skipped_videos} == {"vid2": 1, "vid4": 3, "vid5": 4}
+    assert all([r.video_id for r in s.replacements] == ["sugg1"] for s in job.skipped_videos)
     assert [(c.topic_id, c.status) for c in job.coverage] == [
         ("U1.T1", "covered"), ("U1.T2", "gap"), ("U2.T1", "covered"), ("U2.T2", "partial"),
     ]
@@ -100,3 +104,17 @@ async def test_second_run_uses_cache(youtube_http):
     called = [schema for schema, _ in second.calls]
     assert SyllabusOut not in called and VideoOut not in called
     assert called.count(QuestionsOut) == 2
+
+
+async def test_replacements_skip_videos_already_in_the_playlist():
+    def handler(request):
+        return httpx.Response(200, json={"items": [
+            {"id": {"videoId": "vid1"}, "snippet": {"title": "Already there", "channelTitle": "C"}},
+            {"id": {"videoId": "new1"}, "snippet": {"title": "Fresh one", "channelTitle": "C"}},
+        ]})
+
+    http = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    deps = Deps(llm=make_llm(), store=MemoryStore(), http=http, settings=Settings(youtube_api_key="k"))
+    skipped = [SkippedVideo(video_id="gone", title="Private video", reason="private or deleted", position=1)]
+    result = await find_replacements(deps, make_syllabus(), skipped, {"vid1"})
+    assert [r.video_id for r in result[0].replacements] == ["new1"]

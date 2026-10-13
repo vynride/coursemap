@@ -12,7 +12,7 @@ from coursemap.ai import LLM, analyze_video, read_syllabus
 from coursemap.config import Settings
 from coursemap.coverage import build_coverage
 from coursemap.exam import make_questions
-from coursemap.models import CoverageEntry, SkippedVideo, Suggestion, Syllabus, Video, VideoAnalysis
+from coursemap.models import CoverageEntry, Replacement, SkippedVideo, Suggestion, Syllabus, Video, VideoAnalysis
 from coursemap.store import Store
 from coursemap.youtube import VideoRef, YouTubeError, fetch_videos, search_videos
 
@@ -59,6 +59,35 @@ async def suggest_for_gaps(deps: Deps, syllabus: Syllabus, coverage: list[Covera
     return [s for r in results for s in r]
 
 
+UNTITLED = {"", "private video", "deleted video"}
+
+
+async def find_replacements(
+    deps: Deps, syllabus: Syllabus, skipped: list[SkippedVideo], playlist_ids: set[str]
+) -> list[SkippedVideo]:
+    """For each video we had to skip, search YouTube for one or two on the same subject.
+
+    Uses the video's title when we know it; private and deleted videos only have a placeholder
+    title, so those fall back to the course name. Never suggests a video already in the playlist.
+    """
+    key = deps.settings.youtube_api_key
+    if not key:
+        return skipped
+    async def one(entry: SkippedVideo) -> SkippedVideo:
+        title = entry.title.strip()
+        query = title if title.lower() not in UNTITLED else f"{syllabus.course} tutorial"
+        try:
+            found = await search_videos(deps.http, key, query, n=4)
+        except YouTubeError:
+            log.warning("replacement search failed for %s", entry.video_id)
+            return entry
+        picks = [Replacement(**f) for f in found if f["video_id"] not in playlist_ids][:2]
+        return entry.model_copy(update={"replacements": picks})
+
+    searched = await asyncio.gather(*(one(e) for e in skipped[: deps.settings.max_gap_searches]))
+    return list(searched) + skipped[deps.settings.max_gap_searches:]
+
+
 async def run_job(job_id: str, ref: VideoRef, pdf: bytes | None, text: str | None, deps: Deps) -> None:
     store, settings = deps.store, deps.settings
     job = await store.get_job(job_id)
@@ -99,7 +128,7 @@ async def run_job(job_id: str, ref: VideoRef, pdf: bytes | None, text: str | Non
                 except Exception as e:
                     log.exception("analysis failed for %s", video.id)
                     job.skipped_videos.append(SkippedVideo(
-                        video_id=video.id, title=video.title, reason=f"Couldn't analyse: {type(e).__name__}",
+                        video_id=video.id, title=video.title, reason=f"Couldn't analyse: {type(e).__name__}", position=video.position,
                     ))
                 job.progress_done += 1
                 await store.put_job(job)
@@ -113,18 +142,20 @@ async def run_job(job_id: str, ref: VideoRef, pdf: bytes | None, text: str | Non
         job.status = "writing_questions"
         await store.put_job(job)
 
-        per_unit, suggestions = await asyncio.gather(
+        per_unit, suggestions, skipped_now = await asyncio.gather(
             asyncio.gather(
                 *(make_questions(deps.llm, syllabus.course, u, job.coverage, job.exam_pattern) for u in syllabus.units),
                 return_exceptions=True,
             ),
             suggest_for_gaps(deps, syllabus, job.coverage),
+            find_replacements(deps, syllabus, job.skipped_videos, {v.id for v in videos}),
         )
         for result in per_unit:
             if isinstance(result, BaseException):
                 log.error("question writing failed: %r", result)
         job.questions = [q for r in per_unit if not isinstance(r, BaseException) for q in r]
         job.suggestions = suggestions
+        job.skipped_videos = sorted(skipped_now, key=lambda s: s.position)
         job.status = "done"
         await store.put_job(job)
     except Exception as e:
