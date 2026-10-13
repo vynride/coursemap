@@ -46,6 +46,8 @@ ul.clean.red li::before { background: var(--red); } ul.clean.green li::before { 
 ul.clean.yellow li::before { background: var(--yellow); }
 ul.sm li { font-size: 21px; margin-bottom: 10px; }
 ul.sm li::before { top: 11px; }
+ul.cols2 { columns: 2; column-gap: 50px; }
+ul.cols2 li { break-inside: avoid; }
 b.blue { color: var(--blue); } b.green { color: var(--green); }
 
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -87,6 +89,7 @@ table.cmp { width: 100%; border-collapse: collapse; font-size: 23px; }
 table.cmp th, table.cmp td { padding: 18px 20px; border-bottom: 1px solid var(--line); text-align: center; }
 table.cmp th { font-size: 20px; color: var(--muted); font-weight: 700; }
 table.cmp td:first-child, table.cmp th:first-child { text-align: left; }
+table.cmp.tight th, table.cmp.tight td { padding: 13px 18px; }
 table.cmp .us { background: var(--blue-soft); font-weight: 700; }
 table.cmp th.us { color: var(--blue); }
 .yes { color: var(--green); font-weight: 800; } .no { color: var(--red); font-weight: 800; } .part { color: #b06000; font-weight: 600; font-size: 19px; }
@@ -235,49 +238,29 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   <div class="stripe"></div>
 </section>
 
-<!-- 2. Problem -->
-<section class="slide" data-title="Problem statement">
+<!-- 2. Problem and gap -->
+<section class="slide" data-title="Problem and gap">
   <div class="bar"><div><div class="kicker">Problem statement</div><h2>College gives you structure. YouTube doesn't.</h2></div></div>
   <div class="body">
-    <div class="grid2" style="grid-template-columns:1fr 1fr;gap:60px;align-items:center;height:100%">
-      <div>
-        <p style="margin-bottom:28px">Outside coursework, students learn industry skills from YouTube: frameworks, tools, cloud, ML.</p>
-        <ul class="clean red">
-          <li>No syllabus: you can't tell what a playlist covers or skips</li>
-          <li>The topic you need is buried in hours of video</li>
-          <li>No tests or feedback: no way to know you've learned it</li>
-          <li>No plan or deadlines to keep you on track</li>
-        </ul>
-      </div>
-      <table class="cmp">
-        <tr><th></th><th>College course</th><th>YouTube playlist</th></tr>
-        <tr><td>Syllabus</td><td class="yes">✓</td><td class="no">✗</td></tr>
-        <tr><td>Course plan</td><td class="yes">✓</td><td class="no">✗</td></tr>
-        <tr><td>Quizzes and tests</td><td class="yes">✓</td><td class="no">✗</td></tr>
-        <tr><td>Graded answers</td><td class="yes">✓</td><td class="no">✗</td></tr>
-        <tr><td>Deadlines</td><td class="yes">✓</td><td class="no">✗</td></tr>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- 3. Existing tools -->
-<section class="slide" data-title="Why existing tools fall short">
-  <div class="bar"><div><div class="kicker">Gap analysis</div><h2>No tool gives a free playlist a course structure</h2></div></div>
-  <div class="body">
-    <table class="cmp">
-      <tr><th></th><th>YouTube</th><th>NotebookLM</th><th>Paid course platforms</th><th class="us">CourseMap</th></tr>
+    <p style="margin-bottom:18px">Outside coursework, students learn industry skills from YouTube: frameworks, tools, cloud, ML.</p>
+    <ul class="clean red sm cols2" style="margin-bottom:26px">
+      <li>No syllabus: you can't tell what a playlist covers or skips</li>
+      <li>The topic you need is buried in hours of video</li>
+      <li>No tests or feedback to show you've learned it</li>
+      <li>No plan or deadlines to keep you on track</li>
+    </ul>
+    <table class="cmp tight">
+      <tr><th></th><th>YouTube</th><th>NotebookLM</th><th>Paid courses</th><th class="us">CourseMap</th></tr>
       <tr><td>Works on free YouTube playlists</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="us yes">✓</td></tr>
-      <tr><td>Organised by a syllabus you choose</td><td class="no">✗</td><td class="no">✗</td><td class="part">fixed courses</td><td class="us yes">✓</td></tr>
+      <tr><td>Organised by an outline you choose</td><td class="no">✗</td><td class="no">✗</td><td class="part">fixed courses</td><td class="us yes">✓</td></tr>
       <tr><td>Shows what a playlist is missing</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="us yes">✓</td></tr>
       <tr><td>Jumps to the minute a topic is taught</td><td class="part">one video at a time</td><td class="part">citations</td><td class="no">✗</td><td class="us yes">✓</td></tr>
       <tr><td>Tests with graded written answers</td><td class="no">✗</td><td class="part">generic quizzes</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
     </table>
-    <p style="margin-top:30px"><b>The syllabus is the spine.</b> <span class="muted">Coverage, gaps and tests are all organised by the outline you give it.</span></p>
   </div>
 </section>
 
-<!-- 4. Proposed solution -->
+<!-- 3. Proposed solution -->
 <section class="slide" data-title="Proposed solution">
   <div class="bar"><div><div class="kicker">Proposed solution</div><h2>Paste a playlist. Get a course around it.</h2></div></div>
   <div class="body">
@@ -312,7 +295,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 5. Product mockup -->
+<!-- 4. Product mockup -->
 <section class="slide" data-title="Product walkthrough">
   <div class="bar"><div><div class="kicker">Product walkthrough</div><h2>What the student sees</h2></div></div>
   <div class="body" style="padding-top:26px">
@@ -349,7 +332,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 6. Architecture -->
+<!-- 5. Architecture -->
 <section class="slide" data-title="System architecture">
   <div class="bar"><div><div class="kicker">System architecture</div><h2>One Cloud Run service, with Gemini at the core</h2></div></div>
   <div class="body" style="padding:0">
@@ -422,7 +405,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 7. Google services integration -->
+<!-- 6. Google services integration -->
 <section class="slide" data-title="Google services integration">
   <div class="bar"><div><div class="kicker">Google services integration</div><h2>Every Google service does essential work</h2></div>
     <div class="brandmark"><span class="lg"><svg class="ico" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.19 2.38a9.344 9.344 0 0 0-9.234 6.893c.053-.02-.055.013 0 0-3.875 2.551-3.922 8.11-.247 10.941l.006-.007-.007.03a6.717 6.717 0 0 0 4.077 1.356h5.173l.03.03h5.192c6.687.053 9.376-8.605 3.835-12.35a9.365 9.365 0 0 0-2.821-4.552l-.043.043.006-.05A9.344 9.344 0 0 0 12.19 2.38zm-.358 4.146c1.244-.04 2.518.368 3.486 1.15a5.186 5.186 0 0 1 1.862 4.078v.518c3.53-.07 3.53 5.262 0 5.193h-5.193l-.008.009v-.04H6.785a2.59 2.59 0 0 1-1.067-.23h.001a2.597 2.597 0 1 1 3.437-3.437l3.013-3.012A6.747 6.747 0 0 0 8.11 8.24c.018-.01.04-.026.054-.023a5.186 5.186 0 0 1 3.67-1.69z"/></svg></span>Google Cloud</div></div>
@@ -465,7 +448,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 8. Guardrails -->
+<!-- 7. Guardrails -->
 <section class="slide" data-title="Guarding against AI mistakes">
   <div class="bar"><div><div class="kicker">Technical depth</div><h2>We don't trust the model blindly</h2></div></div>
   <div class="body">
@@ -480,144 +463,70 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 9. Scope -->
+<!-- 8. Scope -->
 <section class="slide" data-title="Scope">
-  <div class="bar"><div><div class="kicker">Scope</div><h2>What we built today, and what comes next</h2></div></div>
+  <div class="bar"><div><div class="kicker">Scope</div><h2>Built today, and what comes next</h2></div></div>
   <div class="body">
     <div class="grid2">
       <div class="card green">
         <h3>Built in this hackathon</h3>
         <ul class="clean green">
-          <li>Public playlists up to 12 videos, or one video</li>
-          <li>Syllabus or outline as PDF or text</li>
-          <li>Test format with presets</li>
+          <li>Playlists up to 12 videos, outline as PDF or text</li>
           <li>Course map with timestamp jumps</li>
           <li>Suggested videos for missing topics</li>
-          <li>Questions per unit and grading</li>
-          <li>Deployed on Cloud Run with Firestore</li>
+          <li>Questions per unit, graded answers</li>
+          <li>Live on Cloud Run with Firestore</li>
         </ul>
       </div>
       <div class="card">
-        <h3>Roadmap</h3>
+        <h3>Next</h3>
         <ul class="clean yellow">
           <li>Study plan with deadlines</li>
           <li>Accounts and progress tracking</li>
-          <li>Ready-made outlines for common job roles</li>
-          <li>Hindi and regional languages</li>
-          <li>Android app</li>
+          <li>Outlines for common job roles</li>
+          <li>Hindi, regional languages, Android</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 10. Feasibility -->
-<section class="slide" data-title="Feasibility and viability">
-  <div class="bar"><div><div class="kicker">Feasibility &amp; viability</div><h2>Small to build, cheap to run</h2></div></div>
+<!-- 9. Feasibility, impact, business -->
+<section class="slide" data-title="Feasibility, impact and business model">
+  <div class="bar"><div><div class="kicker">Feasibility, impact &amp; viability</div><h2>Cheap to run, useful from day one</h2></div></div>
   <div class="body">
-    <div class="grid2" style="grid-template-columns:1fr 1.2fr">
-      <div>
-        <h3>Why it fits in 6 hours</h3>
-        <ul class="clean sm" style="margin-bottom:26px">
-          <li>Gemini reads YouTube links and PDFs natively</li>
-          <li>No download, transcription or embeddings</li>
+    <div class="grid3" style="height:100%">
+      <div class="card">
+        <h3>Feasibility</h3>
+        <ul class="clean sm">
+          <li>Gemini reads YouTube links and PDFs natively: no downloads, transcripts or embeddings</li>
           <li>One container, one deploy command</li>
+          <li>About 160k tokens per video-hour at low resolution, cached for later students</li>
+          <li>Videos analysed 4 at a time; private or failed ones skipped</li>
         </ul>
-        <h3>Running cost</h3>
-        <ul class="clean sm" style="margin-bottom:26px">
-          <li>About 160k input tokens per video-hour at low resolution</li>
-          <li>Cached, so later students cost close to nothing</li>
-        </ul>
-        <div class="stack">
-          <div><span class="lg c-py"><svg class="ico" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/></svg></span>Python</div>
-          <div><span class="lg c-fast"><svg class="ico" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .0387C5.3729.0384.0003 5.3931 0 11.9988c-.001 6.6066 5.372 11.9628 12 11.9625 6.628.0003 12.001-5.3559 12-11.9625-.0003-6.6057-5.3729-11.9604-12-11.96m-.829 5.4153h7.55l-7.5805 5.3284h5.1828L5.279 18.5436q2.9466-6.5444 5.892-13.0896"/></svg></span>FastAPI</div>
-          <div><span class="lg c-react"><svg class="ico" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/></svg></span>React</div>
-          <div><span class="lg c-dock"><svg class="ico" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.184-.186h-2.12a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.376 11.376 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></svg></span>Docker</div>
-        </div>
       </div>
-      <div>
-        <h3>Risks</h3>
-        <table class="risk">
-          <tr><th style="width:36%">Risk</th><th>Mitigation</th></tr>
-          <tr><td>Slow analysis</td><td>4 videos in parallel, results cached</td></tr>
-          <tr><td>Wrong topic or timestamp</td><td>Closed topic list, duration checks</td></tr>
-          <tr><td>Private or failed video</td><td>Skipped and listed</td></tr>
-          <tr><td>YouTube API quota</td><td>Cache per playlist; search only for gaps</td></tr>
-          <tr><td>Copyright</td><td>Nothing downloaded; students watch the official embed</td></tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 11. Impact -->
-<section class="slide" data-title="Impact and benefits">
-  <div class="bar"><div><div class="kicker">Impact &amp; benefits</div><h2>Self-study with the structure of a course</h2></div></div>
-  <div class="body">
-    <div class="grid3">
       <div class="card blue">
-        <h3>Students</h3>
-        <ul class="clean sm"><li>Know what a playlist covers and skips</li><li>Find any topic in one click</li><li>Test yourself and get feedback</li></ul>
+        <h3>Impact</h3>
+        <ul class="clean sm">
+          <li><b>Students</b> see what a playlist covers and skips, and get graded feedback</li>
+          <li><b>Colleges</b> support skills beyond the syllabus and placement prep</li>
+          <li><b>Creators</b> keep their views through the official embed</li>
+          <li><b>Measured by</b> test scores on first vs. second attempt</li>
+        </ul>
       </div>
       <div class="card green">
-        <h3>Colleges</h3>
-        <ul class="clean green sm"><li>Support skill-building beyond the syllabus</li><li>Recommend playlists, gaps flagged</li><li>Placement prep with real tests</li></ul>
-      </div>
-      <div class="card yellow">
-        <h3>Creators</h3>
-        <ul class="clean yellow sm"><li>Views still count through the embed</li><li>See which topics a playlist lacks</li></ul>
-      </div>
-    </div>
-    <h3 style="margin-top:44px">How we'd measure it</h3>
-    <ul class="clean sm">
-      <li>Outline coverage found per playlist</li>
-      <li>Test score on first vs. second attempt</li>
-      <li>Share of students who study a flagged gap topic</li>
-    </ul>
-  </div>
-</section>
-
-<!-- 12. Business + roadmap -->
-<section class="slide" data-title="Business model and roadmap">
-  <div class="bar"><div><div class="kicker">Viability</div><h2>Business model and roadmap</h2></div></div>
-  <div class="body">
-    <div class="grid3">
-      <div class="card blue"><span class="pill b">Free</span><h3 style="margin:14px 0 6px">Students</h3><p style="font-size:21px">Map playlists, take tests, get graded</p></div>
-      <div class="card green"><span class="pill g">B2B</span><h3 style="margin:14px 0 6px">Colleges</h3><p style="font-size:21px">Curated skill tracks and progress dashboards for placement cells</p></div>
-      <div class="card yellow"><span class="pill y">Partners</span><h3 style="margin:14px 0 6px">Creators</h3><p style="font-size:21px">Coverage reports against common skill outlines</p></div>
-    </div>
-    <h3 style="margin-top:48px">Roadmap</h3>
-    <div class="tl">
-      <div><b>Today</b><span>Playlist to course map, tests, grading</span></div>
-      <div><b>Month 1</b><span>Study plan with deadlines</span></div>
-      <div><b>Month 2</b><span>Accounts, progress tracking, Android app</span></div>
-      <div><b>Month 3</b><span>Job-role outlines; pilot with 2–3 colleges</span></div>
-      <div><b>Month 6</b><span>Regional languages; creator reports</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- 13. Demo -->
-<section class="slide" data-title="Live demo">
-  <div class="bar"><div><div class="kicker">Live demo</div><h2>Riya learns Docker from a YouTube playlist</h2></div></div>
-  <div class="body">
-    <div class="grid2" style="align-items:center;height:100%">
-      <ul class="clean">
-        <li>Paste her YouTube playlist</li>
-        <li>Paste a skill outline, choose a test format</li>
-        <li>See what's taught and what's missing</li>
-        <li>Jump to the exact minute a topic is explained</li>
-        <li>Answer a question and get graded</li>
-      </ul>
-      <div class="card blue" style="text-align:center;padding:56px 30px">
-        <p class="muted" style="font-size:20px">Live at</p>
-        <p style="font-size:34px;font-weight:800;color:var(--blue);margin-top:10px">coursemap-xxxx.a.run.app</p>
+        <h3>Business model</h3>
+        <ul class="clean green sm">
+          <li><b>Free</b> for students</li>
+          <li><b>B2B:</b> skill tracks and progress dashboards for college placement cells</li>
+          <li><b>Partners:</b> coverage reports for creators against common skill outlines</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 14. Thanks -->
+<!-- 10. Thanks -->
 <section class="slide" data-title="Thank you">
   <div class="body" style="top:0;bottom:48px">
     <div class="end">

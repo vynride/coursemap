@@ -46,6 +46,8 @@ ul.clean.red li::before { background: var(--red); } ul.clean.green li::before { 
 ul.clean.yellow li::before { background: var(--yellow); }
 ul.sm li { font-size: 21px; margin-bottom: 10px; }
 ul.sm li::before { top: 11px; }
+ul.cols2 { columns: 2; column-gap: 50px; }
+ul.cols2 li { break-inside: avoid; }
 b.blue { color: var(--blue); } b.green { color: var(--green); }
 
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -87,6 +89,7 @@ table.cmp { width: 100%; border-collapse: collapse; font-size: 23px; }
 table.cmp th, table.cmp td { padding: 18px 20px; border-bottom: 1px solid var(--line); text-align: center; }
 table.cmp th { font-size: 20px; color: var(--muted); font-weight: 700; }
 table.cmp td:first-child, table.cmp th:first-child { text-align: left; }
+table.cmp.tight th, table.cmp.tight td { padding: 13px 18px; }
 table.cmp .us { background: var(--blue-soft); font-weight: 700; }
 table.cmp th.us { color: var(--blue); }
 .yes { color: var(--green); font-weight: 800; } .no { color: var(--red); font-weight: 800; } .part { color: #b06000; font-weight: 600; font-size: 19px; }
@@ -235,49 +238,29 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   <div class="stripe"></div>
 </section>
 
-<!-- 2. Problem -->
-<section class="slide" data-title="Problem statement">
+<!-- 2. Problem and gap -->
+<section class="slide" data-title="Problem and gap">
   <div class="bar"><div><div class="kicker">Problem statement</div><h2>College gives you structure. YouTube doesn't.</h2></div></div>
   <div class="body">
-    <div class="grid2" style="grid-template-columns:1fr 1fr;gap:60px;align-items:center;height:100%">
-      <div>
-        <p style="margin-bottom:28px">Outside coursework, students learn industry skills from YouTube: frameworks, tools, cloud, ML.</p>
-        <ul class="clean red">
-          <li>No syllabus: you can't tell what a playlist covers or skips</li>
-          <li>The topic you need is buried in hours of video</li>
-          <li>No tests or feedback: no way to know you've learned it</li>
-          <li>No plan or deadlines to keep you on track</li>
-        </ul>
-      </div>
-      <table class="cmp">
-        <tr><th></th><th>College course</th><th>YouTube playlist</th></tr>
-        <tr><td>Syllabus</td><td class="yes">✓</td><td class="no">✗</td></tr>
-        <tr><td>Course plan</td><td class="yes">✓</td><td class="no">✗</td></tr>
-        <tr><td>Quizzes and tests</td><td class="yes">✓</td><td class="no">✗</td></tr>
-        <tr><td>Graded answers</td><td class="yes">✓</td><td class="no">✗</td></tr>
-        <tr><td>Deadlines</td><td class="yes">✓</td><td class="no">✗</td></tr>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- 3. Existing tools -->
-<section class="slide" data-title="Why existing tools fall short">
-  <div class="bar"><div><div class="kicker">Gap analysis</div><h2>No tool gives a free playlist a course structure</h2></div></div>
-  <div class="body">
-    <table class="cmp">
-      <tr><th></th><th>YouTube</th><th>NotebookLM</th><th>Paid course platforms</th><th class="us">CourseMap</th></tr>
+    <p style="margin-bottom:18px">Outside coursework, students learn industry skills from YouTube: frameworks, tools, cloud, ML.</p>
+    <ul class="clean red sm cols2" style="margin-bottom:26px">
+      <li>No syllabus: you can't tell what a playlist covers or skips</li>
+      <li>The topic you need is buried in hours of video</li>
+      <li>No tests or feedback to show you've learned it</li>
+      <li>No plan or deadlines to keep you on track</li>
+    </ul>
+    <table class="cmp tight">
+      <tr><th></th><th>YouTube</th><th>NotebookLM</th><th>Paid courses</th><th class="us">CourseMap</th></tr>
       <tr><td>Works on free YouTube playlists</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="us yes">✓</td></tr>
-      <tr><td>Organised by a syllabus you choose</td><td class="no">✗</td><td class="no">✗</td><td class="part">fixed courses</td><td class="us yes">✓</td></tr>
+      <tr><td>Organised by an outline you choose</td><td class="no">✗</td><td class="no">✗</td><td class="part">fixed courses</td><td class="us yes">✓</td></tr>
       <tr><td>Shows what a playlist is missing</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="us yes">✓</td></tr>
       <tr><td>Jumps to the minute a topic is taught</td><td class="part">one video at a time</td><td class="part">citations</td><td class="no">✗</td><td class="us yes">✓</td></tr>
       <tr><td>Tests with graded written answers</td><td class="no">✗</td><td class="part">generic quizzes</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
     </table>
-    <p style="margin-top:30px"><b>The syllabus is the spine.</b> <span class="muted">Coverage, gaps and tests are all organised by the outline you give it.</span></p>
   </div>
 </section>
 
-<!-- 4. Proposed solution -->
+<!-- 3. Proposed solution -->
 <section class="slide" data-title="Proposed solution">
   <div class="bar"><div><div class="kicker">Proposed solution</div><h2>Paste a playlist. Get a course around it.</h2></div></div>
   <div class="body">
@@ -312,7 +295,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 5. Product mockup -->
+<!-- 4. Product mockup -->
 <section class="slide" data-title="Product walkthrough">
   <div class="bar"><div><div class="kicker">Product walkthrough</div><h2>What the student sees</h2></div></div>
   <div class="body" style="padding-top:26px">
@@ -349,7 +332,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 6. Architecture -->
+<!-- 5. Architecture -->
 <section class="slide" data-title="System architecture">
   <div class="bar"><div><div class="kicker">System architecture</div><h2>One Cloud Run service, with Gemini at the core</h2></div></div>
   <div class="body" style="padding:0">
@@ -422,7 +405,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 7. Google services integration -->
+<!-- 6. Google services integration -->
 <section class="slide" data-title="Google services integration">
   <div class="bar"><div><div class="kicker">Google services integration</div><h2>Every Google service does essential work</h2></div>
     <div class="brandmark"><span class="lg">{{icon:googlecloud}}</span>Google Cloud</div></div>
@@ -465,7 +448,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 8. Guardrails -->
+<!-- 7. Guardrails -->
 <section class="slide" data-title="Guarding against AI mistakes">
   <div class="bar"><div><div class="kicker">Technical depth</div><h2>We don't trust the model blindly</h2></div></div>
   <div class="body">
@@ -480,144 +463,70 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   </div>
 </section>
 
-<!-- 9. Scope -->
+<!-- 8. Scope -->
 <section class="slide" data-title="Scope">
-  <div class="bar"><div><div class="kicker">Scope</div><h2>What we built today, and what comes next</h2></div></div>
+  <div class="bar"><div><div class="kicker">Scope</div><h2>Built today, and what comes next</h2></div></div>
   <div class="body">
     <div class="grid2">
       <div class="card green">
         <h3>Built in this hackathon</h3>
         <ul class="clean green">
-          <li>Public playlists up to 12 videos, or one video</li>
-          <li>Syllabus or outline as PDF or text</li>
-          <li>Test format with presets</li>
+          <li>Playlists up to 12 videos, outline as PDF or text</li>
           <li>Course map with timestamp jumps</li>
           <li>Suggested videos for missing topics</li>
-          <li>Questions per unit and grading</li>
-          <li>Deployed on Cloud Run with Firestore</li>
+          <li>Questions per unit, graded answers</li>
+          <li>Live on Cloud Run with Firestore</li>
         </ul>
       </div>
       <div class="card">
-        <h3>Roadmap</h3>
+        <h3>Next</h3>
         <ul class="clean yellow">
           <li>Study plan with deadlines</li>
           <li>Accounts and progress tracking</li>
-          <li>Ready-made outlines for common job roles</li>
-          <li>Hindi and regional languages</li>
-          <li>Android app</li>
+          <li>Outlines for common job roles</li>
+          <li>Hindi, regional languages, Android</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 10. Feasibility -->
-<section class="slide" data-title="Feasibility and viability">
-  <div class="bar"><div><div class="kicker">Feasibility &amp; viability</div><h2>Small to build, cheap to run</h2></div></div>
+<!-- 9. Feasibility, impact, business -->
+<section class="slide" data-title="Feasibility, impact and business model">
+  <div class="bar"><div><div class="kicker">Feasibility, impact &amp; viability</div><h2>Cheap to run, useful from day one</h2></div></div>
   <div class="body">
-    <div class="grid2" style="grid-template-columns:1fr 1.2fr">
-      <div>
-        <h3>Why it fits in 6 hours</h3>
-        <ul class="clean sm" style="margin-bottom:26px">
-          <li>Gemini reads YouTube links and PDFs natively</li>
-          <li>No download, transcription or embeddings</li>
+    <div class="grid3" style="height:100%">
+      <div class="card">
+        <h3>Feasibility</h3>
+        <ul class="clean sm">
+          <li>Gemini reads YouTube links and PDFs natively: no downloads, transcripts or embeddings</li>
           <li>One container, one deploy command</li>
+          <li>About 160k tokens per video-hour at low resolution, cached for later students</li>
+          <li>Videos analysed 4 at a time; private or failed ones skipped</li>
         </ul>
-        <h3>Running cost</h3>
-        <ul class="clean sm" style="margin-bottom:26px">
-          <li>About 160k input tokens per video-hour at low resolution</li>
-          <li>Cached, so later students cost close to nothing</li>
-        </ul>
-        <div class="stack">
-          <div><span class="lg c-py">{{icon:python}}</span>Python</div>
-          <div><span class="lg c-fast">{{icon:fastapi}}</span>FastAPI</div>
-          <div><span class="lg c-react">{{icon:react}}</span>React</div>
-          <div><span class="lg c-dock">{{icon:docker}}</span>Docker</div>
-        </div>
       </div>
-      <div>
-        <h3>Risks</h3>
-        <table class="risk">
-          <tr><th style="width:36%">Risk</th><th>Mitigation</th></tr>
-          <tr><td>Slow analysis</td><td>4 videos in parallel, results cached</td></tr>
-          <tr><td>Wrong topic or timestamp</td><td>Closed topic list, duration checks</td></tr>
-          <tr><td>Private or failed video</td><td>Skipped and listed</td></tr>
-          <tr><td>YouTube API quota</td><td>Cache per playlist; search only for gaps</td></tr>
-          <tr><td>Copyright</td><td>Nothing downloaded; students watch the official embed</td></tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 11. Impact -->
-<section class="slide" data-title="Impact and benefits">
-  <div class="bar"><div><div class="kicker">Impact &amp; benefits</div><h2>Self-study with the structure of a course</h2></div></div>
-  <div class="body">
-    <div class="grid3">
       <div class="card blue">
-        <h3>Students</h3>
-        <ul class="clean sm"><li>Know what a playlist covers and skips</li><li>Find any topic in one click</li><li>Test yourself and get feedback</li></ul>
+        <h3>Impact</h3>
+        <ul class="clean sm">
+          <li><b>Students</b> see what a playlist covers and skips, and get graded feedback</li>
+          <li><b>Colleges</b> support skills beyond the syllabus and placement prep</li>
+          <li><b>Creators</b> keep their views through the official embed</li>
+          <li><b>Measured by</b> test scores on first vs. second attempt</li>
+        </ul>
       </div>
       <div class="card green">
-        <h3>Colleges</h3>
-        <ul class="clean green sm"><li>Support skill-building beyond the syllabus</li><li>Recommend playlists, gaps flagged</li><li>Placement prep with real tests</li></ul>
-      </div>
-      <div class="card yellow">
-        <h3>Creators</h3>
-        <ul class="clean yellow sm"><li>Views still count through the embed</li><li>See which topics a playlist lacks</li></ul>
-      </div>
-    </div>
-    <h3 style="margin-top:44px">How we'd measure it</h3>
-    <ul class="clean sm">
-      <li>Outline coverage found per playlist</li>
-      <li>Test score on first vs. second attempt</li>
-      <li>Share of students who study a flagged gap topic</li>
-    </ul>
-  </div>
-</section>
-
-<!-- 12. Business + roadmap -->
-<section class="slide" data-title="Business model and roadmap">
-  <div class="bar"><div><div class="kicker">Viability</div><h2>Business model and roadmap</h2></div></div>
-  <div class="body">
-    <div class="grid3">
-      <div class="card blue"><span class="pill b">Free</span><h3 style="margin:14px 0 6px">Students</h3><p style="font-size:21px">Map playlists, take tests, get graded</p></div>
-      <div class="card green"><span class="pill g">B2B</span><h3 style="margin:14px 0 6px">Colleges</h3><p style="font-size:21px">Curated skill tracks and progress dashboards for placement cells</p></div>
-      <div class="card yellow"><span class="pill y">Partners</span><h3 style="margin:14px 0 6px">Creators</h3><p style="font-size:21px">Coverage reports against common skill outlines</p></div>
-    </div>
-    <h3 style="margin-top:48px">Roadmap</h3>
-    <div class="tl">
-      <div><b>Today</b><span>Playlist to course map, tests, grading</span></div>
-      <div><b>Month 1</b><span>Study plan with deadlines</span></div>
-      <div><b>Month 2</b><span>Accounts, progress tracking, Android app</span></div>
-      <div><b>Month 3</b><span>Job-role outlines; pilot with 2–3 colleges</span></div>
-      <div><b>Month 6</b><span>Regional languages; creator reports</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- 13. Demo -->
-<section class="slide" data-title="Live demo">
-  <div class="bar"><div><div class="kicker">Live demo</div><h2>Riya learns Docker from a YouTube playlist</h2></div></div>
-  <div class="body">
-    <div class="grid2" style="align-items:center;height:100%">
-      <ul class="clean">
-        <li>Paste her YouTube playlist</li>
-        <li>Paste a skill outline, choose a test format</li>
-        <li>See what's taught and what's missing</li>
-        <li>Jump to the exact minute a topic is explained</li>
-        <li>Answer a question and get graded</li>
-      </ul>
-      <div class="card blue" style="text-align:center;padding:56px 30px">
-        <p class="muted" style="font-size:20px">Live at</p>
-        <p style="font-size:34px;font-weight:800;color:var(--blue);margin-top:10px">coursemap-xxxx.a.run.app</p>
+        <h3>Business model</h3>
+        <ul class="clean green sm">
+          <li><b>Free</b> for students</li>
+          <li><b>B2B:</b> skill tracks and progress dashboards for college placement cells</li>
+          <li><b>Partners:</b> coverage reports for creators against common skill outlines</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 14. Thanks -->
+<!-- 10. Thanks -->
 <section class="slide" data-title="Thank you">
   <div class="body" style="top:0;bottom:48px">
     <div class="end">
