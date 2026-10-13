@@ -226,8 +226,8 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   <div class="inner">
     <div class="event"><span class="lg">{{icon:googlecloud}}</span> Hack Sprint · GeeksforGeeks × Google Cloud · Track: EdTech</div>
     <h1><span>Course</span><span>Map</span></h1>
-    <p class="tagline">Your YouTube playlist, mapped to <b class="blue">your syllabus</b>.</p>
-    <p class="sub">A supplement to your lectures, not a replacement.</p>
+    <p class="tagline">Your YouTube playlist, run like <b class="blue">a college course</b>.</p>
+    <p class="sub">For the industry skills you learn outside class.</p>
     <div class="meta">
       <div class="card"><div class="lbl">Team</div><div class="val">v3as</div></div>
     </div>
@@ -237,82 +237,77 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
 
 <!-- 2. Problem -->
 <section class="slide" data-title="Problem statement">
-  <div class="bar"><div><div class="kicker">Problem statement</div><h2>Playlists help, but they don't follow your syllabus</h2></div></div>
+  <div class="bar"><div><div class="kicker">Problem statement</div><h2>College gives you structure. YouTube doesn't.</h2></div></div>
   <div class="body">
-    <div class="grid2" style="grid-template-columns:1fr 680px;align-items:center;height:100%">
+    <div class="grid2" style="grid-template-columns:1fr 1fr;gap:60px;align-items:center;height:100%">
       <div>
-        <p style="margin-bottom:28px">Lectures come first. Students use YouTube alongside them to revise, go deeper, and learn skills outside the course.</p>
+        <p style="margin-bottom:28px">Outside coursework, students learn industry skills from YouTube: frameworks, tools, cloud, ML.</p>
         <ul class="clean red">
-          <li>No way to tell what a playlist covers or skips</li>
+          <li>No syllabus: you can't tell what a playlist covers or skips</li>
           <li>The topic you need is buried in hours of video</li>
-          <li>Watching a lecture isn't practising an answer</li>
+          <li>No tests or feedback: no way to know you've learned it</li>
+          <li>No plan or deadlines to keep you on track</li>
         </ul>
       </div>
-      <svg class="venn" viewBox="0 0 680 520" width="680" height="520">
-        <circle cx="250" cy="280" r="200" fill="#e8f0fe" stroke="#1a73e8" stroke-width="3"/>
-        <circle cx="430" cy="280" r="200" fill="#fce8e6" stroke="#d93025" stroke-width="3" fill-opacity=".75"/>
-        <path d="M340 101.5 A200 200 0 0 1 340 458.5 A200 200 0 0 1 340 101.5z" fill="#e6f4ea" stroke="none"/>
-        <text x="160" y="50" font-size="26" font-weight="800" fill="#1a73e8" text-anchor="middle">YouTube playlist</text>
-        <text x="520" y="50" font-size="26" font-weight="800" fill="#d93025" text-anchor="middle">Your syllabus</text>
-        <text x="145" y="272" font-size="22" font-weight="800" fill="#1a73e8" text-anchor="middle">New skills</text>
-        <text x="145" y="302" font-size="18" fill="#5f6368" text-anchor="middle">beyond the course</text>
-        <text x="340" y="272" font-size="22" font-weight="800" fill="#1e8e3e" text-anchor="middle">Covered</text>
-        <text x="340" y="302" font-size="18" fill="#5f6368" text-anchor="middle">but where?</text>
-        <text x="535" y="272" font-size="22" font-weight="800" fill="#d93025" text-anchor="middle">Not covered</text>
-        <text x="535" y="302" font-size="18" fill="#5f6368" text-anchor="middle">unknown gaps</text>
-      </svg>
+      <table class="cmp">
+        <tr><th></th><th>College course</th><th>YouTube playlist</th></tr>
+        <tr><td>Syllabus</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td>Course plan</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td>Quizzes and tests</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td>Graded answers</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td>Deadlines</td><td class="yes">✓</td><td class="no">✗</td></tr>
+      </table>
     </div>
   </div>
 </section>
 
 <!-- 3. Existing tools -->
 <section class="slide" data-title="Why existing tools fall short">
-  <div class="bar"><div><div class="kicker">Gap analysis</div><h2>Existing tools don't start from your syllabus</h2></div></div>
+  <div class="bar"><div><div class="kicker">Gap analysis</div><h2>No tool gives a free playlist a course structure</h2></div></div>
   <div class="body">
     <table class="cmp">
-      <tr><th></th><th>YouTube</th><th>NotebookLM</th><th>Coaching apps</th><th class="us">CourseMap</th></tr>
-      <tr><td>Starts from your syllabus</td><td class="no">✗</td><td class="no">✗</td><td class="part">fixed courses</td><td class="us yes">✓</td></tr>
+      <tr><th></th><th>YouTube</th><th>NotebookLM</th><th>Paid course platforms</th><th class="us">CourseMap</th></tr>
+      <tr><td>Works on free YouTube playlists</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="us yes">✓</td></tr>
+      <tr><td>Organised by a syllabus you choose</td><td class="no">✗</td><td class="no">✗</td><td class="part">fixed courses</td><td class="us yes">✓</td></tr>
       <tr><td>Shows what a playlist is missing</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="us yes">✓</td></tr>
       <tr><td>Jumps to the minute a topic is taught</td><td class="part">one video at a time</td><td class="part">citations</td><td class="no">✗</td><td class="us yes">✓</td></tr>
-      <tr><td>Questions in your exam's pattern</td><td class="no">✗</td><td class="part">generic quizzes</td><td class="part">some</td><td class="us yes">✓</td></tr>
-      <tr><td>Grades a written answer</td><td class="no">✗</td><td class="no">✗</td><td class="part">some</td><td class="us yes">✓</td></tr>
+      <tr><td>Tests with graded written answers</td><td class="no">✗</td><td class="part">generic quizzes</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
     </table>
-    <p style="margin-top:30px"><b>The syllabus is the spine.</b> <span class="muted">Coverage, gaps and practice are all organised by your syllabus units.</span></p>
+    <p style="margin-top:30px"><b>The syllabus is the spine.</b> <span class="muted">Coverage, gaps and tests are all organised by the outline you give it.</span></p>
   </div>
 </section>
 
 <!-- 4. Proposed solution -->
 <section class="slide" data-title="Proposed solution">
-  <div class="bar"><div><div class="kicker">Proposed solution</div><h2>Paste a playlist. Get a syllabus map and practice.</h2></div></div>
+  <div class="bar"><div><div class="kicker">Proposed solution</div><h2>Paste a playlist. Get a course around it.</h2></div></div>
   <div class="body">
     <div class="flow">
       <div class="step card">
         <div class="num" style="background:var(--blue)">1</div>
         <h3>Paste</h3>
-        <p>Playlist link, syllabus PDF and exam pattern</p>
+        <p>Playlist link, a syllabus or skill outline, and a test format</p>
       </div>
       <div class="step card">
         <div class="num" style="background:var(--red)">2</div>
         <h3>Gemini watches</h3>
-        <p>Each lecture, straight from its YouTube link</p>
+        <p>Each video, straight from its YouTube link</p>
       </div>
       <div class="step card">
         <div class="num" style="background:var(--yellow)">3</div>
-        <h3>Syllabus map</h3>
+        <h3>Course map</h3>
         <p>Every topic marked, with a timestamp</p>
         <div class="pills"><span class="pill g">Taught</span><span class="pill y">Mentioned</span><span class="pill r">Missing</span></div>
       </div>
       <div class="step card">
         <div class="num" style="background:var(--green)">4</div>
-        <h3>Practice</h3>
-        <p>Questions in your exam's pattern, answers graded</p>
+        <h3>Tests</h3>
+        <p>Questions per unit, written answers graded</p>
       </div>
     </div>
     <ul class="clean" style="margin-top:44px">
-      <li>Lectures stay primary: every result points back to a syllabus unit</li>
       <li>Every map entry links to a real moment in a real video</li>
       <li>Missing topics get suggested videos</li>
-      <li>Cached per video and syllabus, so a class shares one analysis</li>
+      <li>Cached per video and outline, so everyone on the same playlist shares one analysis</li>
     </ul>
   </div>
 </section>
@@ -322,30 +317,30 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   <div class="bar"><div><div class="kicker">Product walkthrough</div><h2>What the student sees</h2></div></div>
   <div class="body" style="padding-top:26px">
     <div class="mock">
-      <div class="chrome"><i></i><i></i><i></i><span class="url">coursemap · Operating Systems · 12 lectures</span></div>
+      <div class="chrome"><i></i><i></i><i></i><span class="url">coursemap · Docker and Kubernetes · 12 videos</span></div>
       <div class="content">
         <div>
           <div class="sum">
-            <div style="background:var(--green-soft)"><b style="color:var(--green)">71%</b>of syllabus taught</div>
-            <div style="background:var(--yellow-soft)"><b style="color:#b06000">4</b>topics only mentioned</div>
+            <div style="background:var(--green-soft)"><b style="color:var(--green)">68%</b>of outline taught</div>
+            <div style="background:var(--yellow-soft)"><b style="color:#b06000">5</b>topics only mentioned</div>
             <div style="background:var(--red-soft)"><b style="color:var(--red)">3</b>topics missing</div>
           </div>
-          <div class="unit"><h4>Unit 3 · Deadlocks</h4>
-            <div class="topic"><span class="pill g">Taught</span>Deadlock characterization<span class="ts">L6 8:12</span></div>
-            <div class="topic sel"><span class="pill g">Taught</span>Banker's algorithm<span class="ts">L6 14:32</span></div>
-            <div class="topic"><span class="pill y">Mentioned</span>Deadlock recovery<span class="ts">L7 2:10</span></div>
+          <div class="unit"><h4>Unit 2 · Images</h4>
+            <div class="topic"><span class="pill g">Taught</span>Dockerfile and layers<span class="ts">V4 6:40</span></div>
+            <div class="topic sel"><span class="pill g">Taught</span>Images vs containers<span class="ts">V3 11:05</span></div>
+            <div class="topic"><span class="pill y">Mentioned</span>Multi-stage builds<span class="ts">V5 18:20</span></div>
           </div>
-          <div class="unit"><h4>Unit 4 · Storage</h4>
-            <div class="topic"><span class="pill r">Missing</span>Disk scheduling: SCAN, C-SCAN<span class="ts">2 suggestions</span></div>
-            <div class="topic"><span class="pill g">Taught</span>File allocation methods<span class="ts">L11 21:47</span></div>
+          <div class="unit"><h4>Unit 4 · Orchestration</h4>
+            <div class="topic"><span class="pill r">Missing</span>Kubernetes pods and deployments<span class="ts">2 suggestions</span></div>
+            <div class="topic"><span class="pill g">Taught</span>Docker Compose<span class="ts">V9 3:15</span></div>
           </div>
         </div>
         <div>
-          <div class="player"><span class="play lg">{{icon:youtube}}</span><div class="cap">Lecture 6 · Deadlocks · 14:32</div><div class="bar2"></div></div>
+          <div class="player"><span class="play lg">{{icon:youtube}}</span><div class="cap">Video 3 · Images and containers · 11:05</div><div class="bar2"></div></div>
           <div class="q">
-            <span class="pill b" style="font-size:12px">7 marks</span> <b>Explain the Banker's algorithm with an example. When is a state safe?</b>
-            <div class="ans">"Banker's algorithm avoids deadlock. It checks if resources can be given..."</div>
-            <div class="grade"><b>3 / 7.</b> States the goal but never computes Need = Max − Allocation or shows a safe sequence. <b style="color:var(--blue)">Rewatch L6 at 14:32</b></div>
+            <span class="pill b" style="font-size:12px">5 marks</span> <b>Explain the difference between a Docker image and a container.</b>
+            <div class="ans">"An image is a template and a container is a running copy of it..."</div>
+            <div class="grade"><b>2 / 5.</b> Right idea, but misses read-only image layers and the writable container layer. <b style="color:var(--blue)">Rewatch V3 at 11:05</b></div>
           </div>
         </div>
       </div>
@@ -410,18 +405,18 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
       </div>
       <div class="node" style="left:1300px;top:60px;width:240px;height:90px">
         <span class="lg c-yt">{{icon:youtube}}</span>
-        <div><div class="nm">YouTube</div><div class="ds">public lecture videos</div></div>
+        <div><div class="nm">YouTube</div><div class="ds">public videos</div></div>
       </div>
 
       <ol class="legend">
-        <li><b>1</b>Student submits playlist, syllabus and exam pattern</li>
-        <li><b>2</b>Gemini reads the syllabus into units and topics</li>
+        <li><b>1</b>Student submits playlist, outline and test format</li>
+        <li><b>2</b>Gemini reads the outline into units and topics</li>
         <li><b>3</b>YouTube Data API lists the videos; key from Secret Manager</li>
-        <li><b>4</b>Gemini watches each lecture by its URL, 4 at a time</li>
+        <li><b>4</b>Gemini watches each video by its URL, 4 at a time</li>
         <li><b>5</b>Progress and results saved to Firestore, cached</li>
-        <li><b>6</b>Gemini writes exam questions and grades answers</li>
+        <li><b>6</b>Gemini writes test questions and grades answers</li>
         <li><b>7</b>Cloud Build builds the container for Cloud Run</li>
-        <li><b>8</b>Browser plays the lecture in the YouTube embed</li>
+        <li><b>8</b>Browser plays the video in the YouTube embed</li>
       </ol>
     </div>
   </div>
@@ -436,11 +431,11 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
       <div class="card hero">
         <div class="hd"><span class="lg c-gem">{{icon:googlegemini}}</span><div><div class="nm">Gemini on Vertex AI</div><div class="role">The core of the product</div></div></div>
         <ul class="clean">
-          <li>Watches lectures straight from YouTube URLs</li>
-          <li>Reads the syllabus PDF natively</li>
+          <li>Watches videos straight from YouTube URLs</li>
+          <li>Reads the syllabus or outline PDF natively</li>
           <li>Typed JSON via <code>response_schema</code></li>
           <li>Low media resolution to cut cost</li>
-          <li>Four jobs: parse syllabus, map lectures, set questions, grade answers</li>
+          <li>Four jobs: parse outline, map videos, set questions, grade answers</li>
         </ul>
       </div>
       <div class="card">
@@ -453,7 +448,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
       </div>
       <div class="card">
         <div class="hd"><span class="lg c-fb">{{icon:firebase}}</span><div><div class="nm">Firestore</div><div class="role">State + cache</div></div></div>
-        <ul class="clean"><li>Job progress for the browser</li><li>Cache keyed by video + syllabus</li></ul>
+        <ul class="clean"><li>Job progress for the browser</li><li>Cache keyed by video + outline</li></ul>
       </div>
       <div class="card">
         <div class="hd"><span class="lg c-gcp">{{icon:secretmanager}}</span><div><div class="nm">Secret Manager</div><div class="role">+ IAM · no keys in code</div></div></div>
@@ -475,7 +470,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   <div class="bar"><div><div class="kicker">Technical depth</div><h2>We don't trust the model blindly</h2></div></div>
   <div class="body">
     <div class="guard">
-      <div class="card"><h3>Closed topic list</h3><p>Gemini may only cite syllabus topic IDs. Unknown IDs are dropped.</p></div>
+      <div class="card"><h3>Closed topic list</h3><p>Gemini may only cite topic IDs from the outline. Unknown IDs are dropped.</p></div>
       <div class="card"><h3>Checked timestamps</h3><p>Validated against each video's real duration.</p></div>
       <div class="card"><h3>No invented sources</h3><p>Questions can only cite moments we extracted.</p></div>
       <div class="card"><h3>Partial failure is fine</h3><p>A failed, private or live video is skipped and listed.</p></div>
@@ -494,23 +489,22 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
         <h3>Built in this hackathon</h3>
         <ul class="clean green">
           <li>Public playlists up to 12 videos, or one video</li>
-          <li>Syllabus as PDF or pasted text</li>
-          <li>Exam pattern with presets</li>
-          <li>Syllabus map with timestamp jumps</li>
+          <li>Syllabus or outline as PDF or text</li>
+          <li>Test format with presets</li>
+          <li>Course map with timestamp jumps</li>
           <li>Suggested videos for missing topics</li>
-          <li>Practice questions and grading</li>
+          <li>Questions per unit and grading</li>
           <li>Deployed on Cloud Run with Firestore</li>
         </ul>
       </div>
       <div class="card">
         <h3>Roadmap</h3>
         <ul class="clean yellow">
-          <li>Skill outlines, not just university syllabi</li>
+          <li>Study plan with deadlines</li>
+          <li>Accounts and progress tracking</li>
+          <li>Ready-made outlines for common job roles</li>
           <li>Hindi and regional languages</li>
-          <li>Previous-year paper weighting</li>
-          <li>Teacher view of weak topics</li>
-          <li>Revision plan to the exam date</li>
-          <li>Accounts and Android app</li>
+          <li>Android app</li>
         </ul>
       </div>
     </div>
@@ -531,7 +525,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
         </ul>
         <h3>Running cost</h3>
         <ul class="clean sm" style="margin-bottom:26px">
-          <li>About 160k input tokens per lecture-hour at low resolution</li>
+          <li>About 160k input tokens per video-hour at low resolution</li>
           <li>Cached, so later students cost close to nothing</li>
         </ul>
         <div class="stack">
@@ -545,7 +539,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
         <h3>Risks</h3>
         <table class="risk">
           <tr><th style="width:36%">Risk</th><th>Mitigation</th></tr>
-          <tr><td>Slow analysis</td><td>4 lectures in parallel, results cached</td></tr>
+          <tr><td>Slow analysis</td><td>4 videos in parallel, results cached</td></tr>
           <tr><td>Wrong topic or timestamp</td><td>Closed topic list, duration checks</td></tr>
           <tr><td>Private or failed video</td><td>Skipped and listed</td></tr>
           <tr><td>YouTube API quota</td><td>Cache per playlist; search only for gaps</td></tr>
@@ -558,16 +552,16 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
 
 <!-- 11. Impact -->
 <section class="slide" data-title="Impact and benefits">
-  <div class="bar"><div><div class="kicker">Impact &amp; benefits</div><h2>More value from the videos students already watch</h2></div></div>
+  <div class="bar"><div><div class="kicker">Impact &amp; benefits</div><h2>Self-study with the structure of a course</h2></div></div>
   <div class="body">
     <div class="grid3">
       <div class="card blue">
         <h3>Students</h3>
-        <ul class="clean sm"><li>See what a playlist covers and skips</li><li>Find any topic in one click</li><li>Practise and get feedback</li></ul>
+        <ul class="clean sm"><li>Know what a playlist covers and skips</li><li>Find any topic in one click</li><li>Test yourself and get feedback</li></ul>
       </div>
       <div class="card green">
-        <h3>Teachers</h3>
-        <ul class="clean green sm"><li>Lectures stay primary</li><li>Recommend playlists, gaps flagged</li><li>Class view of weak topics (roadmap)</li></ul>
+        <h3>Colleges</h3>
+        <ul class="clean green sm"><li>Support skill-building beyond the syllabus</li><li>Recommend playlists, gaps flagged</li><li>Placement prep with real tests</li></ul>
       </div>
       <div class="card yellow">
         <h3>Creators</h3>
@@ -576,8 +570,8 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
     </div>
     <h3 style="margin-top:44px">How we'd measure it</h3>
     <ul class="clean sm">
-      <li>Syllabus coverage found per playlist</li>
-      <li>Practice score on first vs. second attempt</li>
+      <li>Outline coverage found per playlist</li>
+      <li>Test score on first vs. second attempt</li>
       <li>Share of students who study a flagged gap topic</li>
     </ul>
   </div>
@@ -588,32 +582,32 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   <div class="bar"><div><div class="kicker">Viability</div><h2>Business model and roadmap</h2></div></div>
   <div class="body">
     <div class="grid3">
-      <div class="card blue"><span class="pill b">Free</span><h3 style="margin:14px 0 6px">Students</h3><p style="font-size:21px">Map playlists, practise, get graded</p></div>
-      <div class="card green"><span class="pill g">B2B</span><h3 style="margin:14px 0 6px">Colleges</h3><p style="font-size:21px">Class dashboards and curated playlists per course</p></div>
-      <div class="card yellow"><span class="pill y">Partners</span><h3 style="margin:14px 0 6px">Creators</h3><p style="font-size:21px">Coverage reports per university syllabus</p></div>
+      <div class="card blue"><span class="pill b">Free</span><h3 style="margin:14px 0 6px">Students</h3><p style="font-size:21px">Map playlists, take tests, get graded</p></div>
+      <div class="card green"><span class="pill g">B2B</span><h3 style="margin:14px 0 6px">Colleges</h3><p style="font-size:21px">Curated skill tracks and progress dashboards for placement cells</p></div>
+      <div class="card yellow"><span class="pill y">Partners</span><h3 style="margin:14px 0 6px">Creators</h3><p style="font-size:21px">Coverage reports against common skill outlines</p></div>
     </div>
     <h3 style="margin-top:48px">Roadmap</h3>
     <div class="tl">
-      <div><b>Today</b><span>Playlist to syllabus map, practice, grading</span></div>
-      <div><b>Month 1</b><span>Regional languages; past papers</span></div>
-      <div><b>Month 2</b><span>Accounts, revision plan, Android app</span></div>
-      <div><b>Month 3</b><span>Teacher view; pilot with 2–3 colleges</span></div>
-      <div><b>Month 6</b><span>Skill outlines; creator reports</span></div>
+      <div><b>Today</b><span>Playlist to course map, tests, grading</span></div>
+      <div><b>Month 1</b><span>Study plan with deadlines</span></div>
+      <div><b>Month 2</b><span>Accounts, progress tracking, Android app</span></div>
+      <div><b>Month 3</b><span>Job-role outlines; pilot with 2–3 colleges</span></div>
+      <div><b>Month 6</b><span>Regional languages; creator reports</span></div>
     </div>
   </div>
 </section>
 
 <!-- 13. Demo -->
 <section class="slide" data-title="Live demo">
-  <div class="bar"><div><div class="kicker">Live demo</div><h2>Riya revises Operating Systems with a playlist</h2></div></div>
+  <div class="bar"><div><div class="kicker">Live demo</div><h2>Riya learns Docker from a YouTube playlist</h2></div></div>
   <div class="body">
     <div class="grid2" style="align-items:center;height:100%">
       <ul class="clean">
-        <li>Paste her 12-lecture YouTube playlist</li>
-        <li>Upload the syllabus PDF, choose the exam pattern</li>
+        <li>Paste her YouTube playlist</li>
+        <li>Paste a skill outline, choose a test format</li>
         <li>See what's taught and what's missing</li>
         <li>Jump to the exact minute a topic is explained</li>
-        <li>Answer a 7-mark question and get marked</li>
+        <li>Answer a question and get graded</li>
       </ul>
       <div class="card blue" style="text-align:center;padding:56px 30px">
         <p class="muted" style="font-size:20px">Live at</p>
@@ -629,7 +623,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
     <div class="end">
       <p class="muted" style="font-size:26px;font-weight:600">CourseMap · v3as</p>
       <h1>Thank you</h1>
-      <p style="font-size:30px;margin-top:18px">Your YouTube playlist, mapped to your syllabus.</p>
+      <p style="font-size:30px;margin-top:18px">Your YouTube playlist, run like a college course.</p>
       <div class="logos">
         <span class="lg c-gem">{{icon:googlegemini}}</span>
         <span class="lg c-gcp">{{icon:googlecloud}}</span>
