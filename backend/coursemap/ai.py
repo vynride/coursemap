@@ -70,10 +70,12 @@ class SyllabusError(ValueError):
     pass
 
 
-SYLLABUS_PROMPT = """You are reading a university course syllabus.
-Return the course name and every unit or module in order. For each unit, list its topics as short names,
-worded as in the syllabus. Split comma-separated topic lists into separate topics.
-Ignore textbooks, course outcomes, marks distribution, lab experiments and reference lists."""
+SYLLABUS_PROMPT = """You are reading a course outline: a syllabus, a skill roadmap, a job description, or a list of topics.
+Return the course or skill name and every unit or module in order. For each unit, list its topics as short
+names, worded as in the outline. Split comma-separated topic lists into separate topics.
+If the outline has no units, group its topics into a few logical units in learning order.
+Ignore textbooks, course outcomes, marks distribution, lab experiments, reference lists, salary, perks
+and company details."""
 
 
 def to_syllabus(out: SyllabusOut) -> Syllabus:
@@ -86,7 +88,7 @@ def to_syllabus(out: SyllabusOut) -> Syllabus:
         topics = [Topic(id=f"{unit_id}.T{i + 1}", name=name) for i, name in enumerate(names)]
         units.append(Unit(id=unit_id, title=unit.title.strip(), topics=topics))
     if not units:
-        raise SyllabusError("Couldn't find any units or topics in that syllabus.")
+        raise SyllabusError("Couldn't find any units or topics in that outline.")
     return Syllabus(course=out.course.strip() or "Course", units=units)
 
 
@@ -95,7 +97,7 @@ async def read_syllabus(llm: LLM, *, pdf: bytes | None, text: str | None) -> Syl
     if pdf:
         parts.append(pdf_part(pdf))
     if text:
-        parts.append(text_part(f"Syllabus text:\n{text}"))
+        parts.append(text_part(f"Outline text:\n{text}"))
     return to_syllabus(await llm.generate(parts, SyllabusOut))
 
 
@@ -115,16 +117,16 @@ class VideoOut(BaseModel):
 
 def video_prompt(syllabus: Syllabus, video: Video) -> str:
     topics = "\n".join(f"{t.id}: {t.name}" for u in syllabus.units for t in u.topics)
-    return f"""You are watching a university lecture video titled "{video.title}" ({fmt_ts(video.duration_s)} long).
+    return f"""You are watching a teaching video titled "{video.title}" ({fmt_ts(video.duration_s)} long).
 
-Syllabus topics (id: name):
+Course outline topics (id: name):
 {topics}
 
-For every syllabus topic this video actually teaches, return a hit with:
+For every outline topic this video actually teaches, return a hit with:
 - topic_id: the id from the list above, exactly as written
-- start: the timestamp (M:SS or H:MM:SS) where the lecturer starts on that topic
-- depth: "explained" if the lecturer teaches it properly, "mentioned" if it only comes up in passing
-- key_points: 2 to 4 short facts the lecturer states about it, in the lecturer's own terms
+- start: the timestamp (M:SS or H:MM:SS) where the instructor starts on that topic
+- depth: "explained" if the instructor teaches or demonstrates it properly, "mentioned" if it only comes up in passing
+- key_points: 2 to 4 short facts the instructor states or shows about it, in the instructor's own terms
 Leave out topics the video does not cover. Also give a two-sentence summary of the video."""
 
 

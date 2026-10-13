@@ -41,7 +41,7 @@ function QuestionCard({ jobId, question, onPlay }: { jobId: string; question: Qu
   return (
     <div className="question card">
       <div className="qhead">
-        <span className="marks">{question.marks} marks</span>
+        <span className="marks">{question.marks} {question.marks === 1 ? "point" : "points"}</span>
         {question.moment ? (
           <button className="link" onClick={() => onPlay(question.moment!)}>
             Taught in L{question.moment.position + 1} at {fmt(question.moment.start_s)}
@@ -52,11 +52,11 @@ function QuestionCard({ jobId, question, onPlay }: { jobId: string; question: Qu
       </div>
       <p>{question.text}</p>
       <textarea rows={4} value={answer} onChange={(e) => setAnswer(e.target.value)} maxLength={5000}
-        placeholder="Write your answer the way you would in the exam" />
+        placeholder="Write your answer in your own words" />
       <div className="row">
         <button className="primary" onClick={check} disabled={busy}>{busy ? "Checking…" : "Check my answer"}</button>
         <button className="link" onClick={() => setShowPoints(!showPoints)}>
-          {showPoints ? "Hide" : "Show"} what the examiner expects
+          {showPoints ? "Hide" : "Show"} what a good answer covers
         </button>
       </div>
       {error && <p className="error">{error}</p>}

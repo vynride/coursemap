@@ -43,12 +43,12 @@ def create_app(deps: Deps) -> FastAPI:
         if pdf is not None and len(pdf) == 0:
             pdf = None
         if pdf is not None and not pdf.startswith(b"%PDF"):
-            raise HTTPException(400, "The syllabus file must be a PDF.")
+            raise HTTPException(400, "The outline file must be a PDF.")
         if pdf is not None and len(pdf) > MAX_PDF_BYTES:
-            raise HTTPException(400, "The syllabus PDF must be under 15 MB.")
+            raise HTTPException(400, "The outline PDF must be under 15 MB.")
         text = syllabus_text.strip() or None
         if pdf is None and text is None:
-            raise HTTPException(400, "Upload the syllabus PDF or paste the syllabus text.")
+            raise HTTPException(400, "Upload an outline PDF or paste the topics you want to learn.")
         job = Job(id=uuid.uuid4().hex[:12], playlist_id=ref[1], exam_pattern=exam_pattern.strip() or DEFAULT_PATTERN)
         await deps.store.put_job(job)
         task = asyncio.create_task(run_job(job.id, ref, pdf, text, deps))

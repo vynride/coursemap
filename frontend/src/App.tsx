@@ -20,7 +20,7 @@ export default function App() {
     <div className="app">
       <header className="top">
         <a href="#/" className="brand">CourseMap</a>
-        <span className="tag">Your YouTube playlist, mapped to your syllabus and your exam</span>
+        <span className="tag">Your YouTube playlist, run like a college course</span>
       </header>
       {jobId ? (
         <JobView key={jobId} jobId={jobId} />

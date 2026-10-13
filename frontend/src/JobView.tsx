@@ -7,10 +7,10 @@ import PracticeTab from "./PracticeTab";
 
 const STEP_LABEL: Record<Job["status"], string> = {
   queued: "Starting…",
-  reading_syllabus: "Reading your syllabus",
+  reading_syllabus: "Reading your outline",
   fetching_playlist: "Fetching the playlist",
-  watching_videos: "Watching your lectures",
-  writing_questions: "Writing exam questions",
+  watching_videos: "Watching your videos",
+  writing_questions: "Writing practice questions",
   done: "Done",
   failed: "Failed",
 };
@@ -63,7 +63,7 @@ export default function JobView({ jobId }: { jobId: string }) {
         <h1>{job.syllabus?.course}</h1>
         <Summary job={job} />
         <nav className="tabs">
-          <button className={tab === "map" ? "on" : ""} onClick={() => setTab("map")}>Syllabus map</button>
+          <button className={tab === "map" ? "on" : ""} onClick={() => setTab("map")}>Course map</button>
           <button className={tab === "practice" ? "on" : ""} onClick={() => setTab("practice")}>
             Practice ({job.questions.length})
           </button>
@@ -87,7 +87,7 @@ function Progress({ job }: { job: Job }) {
       {job.status === "watching_videos" && (
         <>
           <div className="bar"><div style={{ width: `${pct}%` }} /></div>
-          <p>{job.progress_done} of {job.progress_total} lectures watched</p>
+          <p>{job.progress_done} of {job.progress_total} videos watched</p>
         </>
       )}
     </div>
@@ -99,7 +99,7 @@ function Summary({ job }: { job: Job }) {
   const count = (s: string) => job.coverage.filter((c) => c.status === s).length;
   return (
     <div className="summary">
-      <div className="covered"><b>{total ? Math.round((100 * count("covered")) / total) : 0}%</b> of the syllabus is taught</div>
+      <div className="covered"><b>{total ? Math.round((100 * count("covered")) / total) : 0}%</b> of the outline is taught</div>
       <div className="partial"><b>{count("partial")}</b> topics only mentioned</div>
       <div className="gap"><b>{count("gap")}</b> topics missing</div>
       {job.skipped_videos.length > 0 && (

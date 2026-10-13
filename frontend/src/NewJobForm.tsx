@@ -2,9 +2,9 @@ import { useState, type FormEvent } from "react";
 import { createJob } from "./api";
 
 const PRESETS = [
-  { label: "2 + 7 marks", text: "Part A: 2-mark short answers. Part B: 7-mark long answers." },
-  { label: "2 + 5 + 10 marks", text: "Section A: 2 marks each. Section B: 5 marks each. Section C: 10 marks each." },
-  { label: "MCQ + 5 marks", text: "1-mark MCQs with four options, then 5-mark short answers." },
+  { label: "Concepts + scenarios", text: "2-point short answers on concepts, then 5-point practical scenario questions." },
+  { label: "Interview style", text: "5-point questions the way a technical interviewer would ask them, including \"how would you debug...\" and \"what happens when...\"." },
+  { label: "Quick quiz", text: "1-point multiple-choice questions with four options, then 3-point short answers." },
 ];
 
 export default function NewJobForm({ onCreated }: { onCreated: (id: string) => void }) {
@@ -35,23 +35,23 @@ export default function NewJobForm({ onCreated }: { onCreated: (id: string) => v
 
   return (
     <form className="card form" onSubmit={submit}>
-      <h1>Is your playlist enough for your exam?</h1>
+      <h1>Turn your YouTube playlist into a course</h1>
       <label>
         YouTube playlist link
         <input required value={playlist} onChange={(e) => setPlaylist(e.target.value)}
           placeholder="https://www.youtube.com/playlist?list=..." />
       </label>
       <label>
-        Syllabus PDF
+        Outline PDF (syllabus, roadmap or job description)
         <input type="file" accept="application/pdf" onChange={(e) => setPdf(e.target.files?.[0] ?? null)} />
       </label>
       <label>
-        …or paste the syllabus
+        …or paste the topics you want to learn
         <textarea rows={5} value={text} onChange={(e) => setText(e.target.value)}
-          placeholder="Unit 1: Introduction — process states, context switching…" />
+          placeholder="Docker basics: images, containers, Dockerfile, volumes, networking, Compose…" />
       </label>
       <label>
-        Exam pattern
+        Test style
         <div className="presets">
           {PRESETS.map((p) => (
             <button type="button" key={p.label} className={pattern === p.text ? "on" : ""} onClick={() => setPattern(p.text)}>

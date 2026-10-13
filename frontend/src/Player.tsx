@@ -2,7 +2,7 @@ import { fmt, type Moment } from "./api";
 
 export default function Player({ moment }: { moment: Moment | null }) {
   if (!moment) {
-    return <div className="player empty">Click any timestamp to watch that part of the lecture.</div>;
+    return <div className="player empty">Click any timestamp to watch that part of the video.</div>;
   }
   return (
     <div className="player">

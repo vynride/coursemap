@@ -42,7 +42,7 @@ async def test_health(client):
     "data,files,message",
     [
         ({"playlist_url": "https://vimeo.com/1", "syllabus_text": "x"}, None, "YouTube"),
-        ({"playlist_url": "https://www.youtube.com/playlist?list=PLtest"}, None, "syllabus"),
+        ({"playlist_url": "https://www.youtube.com/playlist?list=PLtest"}, None, "outline"),
         ({"playlist_url": "https://www.youtube.com/playlist?list=PLtest"},
          {"syllabus_pdf": ("s.pdf", b"hello", "application/pdf")}, "PDF"),
     ],
@@ -59,7 +59,7 @@ async def test_job_lifecycle_and_grading(client):
     assert r.status_code == 200
     job = await wait_done(client, r.json()["job_id"])
     assert job["status"] == "done", job["error"]
-    assert job["exam_pattern"].startswith("Part A")
+    assert job["exam_pattern"].startswith("2-point")
     question = job["questions"][0]
 
     r = await client.post(f"/api/jobs/{job['id']}/grade", json={"question_id": question["id"], "answer": "some answer"})

@@ -49,7 +49,7 @@ async def suggest_for_gaps(deps: Deps, syllabus: Syllabus, coverage: list[Covera
 
     async def one(entry: CoverageEntry) -> list[Suggestion]:
         try:
-            found = await search_videos(deps.http, key, f"{entry.topic_name} {syllabus.course} lecture")
+            found = await search_videos(deps.http, key, f"{entry.topic_name} {syllabus.course} tutorial")
         except YouTubeError:
             log.warning("search failed for %s", entry.topic_id)
             return []
