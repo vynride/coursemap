@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CourseMap Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1a73e8; --red: #d93025; --yellow: #f9ab00; --green: #1e8e3e;
+  --ink: #202124; --muted: #5f6368; --line: #dadce0; --panel: #f8f9fa; --bg: #ffffff;
+  --blue-soft: #e8f0fe; --green-soft: #e6f4ea; --red-soft: #fce8e6; --yellow-soft: #fef7e0;
+  --stage-bg: #e9ebee;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--stage-bg); color: var(--ink);
+  font-family: Inter, "Segoe UI", Roboto, system-ui, sans-serif; }
+.stage { position: absolute; top: 50%; left: 50%; width: 1600px; height: 900px;
+  transform-origin: center center; background: var(--bg); box-shadow: 0 10px 40px rgba(0,0,0,.18); overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 0; opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.ico { width: 100%; height: 100%; display: block; }
+
+/* header bar */
+.bar { height: 118px; padding: 0 70px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); position: relative; }
+.bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 6px;
+  background: linear-gradient(90deg, var(--blue) 0 25%, var(--red) 25% 50%, var(--yellow) 50% 75%, var(--green) 75% 100%); }
+.bar h2 { font-size: 46px; font-weight: 800; letter-spacing: -.5px; }
+.bar .kicker { font-size: 18px; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; }
+.bar .brandmark { display: flex; align-items: center; gap: 14px; color: var(--muted); font-weight: 600; font-size: 18px; }
+.bar .brandmark .lg { width: 40px; height: 40px; color: #4285F4; }
+.body { position: absolute; top: 124px; left: 0; right: 0; bottom: 48px; padding: 36px 70px; }
+.foot { position: absolute; left: 0; right: 0; bottom: 0; height: 48px; padding: 0 70px; display: flex; align-items: center;
+  justify-content: space-between; font-size: 16px; color: var(--muted); border-top: 1px solid var(--line); background: var(--panel); }
+
+/* type */
+h3 { font-size: 30px; font-weight: 700; margin-bottom: 14px; }
+p, li { font-size: 24px; line-height: 1.45; }
+.muted { color: var(--muted); }
+.small { font-size: 18px; }
+ul.clean { list-style: none; }
+ul.clean li { padding-left: 34px; position: relative; margin-bottom: 14px; }
+ul.clean li::before { content: ""; position: absolute; left: 4px; top: 12px; width: 14px; height: 14px; border-radius: 4px; background: var(--blue); }
+ul.clean.red li::before { background: var(--red); } ul.clean.green li::before { background: var(--green); }
+ul.clean.yellow li::before { background: var(--yellow); }
+b.blue { color: var(--blue); } b.red { color: var(--red); } b.green { color: var(--green); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 100%; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 28px 30px; }
+.card.blue { background: var(--blue-soft); border-color: #c6dafc; }
+.card.green { background: var(--green-soft); border-color: #ceead6; }
+.card.red { background: var(--red-soft); border-color: #fad2cf; }
+.card.yellow { background: var(--yellow-soft); border-color: #feefc3; }
+.pill { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 16px; font-weight: 700; }
+.pill.g { background: var(--green-soft); color: var(--green); } .pill.y { background: var(--yellow-soft); color: #b06000; }
+.pill.r { background: var(--red-soft); color: var(--red); } .pill.b { background: var(--blue-soft); color: var(--blue); }
+
+/* title slide */
+.title-slide { background: radial-gradient(1200px 700px at 85% 10%, #e8f0fe 0, transparent 60%), radial-gradient(900px 600px at 0% 100%, #e6f4ea 0, transparent 55%), #fff; }
+.title-slide .inner { position: absolute; inset: 0; padding: 90px 110px; display: flex; flex-direction: column; justify-content: center; }
+.title-slide .event { display: flex; align-items: center; gap: 16px; font-size: 22px; font-weight: 600; color: var(--muted); margin-bottom: 40px; }
+.title-slide .event .lg { width: 46px; height: 46px; color: #4285F4; }
+.title-slide h1 { font-size: 118px; font-weight: 800; letter-spacing: -3px; line-height: 1; }
+.title-slide h1 span:nth-child(1) { color: var(--blue); }
+.title-slide .tagline { font-size: 40px; font-weight: 500; margin-top: 26px; max-width: 1100px; line-height: 1.25; }
+.title-slide .meta { margin-top: 60px; display: flex; gap: 22px; flex-wrap: wrap; }
+.title-slide .meta .card { padding: 18px 26px; }
+.title-slide .meta .lbl { font-size: 15px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-weight: 700; }
+.title-slide .meta .val { font-size: 26px; font-weight: 700; margin-top: 4px; min-width: 200px; outline: none; }
+.title-slide .meta .val[contenteditable]:hover { background: #fff; border-radius: 6px; }
+.title-slide .stripe { position: absolute; left: 0; right: 0; bottom: 0; height: 14px;
+  background: linear-gradient(90deg, var(--blue) 0 25%, var(--red) 25% 50%, var(--yellow) 50% 75%, var(--green) 75% 100%); }
+.title-slide .powered { position: absolute; right: 110px; top: 90px; display: flex; gap: 22px; }
+.title-slide .powered span { width: 64px; height: 64px; display: block; }
+
+/* logos */
+.lg { display: inline-block; }
+.c-gcp { color: #4285F4; } .c-gem { color: #8E75B2; } .c-yt { color: #FF0000; } .c-fb { color: #F57C00; }
+.c-react { color: #0ea5c6; } .c-fast { color: #009688; } .c-py { color: #3776AB; } .c-dock { color: #2496ED; }
+
+/* venn */
+.venn text { font-family: Inter, sans-serif; }
+
+/* table */
+table.cmp { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 22px; }
+table.cmp th, table.cmp td { padding: 15px 18px; border-bottom: 1px solid var(--line); text-align: center; }
+table.cmp th { font-size: 20px; color: var(--muted); font-weight: 700; }
+table.cmp td:first-child, table.cmp th:first-child { text-align: left; }
+table.cmp .us { background: var(--blue-soft); font-weight: 700; }
+table.cmp th.us { color: var(--blue); border-radius: 14px 14px 0 0; }
+.yes { color: var(--green); font-weight: 800; } .no { color: var(--red); font-weight: 800; } .part { color: #b06000; font-weight: 700; font-size: 18px; }
+
+/* solution flow */
+.flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; margin-top: 10px; }
+.flow .step { position: relative; }
+.flow .step .num { width: 54px; height: 54px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 26px; display: grid; place-items: center; margin-bottom: 18px; }
+.flow .step:not(:last-child)::after { content: "→"; position: absolute; right: -25px; top: 45%; font-size: 34px; color: var(--muted); }
+.flow .step h3 { font-size: 27px; }
+.flow .step p { font-size: 21px; }
+.flow .lgrow { display: flex; gap: 10px; margin-top: 16px; }
+.flow .lgrow span { width: 34px; height: 34px; }
+
+/* mockup */
+.mock { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.08); background: #fff; }
+.mock .chrome { height: 40px; background: var(--panel); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; padding: 0 16px; }
+.mock .chrome i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.mock .chrome .url { margin-left: 14px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 3px 16px; font-size: 14px; color: var(--muted); }
+.mock .content { display: grid; grid-template-columns: 1.15fr 1fr; gap: 22px; padding: 22px; }
+.mock .sum { display: flex; gap: 12px; margin-bottom: 14px; }
+.mock .sum div { flex: 1; border-radius: 12px; padding: 10px 14px; font-size: 15px; }
+.mock .sum b { display: block; font-size: 28px; }
+.mock .unit h4 { font-size: 16px; color: var(--muted); margin: 10px 0 6px; text-transform: uppercase; letter-spacing: 1px; }
+.mock .topic { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; font-size: 17px; cursor: pointer; border: 1px solid transparent; }
+.mock .topic:hover, .mock .topic.sel { border-color: var(--blue); background: var(--blue-soft); }
+.mock .topic .pill { font-size: 12px; padding: 2px 10px; min-width: 82px; text-align: center; }
+.mock .topic .ts { margin-left: auto; font-size: 14px; color: var(--blue); font-weight: 700; white-space: nowrap; }
+.mock .player { background: #111; border-radius: 12px; aspect-ratio: 16/9; position: relative; display: grid; place-items: center; color: #fff; overflow: hidden; }
+.mock .player .play { width: 70px; height: 50px; color: #FF0000; }
+.mock .player .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 14px; background: linear-gradient(transparent, rgba(0,0,0,.85)); font-size: 15px; }
+.mock .player .bar2 { position: absolute; left: 0; bottom: 0; height: 4px; background: #FF0000; transition: width .6s ease; }
+.mock .pts { font-size: 15px; margin: 10px 0 0 18px; }
+.mock .pts li { font-size: 15px; line-height: 1.4; }
+.mock .q { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 15px; }
+.mock .q .ans { margin: 8px 0; border: 1px dashed var(--line); border-radius: 8px; padding: 8px; color: var(--muted); font-size: 14px; min-height: 40px; }
+.mock .q button, .btn { font: inherit; font-weight: 700; font-size: 15px; background: var(--blue); color: #fff; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.mock .grade { margin-top: 10px; background: var(--yellow-soft); border-radius: 8px; padding: 10px; font-size: 14px; display: none; }
+.mock .grade.show { display: block; animation: pop .35s ease; }
+@keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
+.note { font-size: 15px; color: var(--muted); }
+
+/* architecture */
+.arch { position: absolute; inset: 0; }
+.arch svg.wires { position: absolute; inset: 0; width: 100%; height: 100%; }
+.wire { fill: none; stroke: #9aa0a6; stroke-width: 3.5; transition: stroke .3s, opacity .3s; }
+.wire.on { stroke: var(--blue); stroke-width: 5; stroke-dasharray: 12 9; animation: flow 1s linear infinite; }
+.wire.dim, .node.dim, .badge.dim, .badge-t.dim { opacity: .25; }
+@keyframes flow { to { stroke-dashoffset: -21; } }
+.badge { fill: #fff; stroke: var(--blue); stroke-width: 3; transition: opacity .3s; }
+.badge-t { font: 800 18px Inter, sans-serif; fill: var(--blue); text-anchor: middle; dominant-baseline: central; transition: opacity .3s; }
+.node { position: absolute; background: #fff; border: 2px solid var(--line); border-radius: 16px; padding: 14px 16px; display: flex; gap: 14px; align-items: center; cursor: pointer; transition: opacity .3s, border-color .3s, box-shadow .3s; }
+.node.on { border-color: var(--blue); box-shadow: 0 0 0 5px var(--blue-soft); }
+.node .lg { width: 48px; height: 48px; flex: none; }
+.node .nm { font-size: 21px; font-weight: 700; line-height: 1.15; }
+.node .ds { font-size: 15px; color: var(--muted); line-height: 1.3; margin-top: 3px; }
+.node.big { flex-direction: column; align-items: flex-start; }
+.node.big .row { display: flex; gap: 14px; align-items: center; }
+.node.big .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.node.big .chips span { font-size: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 3px 9px; display: inline-flex; align-items: center; gap: 6px; }
+.node.big .chips span i { width: 18px; height: 18px; display: inline-block; }
+.gcpbox { position: absolute; border: 2px dashed #8ab4f8; border-radius: 22px; }
+.gcpbox .lbl { position: absolute; top: -16px; left: 22px; background: #fff; padding: 0 10px; display: flex; gap: 8px; align-items: center; font-weight: 700; color: var(--blue); font-size: 17px; }
+.gcpbox .lbl span { width: 26px; height: 26px; }
+.archcap { position: absolute; left: 70px; right: 70px; bottom: 6px; display: flex; gap: 18px; align-items: center; }
+.archcap .txt { flex: 1; background: var(--blue-soft); border-radius: 14px; padding: 12px 20px; font-size: 20px; min-height: 64px; display: flex; align-items: center; }
+.archcap .txt b { margin-right: 10px; }
+.archcap .btn { font-size: 17px; padding: 12px 18px; }
+.archcap .btn.ghost { background: #fff; color: var(--blue); border: 2px solid var(--blue); }
+
+/* google services */
+.svc { display: grid; grid-template-columns: 1.25fr 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 18px; height: 100%; }
+.svc .card { padding: 20px 22px; position: relative; }
+.svc .hd { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+.svc .hd .lg { width: 44px; height: 44px; }
+.svc .hd .nm { font-size: 23px; font-weight: 800; }
+.svc .hd .role { font-size: 15px; color: var(--muted); font-weight: 600; }
+.svc p { font-size: 17px; line-height: 1.42; }
+.svc code { font-family: "Roboto Mono", ui-monospace, monospace; font-size: 15px; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
+.svc .card.hero { grid-row: span 2; background: linear-gradient(160deg, #f3efff 0, #e8f0fe 100%); border-color: #d7cdf5; }
+.svc .card.hero p { font-size: 18px; margin-bottom: 10px; }
+
+/* guardrails */
+.guard { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.guard .card { display: flex; gap: 20px; align-items: flex-start; }
+.guard .ic { font-size: 34px; width: 60px; height: 60px; flex: none; border-radius: 14px; display: grid; place-items: center; background: #fff; border: 1px solid var(--line); }
+.guard h3 { font-size: 24px; margin-bottom: 6px; }
+.guard p { font-size: 19.5px; }
+
+/* risk table */
+table.risk { width: 100%; border-collapse: collapse; font-size: 19px; }
+table.risk th { text-align: left; color: var(--muted); font-size: 16px; text-transform: uppercase; letter-spacing: 1px; padding: 8px 12px; border-bottom: 2px solid var(--line); }
+table.risk td { padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.35; }
+
+/* stack */
+.stack { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+.stack div { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 8px 14px; font-size: 18px; font-weight: 600; background: #fff; }
+.stack .lg { width: 28px; height: 28px; }
+
+/* timeline */
+.tl { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 18px; }
+.tl div { border-top: 6px solid var(--blue); padding: 14px 14px 0 0; }
+.tl div:nth-child(2) { border-color: var(--red); } .tl div:nth-child(3) { border-color: var(--yellow); }
+.tl div:nth-child(4) { border-color: var(--green); } .tl div:nth-child(5) { border-color: var(--blue); }
+.tl b { font-size: 18px; display: block; } .tl span { font-size: 16px; color: var(--muted); line-height: 1.35; display: block; margin-top: 4px; }
+
+/* end slide */
+.end { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.end h1 { font-size: 96px; font-weight: 800; letter-spacing: -2px; }
+.end .logos { display: flex; gap: 34px; margin-top: 40px; }
+.end .logos span { width: 60px; height: 60px; }
+
+/* chrome: nav, progress, menu */
+.ui { position: fixed; z-index: 10; }
+.progress { top: 0; left: 0; height: 4px; background: var(--blue); transition: width .3s; }
+.nav { left: 50%; transform: translateX(-50%); bottom: 10px; display: flex; gap: 8px; opacity: .25; transition: opacity .2s; }
+.nav:hover { opacity: 1; }
+.nav button { font: 600 15px Inter, sans-serif; border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 8px 12px; cursor: pointer; color: var(--ink); }
+.menu { inset: 0; background: rgba(32,33,36,.55); display: none; place-items: center; }
+.menu.open { display: grid; }
+.menu .list { background: #fff; border-radius: 16px; padding: 18px; width: min(560px, 92vw); max-height: 86vh; overflow: auto; }
+.menu .list button { display: block; width: 100%; text-align: left; font: 500 17px Inter, sans-serif; padding: 10px 14px; border: 0; background: none; border-radius: 8px; cursor: pointer; color: var(--ink); }
+.menu .list button:hover, .menu .list button.cur { background: var(--blue-soft); color: var(--blue); }
+.menu .hint { font-size: 14px; color: var(--muted); padding: 8px 14px 0; }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+
+<!-- 1. Title -->
+<section class="slide title-slide" data-title="Title">
+  <div class="powered">
+    <span class="lg c-gem">{{icon:googlegemini}}</span>
+    <span class="lg c-gcp">{{icon:googlecloud}}</span>
+    <span class="lg c-yt">{{icon:youtube}}</span>
+  </div>
+  <div class="inner">
+    <div class="event"><span class="lg">{{icon:googlecloud}}</span> Hack Sprint · GeeksforGeeks × Google Cloud · Track: EdTech</div>
+    <h1><span>Course</span><span>Map</span></h1>
+    <p class="tagline">Your YouTube playlist, mapped to <b class="blue">your syllabus</b> and <b class="green">your exam</b>.</p>
+    <div class="meta">
+      <div class="card"><div class="lbl">Team</div><div class="val" contenteditable="true" spellcheck="false" data-save="team">Team name</div></div>
+      <div class="card"><div class="lbl">Members</div><div class="val" contenteditable="true" spellcheck="false" data-save="members">Names</div></div>
+      <div class="card"><div class="lbl">College</div><div class="val" contenteditable="true" spellcheck="false" data-save="college">College</div></div>
+    </div>
+  </div>
+  <div class="stripe"></div>
+</section>
+
+<!-- 2. Problem -->
+<section class="slide" data-title="Problem statement">
+  <div class="bar"><div><div class="kicker">Problem statement</div><h2>Students learn from YouTube. Exams come from the syllabus.</h2></div></div>
+  <div class="body">
+    <div class="grid2">
+      <div>
+        <p style="font-size:26px;margin-bottom:26px">Most of us prepare for university exams from free YouTube lecture playlists. A playlist is made for everyone; <b>the exam is set from our own university's syllabus, in its own question pattern.</b></p>
+        <ul class="clean red">
+          <li><b>No idea what's missing.</b> Nobody tells you which syllabus topics the playlist skips. You find out in the exam hall.</li>
+          <li><b>Topics are buried in hours of video.</b> Finding where "Banker's algorithm" is explained means scrubbing through 12 lectures.</li>
+          <li><b>No practice in the real format.</b> Watching isn't answering a 7-mark question the way your examiner marks it.</li>
+        </ul>
+        <div class="card yellow" style="margin-top:18px;padding:18px 24px"><p style="font-size:22px"><b>Who has this problem:</b> every student who learns from a playlist instead of paid coaching. That's most of our classmates.</p></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center">
+        <svg class="venn" viewBox="0 0 680 560" width="680" height="560">
+          <circle cx="250" cy="270" r="200" fill="#e8f0fe" stroke="#1a73e8" stroke-width="4"/>
+          <circle cx="430" cy="270" r="200" fill="#fce8e6" stroke="#d93025" stroke-width="4" fill-opacity=".75"/>
+          <path d="M340 91.5 A200 200 0 0 1 340 448.5 A200 200 0 0 1 340 91.5z" fill="#e6f4ea" stroke="none"/>
+          <text x="160" y="40" font-size="26" font-weight="800" fill="#1a73e8" text-anchor="middle">YouTube playlist</text>
+          <text x="520" y="40" font-size="26" font-weight="800" fill="#d93025" text-anchor="middle">University syllabus</text>
+          <text x="140" y="262" font-size="22" font-weight="700" fill="#1a73e8" text-anchor="middle">Extra content</text>
+          <text x="140" y="292" font-size="18" fill="#5f6368" text-anchor="middle">not in your exam</text>
+          <text x="340" y="262" font-size="22" font-weight="800" fill="#1e8e3e" text-anchor="middle">Covered</text>
+          <text x="340" y="292" font-size="18" fill="#5f6368" text-anchor="middle">but where?</text>
+          <text x="540" y="262" font-size="22" font-weight="800" fill="#d93025" text-anchor="middle">GAPS</text>
+          <text x="540" y="292" font-size="18" fill="#5f6368" text-anchor="middle">found in the exam</text>
+          <text x="340" y="530" font-size="20" fill="#5f6368" text-anchor="middle">Today nobody draws this picture for the student.</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Existing tools -->
+<section class="slide" data-title="Why existing tools fall short">
+  <div class="bar"><div><div class="kicker">Gap analysis</div><h2>Existing tools don't start from your syllabus</h2></div></div>
+  <div class="body">
+    <table class="cmp">
+      <tr><th></th><th>YouTube<br><span class="small">Ask / chapters</span></th><th>NotebookLM</th><th>Coaching apps</th><th class="us">CourseMap</th></tr>
+      <tr><td>Starts from <b>your university syllabus</b></td><td class="no">✗</td><td class="no">✗</td><td class="part">fixed courses</td><td class="us yes">✓</td></tr>
+      <tr><td>Shows what your playlist <b>is missing</b></td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="us yes">✓</td></tr>
+      <tr><td>Jumps to the <b>exact minute</b> each syllabus topic is taught</td><td class="part">one video at a time</td><td class="part">source citations</td><td class="no">✗</td><td class="us yes">✓</td></tr>
+      <tr><td>Questions in <b>your exam's pattern and marks</b></td><td class="no">✗</td><td class="part">generic quizzes</td><td class="part">major exams only</td><td class="us yes">✓</td></tr>
+      <tr><td><b>Grades a written answer</b> like an examiner</td><td class="no">✗</td><td class="no">✗</td><td class="part">some</td><td class="us yes">✓</td></tr>
+      <tr><td>Works on the <b>free playlist you already trust</b></td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="us yes">✓</td></tr>
+    </table>
+    <p class="muted" style="margin-top:22px;font-size:21px"><b style="color:var(--ink)">Our USP: the syllabus is the spine.</b> Coverage, gaps, questions and grading are all organised by your syllabus units and grounded in timestamps from your own playlist.</p>
+  </div>
+</section>
+
+<!-- 4. Proposed solution -->
+<section class="slide" data-title="Proposed solution">
+  <div class="bar"><div><div class="kicker">Proposed solution</div><h2>Paste a playlist. Get a syllabus map and exam practice.</h2></div></div>
+  <div class="body">
+    <div class="flow">
+      <div class="step card">
+        <div class="num" style="background:var(--blue)">1</div>
+        <h3>Paste &amp; upload</h3>
+        <p>YouTube playlist link, syllabus PDF, and the exam pattern (e.g. "2-mark short, 7-mark long").</p>
+        <div class="lgrow"><span class="lg c-yt">{{icon:youtube}}</span></div>
+      </div>
+      <div class="step card">
+        <div class="num" style="background:var(--red)">2</div>
+        <h3>Gemini watches every lecture</h3>
+        <p>Reads the syllabus into units and topics, then watches each video by its YouTube link and notes which topics are taught, how well, and when.</p>
+        <div class="lgrow"><span class="lg c-gem">{{icon:googlegemini}}</span><span class="lg c-gcp">{{icon:vertexai}}</span></div>
+      </div>
+      <div class="step card">
+        <div class="num" style="background:var(--yellow)">3</div>
+        <h3>Syllabus map</h3>
+        <p>Every topic marked <span class="pill g">Taught</span> <span class="pill y">Mentioned</span> <span class="pill r">Missing</span>. One click jumps the player to the exact minute. Missing topics get suggested videos.</p>
+      </div>
+      <div class="step card">
+        <div class="num" style="background:var(--green)">4</div>
+        <h3>Exam practice</h3>
+        <p>Questions per unit in your exam's pattern. Write an answer, get marked like an examiner, then "rewatch where this is taught".</p>
+      </div>
+    </div>
+    <div class="grid3" style="margin-top:30px">
+      <div class="card blue"><h3 style="font-size:24px">For the student</h3><p style="font-size:20px">Knows exactly what to study beyond the playlist, finds any topic in one click, practises in the real format.</p></div>
+      <div class="card green"><h3 style="font-size:24px">Grounded, not generated</h3><p style="font-size:20px">Every map entry and question points to a real moment in a real lecture. Gemini can't invent timestamps (see guardrails).</p></div>
+      <div class="card yellow"><h3 style="font-size:24px">Built once, used by the class</h3><p style="font-size:20px">Analyses are cached per video and syllabus, so the second student with the same playlist gets results instantly.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Product mockup -->
+<section class="slide" data-title="Product walkthrough">
+  <div class="bar"><div><div class="kicker">Product walkthrough · click around</div><h2>What the student sees</h2></div></div>
+  <div class="body" style="padding-top:22px">
+    <div class="mock">
+      <div class="chrome"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="url">coursemap · Operating Systems · 12 lectures</span></div>
+      <div class="content">
+        <div>
+          <div class="sum">
+            <div style="background:var(--green-soft)"><b style="color:var(--green)">71%</b>of syllabus taught</div>
+            <div style="background:var(--yellow-soft)"><b style="color:#b06000">4</b>topics only mentioned</div>
+            <div style="background:var(--red-soft)"><b style="color:var(--red)">3</b>topics missing</div>
+          </div>
+          <div class="unit"><h4>Unit 3 · Deadlocks</h4>
+            <div class="topic sel" data-v="Lecture 6 · Deadlocks" data-t="8:12" data-w="22" data-p="Four necessary conditions|Resource allocation graph|Cycle ≠ deadlock with multiple instances"><span class="pill g">Taught</span>Deadlock characterization<span class="ts">▶ L6 8:12</span></div>
+            <div class="topic" data-v="Lecture 6 · Deadlocks" data-t="14:32" data-w="38" data-p="Safe state and safe sequence|Need = Max − Allocation|Worked 5-process example"><span class="pill g">Taught</span>Banker's algorithm<span class="ts">▶ L6 14:32</span></div>
+            <div class="topic" data-v="Lecture 7 · Deadlock handling" data-t="2:10" data-w="6" data-p="Only mentions process termination|No resource preemption details"><span class="pill y">Mentioned</span>Deadlock recovery<span class="ts">▶ L7 2:10</span></div>
+          </div>
+          <div class="unit"><h4>Unit 4 · Storage</h4>
+            <div class="topic" data-v="Suggested: Disk scheduling (other channel)" data-t="0:00" data-w="0" data-p="Not taught anywhere in your playlist|Suggested video found via YouTube search"><span class="pill r">Missing</span>Disk scheduling: SCAN, C-SCAN<span class="ts">2 suggestions</span></div>
+            <div class="topic" data-v="Lecture 11 · File systems" data-t="21:47" data-w="64" data-p="Contiguous, linked, indexed allocation|Trade-offs table"><span class="pill g">Taught</span>File allocation methods<span class="ts">▶ L11 21:47</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="player"><span class="play lg">{{icon:youtube}}</span><div class="cap" id="mockCap">Lecture 6 · Deadlocks — 8:12</div><div class="bar2" id="mockBar" style="width:22%"></div></div>
+          <ul class="pts" id="mockPts"><li>Four necessary conditions</li><li>Resource allocation graph</li><li>Cycle ≠ deadlock with multiple instances</li></ul>
+          <div class="q">
+            <span class="pill b" style="font-size:12px">7 marks</span> <b>Explain the Banker's algorithm with an example. When is a state safe?</b>
+            <div class="ans">"Banker's algorithm avoids deadlock. It checks if resources can be given…"</div>
+            <button id="gradeBtn">Check my answer</button>
+            <div class="grade" id="gradeBox"><b>3 / 7.</b> Defines the goal correctly but never computes Need = Max − Allocation or shows a safe sequence. <b style="color:var(--blue);cursor:pointer" data-jump="1">▶ Rewatch L6 at 14:32</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:10px">Illustrative mock-up of the interface; the live demo shows real results for a real playlist.</p>
+  </div>
+</section>
+
+<!-- 6. Architecture -->
+<section class="slide" data-title="System architecture">
+  <div class="bar"><div><div class="kicker">System architecture</div><h2>One Cloud Run service, with Gemini at the core</h2></div></div>
+  <div class="body" style="padding:0">
+    <div class="arch" id="arch">
+      <div class="gcpbox" style="left:370px;top:22px;width:870px;height:610px"><div class="lbl"><span class="lg c-gcp">{{icon:googlecloud}}</span>Google Cloud project</div></div>
+      <svg class="wires" viewBox="0 0 1600 728" preserveAspectRatio="none">
+        <path class="wire" data-s="1" d="M300 300 L420 300"/>
+        <path class="wire" data-s="2 6" d="M740 250 C 820 250, 820 110, 900 110"/>
+        <path class="wire" data-s="3" d="M740 300 C 820 300, 820 265, 900 265"/>
+        <path class="wire" data-s="3" d="M740 410 C 800 450, 830 565, 900 565"/>
+        <path class="wire" data-s="4" d="M1210 110 L1300 110"/>
+        <path class="wire" data-s="5" d="M740 360 C 820 360, 820 415, 900 415"/>
+        <path class="wire" data-s="7" d="M580 510 L580 470"/>
+        <g data-s="1"><circle class="badge" cx="360" cy="300" r="18"/><text class="badge-t" x="360" y="300">1</text></g>
+        <g data-s="2 6"><circle class="badge" cx="820" cy="180" r="18"/><text class="badge-t" x="820" y="180">2</text></g>
+        <g data-s="3"><circle class="badge" cx="820" cy="282" r="18"/><text class="badge-t" x="820" y="282">3</text></g>
+        <g data-s="4"><circle class="badge" cx="1255" cy="110" r="18"/><text class="badge-t" x="1255" y="110">4</text></g>
+        <g data-s="5"><circle class="badge" cx="820" cy="388" r="18"/><text class="badge-t" x="820" y="388">5</text></g>
+        <g data-s="7"><circle class="badge" cx="580" cy="490" r="18"/><text class="badge-t" x="580" y="490">7</text></g>
+      </svg>
+
+      <div class="node" data-s="1 8" style="left:40px;top:230px;width:260px;height:140px">
+        <span class="lg c-react">{{icon:react}}</span>
+        <div><div class="nm">Student's browser</div><div class="ds">React app: form, syllabus map, practice, embedded YouTube player</div></div>
+      </div>
+
+      <div class="node big" data-s="1 2 3 5 6 7" style="left:420px;top:150px;width:320px;height:320px">
+        <div class="row"><span class="lg c-gcp">{{icon:cloudrun}}</span><div><div class="nm">Cloud Run</div><div class="ds">one container, warm instance</div></div></div>
+        <div class="ds" style="font-size:16px">FastAPI API + built React app. Background job pipeline: read syllabus → list videos → watch 4 lectures in parallel → validate → map coverage → write questions.</div>
+        <div class="chips"><span><i class="lg c-fast">{{icon:fastapi}}</i>FastAPI</span><span><i class="lg c-py">{{icon:python}}</i>Python</span><span><i class="lg c-react">{{icon:react}}</i>React</span><span><i class="lg c-dock">{{icon:docker}}</i>Docker</span></div>
+      </div>
+
+      <div class="node" data-s="2 4 6" style="left:900px;top:50px;width:310px;height:120px">
+        <span class="lg c-gem">{{icon:googlegemini}}</span>
+        <div><div class="nm">Gemini on Vertex AI</div><div class="ds">reads PDF, watches video, writes &amp; grades questions</div></div>
+      </div>
+      <div class="node" data-s="3" style="left:900px;top:205px;width:310px;height:120px">
+        <span class="lg c-yt">{{icon:youtube}}</span>
+        <div><div class="nm">YouTube Data API v3</div><div class="ds">playlist videos, durations, privacy; search for gap topics</div></div>
+      </div>
+      <div class="node" data-s="5" style="left:900px;top:355px;width:310px;height:120px">
+        <span class="lg c-fb">{{icon:firebase}}</span>
+        <div><div class="nm">Firestore</div><div class="ds">job progress + analysis cache shared by the class</div></div>
+      </div>
+      <div class="node" data-s="3" style="left:900px;top:505px;width:310px;height:110px">
+        <span class="lg c-gcp">{{icon:secretmanager}}</span>
+        <div><div class="nm">Secret Manager</div><div class="ds">YouTube API key, injected at deploy</div></div>
+      </div>
+      <div class="node" data-s="7" style="left:420px;top:510px;width:320px;height:105px">
+        <span class="lg c-gcp">{{icon:cloudbuild}}</span>
+        <div><div class="nm">Cloud Build</div><div class="ds">builds the container from source, deploys to Cloud Run</div></div>
+      </div>
+      <div class="node" data-s="4 8" style="left:1300px;top:40px;width:250px;height:140px">
+        <span class="lg c-yt">{{icon:youtube}}</span>
+        <div><div class="nm">YouTube</div><div class="ds">public lecture videos; Gemini reads them by URL, students watch the embed</div></div>
+      </div>
+
+      <div class="archcap">
+        <div class="txt" id="archTxt"><b>Overview.</b> Click a step, or press Play to walk through one request.</div>
+        <button class="btn ghost" id="archPrev">◀</button>
+        <button class="btn" id="archPlay">▶ Play</button>
+        <button class="btn ghost" id="archNext">▶</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Google services integration -->
+<section class="slide" data-title="Google services integration">
+  <div class="bar"><div><div class="kicker">Google services integration</div><h2>Every Google service does essential work</h2></div>
+    <div class="brandmark"><span class="lg">{{icon:googlecloud}}</span>Google Cloud</div></div>
+  <div class="body" style="padding-top:26px">
+    <div class="svc">
+      <div class="card hero">
+        <div class="hd"><span class="lg c-gem">{{icon:googlegemini}}</span><div><div class="nm">Gemini on Vertex AI</div><div class="role">The core of the product</div></div></div>
+        <p><b>Video understanding on YouTube URLs.</b> Gemini watches a public lecture straight from its link: no downloading, no separate transcription, no vector database.</p>
+        <p><b>Cost-tuned for lectures.</b> <code>media_resolution=LOW</code> and a low frame rate, since audio carries most of a lecture.</p>
+        <p><b>Native PDF reading</b> for the syllabus, including tables and scanned pages.</p>
+        <p><b>Structured output</b> (<code>response_schema</code>): every call returns typed JSON we validate, not free text.</p>
+        <p><b>Four jobs:</b> parse syllabus · map lectures · set exam questions · grade answers.</p>
+      </div>
+      <div class="card">
+        <div class="hd"><span class="lg c-yt">{{icon:youtube}}</span><div><div class="nm">YouTube Data API v3</div><div class="role">Playlist + discovery</div></div></div>
+        <p><code>playlistItems.list</code> and <code>videos.list</code> give the lecture list, durations and privacy (to skip private and live videos). <code>search.list</code> finds videos for missing topics.</p>
+      </div>
+      <div class="card">
+        <div class="hd"><span class="lg c-gcp">{{icon:cloudrun}}</span><div><div class="nm">Cloud Run</div><div class="role">Serving + background jobs</div></div></div>
+        <p>One container serves the React app and the API. A warm instance with CPU always allocated runs the multi-minute analysis job after the request returns.</p>
+      </div>
+      <div class="card">
+        <div class="hd"><span class="lg c-fb">{{icon:firebase}}</span><div><div class="nm">Firestore</div><div class="role">State + shared cache</div></div></div>
+        <p>Job progress the browser polls, and an analysis cache keyed by video + syllabus: a class of 60 on one playlist pays for one analysis.</p>
+      </div>
+      <div class="card">
+        <div class="hd"><span class="lg c-gcp">{{icon:secretmanager}}</span><div><div class="nm">Secret Manager + IAM</div><div class="role">No keys in code</div></div></div>
+        <p>YouTube key lives in Secret Manager. Vertex AI and Firestore use the Cloud Run service account, so there are no Gemini keys at all.</p>
+      </div>
+      <div class="card">
+        <div class="hd"><span class="lg c-gcp">{{icon:cloudbuild}}</span><div><div class="nm">Cloud Build</div><div class="role">Source → container</div></div></div>
+        <p><code>gcloud run deploy --source .</code> builds the multi-stage image (React build + Python) and ships it. We deployed in hour one and kept deploying.</p>
+      </div>
+      <div class="card blue" style="display:flex;flex-direction:column;justify-content:center">
+        <h3 style="font-size:24px;color:var(--blue)">Take any one away and the product stops working.</h3>
+        <p>No Gemini: nothing watches the lectures. No YouTube API: no playlist. No Firestore: no progress or shared cache. No Cloud Run: nothing to open.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Guardrails -->
+<section class="slide" data-title="Trust: guarding against AI mistakes">
+  <div class="bar"><div><div class="kicker">Technical depth</div><h2>We don't trust the model blindly</h2></div></div>
+  <div class="body">
+    <div class="guard">
+      <div class="card"><div class="ic">🎯</div><div><h3>Topics come from a closed list</h3><p>Gemini gets the syllabus as numbered topic IDs (U3.T2) and may only answer with those. Unknown IDs are dropped.</p></div></div>
+      <div class="card"><div class="ic">⏱️</div><div><h3>Timestamps are checked</h3><p>Every timestamp is parsed and checked against the video's real duration from the YouTube API. Invalid ones fall back to the video start.</p></div></div>
+      <div class="card"><div class="ic">🔗</div><div><h3>Questions can't invent sources</h3><p>We hand Gemini a numbered list of moments we extracted. A question cites a moment by number or says "not in your playlist".</p></div></div>
+      <div class="card"><div class="ic">🧩</div><div><h3>Partial failure is fine</h3><p>If one lecture fails to analyse, the job continues and lists it as skipped. Private, deleted and live videos are skipped up front.</p></div></div>
+      <div class="card"><div class="ic">📐</div><div><h3>Typed JSON everywhere</h3><p>Structured output plus Pydantic validation on every response. Scores are clamped to the question's marks.</p></div></div>
+      <div class="card"><div class="ic">🧪</div><div><h3>Tested where it matters</h3><p>Unit tests cover parsing, validation, coverage and the full pipeline with a fake model and a fake YouTube API.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Scope -->
+<section class="slide" data-title="Scope">
+  <div class="bar"><div><div class="kicker">Scope</div><h2>What we built today, and what comes next</h2></div></div>
+  <div class="body">
+    <div class="grid2" style="height:auto">
+      <div class="card green">
+        <h3>In scope (built in this hackathon)</h3>
+        <ul class="clean green">
+          <li>Public YouTube playlists up to 12 lectures, or a single video</li>
+          <li>Syllabus as PDF upload or pasted text</li>
+          <li>Exam pattern as free text, with presets</li>
+          <li>Syllabus map: Taught / Mentioned / Missing, timestamp jumps</li>
+          <li>Suggested videos for missing topics</li>
+          <li>Exam-pattern questions per unit + examiner-style grading</li>
+          <li>Deployed on Cloud Run, cached in Firestore</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Out of scope (roadmap)</h3>
+        <ul class="clean yellow">
+          <li>Hindi and regional-language answers and feedback</li>
+          <li>Previous-year papers to weight topics by how often they're asked</li>
+          <li>Class view for teachers: which topics the class is weakest on</li>
+          <li>Spaced-repetition revision plan to the exam date</li>
+          <li>Accounts, saved progress, Android app</li>
+          <li>Creator view: what a playlist lacks for each university</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Feasibility -->
+<section class="slide" data-title="Feasibility and viability">
+  <div class="bar"><div><div class="kicker">Feasibility &amp; viability</div><h2>Small to build, cheap to run</h2></div></div>
+  <div class="body" style="padding-top:26px">
+    <div class="grid2" style="grid-template-columns:1fr 1.25fr;gap:34px">
+      <div>
+        <h3>Why it fits in 6 hours</h3>
+        <ul class="clean" style="margin-bottom:14px">
+          <li style="font-size:21px">Gemini reads YouTube links and PDFs natively, so there's no download, transcription or embedding pipeline to build.</li>
+          <li style="font-size:21px">Structured output gives typed JSON, so no fragile text parsing.</li>
+          <li style="font-size:21px">One container, one deploy command.</li>
+        </ul>
+        <h3>Running cost</h3>
+        <div class="card blue" style="padding:18px 22px">
+          <p style="font-size:20px">At low media resolution (~66 tokens per frame) and 0.2 frames/sec plus audio (~32 tokens/sec), one lecture-hour is roughly <b>(13 + 32) × 3,600 ≈ 160k input tokens</b>.</p>
+          <p style="font-size:20px;margin-top:8px">Cached per video + syllabus, so <b>every later student on the same playlist costs close to zero</b>.</p>
+        </div>
+        <div class="stack" style="margin-top:16px">
+          <div><span class="lg c-gem">{{icon:googlegemini}}</span>Gemini</div>
+          <div><span class="lg c-py">{{icon:python}}</span>Python</div>
+          <div><span class="lg c-fast">{{icon:fastapi}}</span>FastAPI</div>
+          <div><span class="lg c-react">{{icon:react}}</span>React</div>
+          <div><span class="lg c-dock">{{icon:docker}}</span>Docker</div>
+        </div>
+      </div>
+      <div>
+        <h3>Risks and how we handle them</h3>
+        <table class="risk">
+          <tr><th>Risk</th><th>Mitigation</th></tr>
+          <tr><td>Long lectures are slow to analyse</td><td>4 lectures in parallel, progress bar, results cached</td></tr>
+          <tr><td>Model returns wrong topic or timestamp</td><td>Closed topic list, duration checks, cited moments only</td></tr>
+          <tr><td>One video fails or is private</td><td>Skipped and listed; the rest of the job completes</td></tr>
+          <tr><td>YouTube API quota</td><td>Cache per playlist; search only for missing topics (max 6)</td></tr>
+          <tr><td>Token cost</td><td>Low resolution + low frame rate; one analysis per class</td></tr>
+          <tr><td>Copyright</td><td>Nothing downloaded or rehosted; students watch the official embed, so views still count for the creator</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. Impact -->
+<section class="slide" data-title="Impact and benefits">
+  <div class="bar"><div><div class="kicker">Impact &amp; benefits</div><h2>Exam alignment for students who can't pay for coaching</h2></div></div>
+  <div class="body">
+    <div class="grid3">
+      <div class="card blue">
+        <h3>Students</h3>
+        <ul class="clean"><li style="font-size:21px">See syllabus gaps weeks before the exam, not in the hall</li><li style="font-size:21px">Any topic in one click instead of scrubbing hours of video</li><li style="font-size:21px">Practise in the real pattern, with feedback</li></ul>
+      </div>
+      <div class="card green">
+        <h3>Colleges &amp; teachers</h3>
+        <ul class="clean green"><li style="font-size:21px">Point students to vetted playlists, with gaps flagged</li><li style="font-size:21px">Class-level view of weak topics (roadmap)</li><li style="font-size:21px">Works with the syllabus they already publish</li></ul>
+      </div>
+      <div class="card yellow">
+        <h3>Creators</h3>
+        <ul class="clean yellow"><li style="font-size:21px">Views still go to their videos through the embed</li><li style="font-size:21px">Learn which syllabus topics their playlist is missing</li></ul>
+      </div>
+    </div>
+    <div class="grid2" style="height:auto;margin-top:28px">
+      <div class="card">
+        <h3 style="font-size:24px">Social impact</h3>
+        <p style="font-size:21px">Coaching gives paid students a syllabus-aligned course and test series. CourseMap gives the same alignment to anyone with a free playlist and a phone, at a cost that falls as more classmates use it.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:24px">How we'd measure it</h3>
+        <ul class="clean" style="margin:0"><li style="font-size:20px;margin-bottom:6px">Syllabus coverage found per playlist</li><li style="font-size:20px;margin-bottom:6px">Practice score on first vs. second attempt</li><li style="font-size:20px;margin-bottom:6px">Share of students who study a flagged gap topic</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Business + roadmap -->
+<section class="slide" data-title="Business model and roadmap">
+  <div class="bar"><div><div class="kicker">Viability</div><h2>Business model and roadmap</h2></div></div>
+  <div class="body">
+    <div class="grid3">
+      <div class="card blue"><span class="pill b">Free</span><h3 style="margin-top:12px">Students</h3><p style="font-size:21px">Map any playlist, practise, get graded. Cached analyses keep the cost per student near zero.</p></div>
+      <div class="card green"><span class="pill g">B2B</span><h3 style="margin-top:12px">Colleges &amp; coaching</h3><p style="font-size:21px">Per-institution plan: class dashboards, curated playlists per course, internal-exam question banks.</p></div>
+      <div class="card yellow"><span class="pill y">Partners</span><h3 style="margin-top:12px">Creators</h3><p style="font-size:21px">Syllabus coverage reports per university, so creators can fill gaps and reach more students.</p></div>
+    </div>
+    <h3 style="margin-top:36px">Roadmap</h3>
+    <div class="tl">
+      <div><b>Today</b><span>Playlist → syllabus map → practice → grading, deployed</span></div>
+      <div><b>Month 1</b><span>Hindi and regional languages; previous-year paper weighting</span></div>
+      <div><b>Month 2</b><span>Accounts, revision plan to exam date, Android app</span></div>
+      <div><b>Month 3</b><span>Teacher class view; pilot with 2–3 colleges</span></div>
+      <div><b>Month 6</b><span>Creator reports; university syllabus library</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. Demo -->
+<section class="slide" data-title="Live demo">
+  <div class="bar"><div><div class="kicker">Live demo</div><h2>Riya, third semester, Operating Systems exam in 10 days</h2></div></div>
+  <div class="body">
+    <div class="grid2">
+      <div>
+        <ul class="clean">
+          <li>Paste her 12-lecture YouTube playlist</li>
+          <li>Upload the university syllabus PDF, choose the exam pattern</li>
+          <li>See what percentage of her syllabus is taught, and what's missing</li>
+          <li>Click a topic and jump to the exact minute it's explained</li>
+          <li>Answer a 7-mark question, get marked, rewatch the part she missed</li>
+        </ul>
+      </div>
+      <div class="card blue" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+        <p class="muted" style="font-size:20px">Live at</p>
+        <p contenteditable="true" spellcheck="false" data-save="url" style="font-size:34px;font-weight:800;color:var(--blue);outline:none;margin:10px 0 22px">coursemap-xxxx.a.run.app</p>
+        <p style="font-size:20px">"From <i>I watched twelve hours of video</i> to <i>I know what's missing and I've practised in my exam's format</i>."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14. Thanks -->
+<section class="slide" data-title="Thank you">
+  <div class="body" style="top:0;bottom:48px">
+    <div class="end">
+      <p class="muted" style="font-size:26px;font-weight:600">CourseMap</p>
+      <h1>Thank you</h1>
+      <p style="font-size:32px;margin-top:18px">Your YouTube playlist, mapped to your syllabus and your exam.</p>
+      <div class="logos">
+        <span class="lg c-gem">{{icon:googlegemini}}</span>
+        <span class="lg c-gcp">{{icon:googlecloud}}</span>
+        <span class="lg c-gcp">{{icon:vertexai}}</span>
+        <span class="lg c-gcp">{{icon:cloudrun}}</span>
+        <span class="lg c-fb">{{icon:firebase}}</span>
+        <span class="lg c-yt">{{icon:youtube}}</span>
+      </div>
+      <p class="muted" style="font-size:20px;margin-top:40px">Questions?</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="ui progress" id="progress"></div>
+<div class="ui nav">
+  <button id="prevBtn" title="Previous (←)">◀</button>
+  <button id="menuBtn" title="Slides (M)">☰ <span id="counter"></span></button>
+  <button id="nextBtn" title="Next (→)">▶</button>
+  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
+</div>
+<div class="ui menu" id="menu"><div class="list" id="menuList"></div></div>
+
+<script>
+(function () {
+  const stage = document.getElementById("stage");
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  const progress = document.getElementById("progress");
+  const counter = document.getElementById("counter");
+  const menu = document.getElementById("menu");
+  const menuList = document.getElementById("menuList");
+  let cur = 0;
+
+  function store(key, value) {
+    try {
+      if (value === undefined) return localStorage.getItem("coursemap-deck-" + key);
+      localStorage.setItem("coursemap-deck-" + key, value);
+    } catch (e) { return null; }
+  }
+
+  // Editable fields (team name etc.) persist in this browser.
+  document.querySelectorAll("[data-save]").forEach(function (el) {
+    const saved = store(el.dataset.save);
+    if (saved) el.textContent = saved;
+    el.addEventListener("input", function () { store(el.dataset.save, el.textContent); updateFooters(); });
+    el.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); el.blur(); } });
+  });
+
+  // Footer on every slide except the title.
+  slides.forEach(function (s, i) {
+    if (i === 0) return;
+    const f = document.createElement("div");
+    f.className = "foot";
+    f.innerHTML = '<span class="team"></span><span>' + (i + 1) + " / " + slides.length + "</span>";
+    s.appendChild(f);
+  });
+  function updateFooters() {
+    const team = (document.querySelector('[data-save="team"]') || {}).textContent || "";
+    document.querySelectorAll(".foot .team").forEach(function (t) {
+      t.textContent = "CourseMap · " + team + " · Hack Sprint, GeeksforGeeks × Google Cloud";
+    });
+  }
+  updateFooters();
+
+  slides.forEach(function (s, i) {
+    const b = document.createElement("button");
+    b.textContent = (i + 1) + ". " + s.dataset.title;
+    b.addEventListener("click", function () { show(i); menu.classList.remove("open"); });
+    menuList.appendChild(b);
+  });
+  const hint = document.createElement("div");
+  hint.className = "hint";
+  hint.textContent = "Keys: ← → or Space to move · M menu · F fullscreen · Home/End";
+  menuList.appendChild(hint);
+
+  function show(i) {
+    cur = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function (s, k) { s.classList.toggle("active", k === cur); });
+    progress.style.width = ((cur + 1) / slides.length * 100) + "vw";
+    counter.textContent = (cur + 1) + "/" + slides.length;
+    menuList.querySelectorAll("button").forEach(function (b, k) { b.classList.toggle("cur", k === cur); });
+    try { history.replaceState(null, "", "#" + (cur + 1)); } catch (e) {}
+    if (slides[cur].dataset.title !== "System architecture") stopPlay();
+  }
+
+  function fit() {
+    const s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    stage.style.transform = "translate(-50%, -50%) scale(" + s + ")";
+  }
+  window.addEventListener("resize", fit);
+  fit();
+
+  function fullscreen() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen().catch(function () {});
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.target.isContentEditable) return;
+    if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) { e.preventDefault(); show(cur + 1); }
+    else if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); show(cur - 1); }
+    else if (e.key === "Home") show(0);
+    else if (e.key === "End") show(slides.length - 1);
+    else if (e.key === "f" || e.key === "F") fullscreen();
+    else if (e.key === "m" || e.key === "M") menu.classList.toggle("open");
+    else if (e.key === "Escape") menu.classList.remove("open");
+  });
+  document.getElementById("prevBtn").onclick = function () { show(cur - 1); };
+  document.getElementById("nextBtn").onclick = function () { show(cur + 1); };
+  document.getElementById("menuBtn").onclick = function () { menu.classList.toggle("open"); };
+  document.getElementById("fsBtn").onclick = fullscreen;
+  menu.addEventListener("click", function (e) { if (e.target === menu) menu.classList.remove("open"); });
+
+  // Product mock-up: clicking a topic moves the player.
+  const topics = Array.from(document.querySelectorAll(".mock .topic"));
+  function playTopic(t) {
+    topics.forEach(function (x) { x.classList.toggle("sel", x === t); });
+    document.getElementById("mockCap").textContent = t.dataset.v + (t.dataset.t !== "0:00" ? " — " + t.dataset.t : "");
+    document.getElementById("mockBar").style.width = t.dataset.w + "%";
+    document.getElementById("mockPts").innerHTML = t.dataset.p.split("|").map(function (p) { return "<li>" + p + "</li>"; }).join("");
+  }
+  topics.forEach(function (t) { t.addEventListener("click", function () { playTopic(t); }); });
+  document.getElementById("gradeBtn").addEventListener("click", function () {
+    const g = document.getElementById("gradeBox");
+    g.classList.remove("show"); void g.offsetWidth; g.classList.add("show");
+  });
+  document.querySelector("[data-jump]").addEventListener("click", function () { playTopic(topics[1]); });
+
+  // Architecture walkthrough.
+  const STEPS = [
+    "<b>Overview.</b> Click a step, or press Play to walk through one request.",
+    "<b>1 · Submit.</b> The student pastes a playlist link, uploads the syllabus PDF and picks the exam pattern. Cloud Run starts a background job and returns a job ID.",
+    "<b>2 · Read the syllabus.</b> Gemini on Vertex AI reads the PDF and returns units and topics as typed JSON. We give each topic an ID like U3.T2.",
+    "<b>3 · List the lectures.</b> The YouTube Data API returns each video's title, duration and privacy. The API key comes from Secret Manager.",
+    "<b>4 · Watch every lecture.</b> Gemini watches each public video straight from its YouTube URL, 4 at a time, and returns the topics taught, how deeply, and when.",
+    "<b>5 · Save and share.</b> Progress and every analysis go to Firestore, cached per video + syllabus, so the next student on the same playlist gets results instantly.",
+    "<b>6 · Questions and grading.</b> Gemini writes exam-pattern questions per unit, each tied to a validated moment, and grades typed answers on demand.",
+    "<b>7 · Ship.</b> Cloud Build builds one container (React app + FastAPI) from source; Cloud Run serves it from a warm instance.",
+    "<b>8 · Watch the moment.</b> The browser polls for results and plays the lecture in the official YouTube embed, starting at the exact second."
+  ];
+  const arch = document.getElementById("arch");
+  const parts = Array.from(arch.querySelectorAll("[data-s]"));
+  const archTxt = document.getElementById("archTxt");
+  const playBtn = document.getElementById("archPlay");
+  let step = 0, timer = null;
+
+  function setStep(k) {
+    step = (k + STEPS.length) % STEPS.length;
+    archTxt.innerHTML = STEPS[step];
+    parts.forEach(function (p) {
+      const on = step !== 0 && p.dataset.s.split(" ").includes(String(step));
+      p.classList.toggle("on", on);
+      p.classList.toggle("dim", step !== 0 && !on);
+      if (p.tagName === "g") p.querySelectorAll("*").forEach(function (c) { c.classList.toggle("dim", step !== 0 && !on); });
+    });
+  }
+  function stopPlay() { clearInterval(timer); timer = null; playBtn.textContent = "▶ Play"; }
+  playBtn.onclick = function () {
+    if (timer) { stopPlay(); return; }
+    playBtn.textContent = "❚❚ Pause";
+    setStep(step === STEPS.length - 1 ? 1 : step + 1);
+    timer = setInterval(function () {
+      if (step === STEPS.length - 1) { stopPlay(); return; }
+      setStep(step + 1);
+    }, 3200);
+  };
+  document.getElementById("archNext").onclick = function () { stopPlay(); setStep(step + 1); };
+  document.getElementById("archPrev").onclick = function () { stopPlay(); setStep(step - 1); };
+  parts.forEach(function (p) {
+    if (!p.classList.contains("node")) return;
+    p.addEventListener("click", function () { stopPlay(); setStep(Number(p.dataset.s.split(" ")[0])); });
+  });
+
+  const start = parseInt((location.hash || "#1").slice(1), 10);
+  show(isNaN(start) ? 0 : start - 1);
+})();
+</script>
+</body>
+</html>
