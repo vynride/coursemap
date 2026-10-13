@@ -17,6 +17,7 @@ class Settings:
     video_fps: float = 0.2
     video_timeout_s: float = 300
     max_gap_searches: int = 6
+    demo: bool = False
 
 
 def load_settings() -> Settings:
@@ -35,4 +36,5 @@ def load_settings() -> Settings:
         video_fps=float(env.get("VIDEO_FPS", Settings.video_fps)),
         video_timeout_s=float(env.get("VIDEO_TIMEOUT_S", Settings.video_timeout_s)),
         max_gap_searches=int(env.get("MAX_GAP_SEARCHES", Settings.max_gap_searches)),
+        demo=env.get("DEMO", "").lower() in ("1", "true", "yes"),
     )
