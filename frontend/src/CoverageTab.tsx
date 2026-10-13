@@ -1,6 +1,6 @@
 import { Play, Plus } from "lucide-react";
 import { fmt, type Job, type Moment } from "./api";
-import { suggestionMoment } from "./CoursePanel";
+import { suggestionMoment } from "./course";
 
 const STATUS = {
   covered: { label: "Taught", badge: "badge-green" },

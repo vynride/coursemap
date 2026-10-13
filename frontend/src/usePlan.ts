@@ -10,6 +10,7 @@ export interface Plan {
   weeks: Week[];
   done: Set<string>;
   toggle: (videoId: string) => void;
+  markWatched: (videoId: string) => void;
   behind: number;   // past-due weeks with unwatched videos
 }
 
@@ -52,5 +53,9 @@ export function usePlan(job: Job): Plan {
     }));
   }
 
-  return { settings, setSettings, weeks, done, toggle, behind };
+  function markWatched(videoId: string) {
+    setSettings((s) => (s.done.includes(videoId) ? s : { ...s, done: [...s.done, videoId] }));
+  }
+
+  return { settings, setSettings, weeks, done, toggle, markWatched, behind };
 }

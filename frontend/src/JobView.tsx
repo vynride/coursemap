@@ -1,9 +1,11 @@
-import { Check, Circle, LoaderCircle, Map as MapIcon, PenLine, TriangleAlert } from "lucide-react";
+import { Check, Circle, LoaderCircle, Map as MapIcon, NotebookPen, PenLine, TriangleAlert } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { getJob, type Job, type Moment } from "./api";
-import CoursePanel, { videoMoment } from "./CoursePanel";
+import CoursePanel from "./CoursePanel";
+import { videoMoment } from "./course";
 import CoverageTab from "./CoverageTab";
 import { fixtureJob } from "./fixture";
+import NotesTab from "./NotesTab";
 import Player from "./Player";
 import PracticeTab from "./PracticeTab";
 import { usePlan } from "./usePlan";
@@ -65,18 +67,20 @@ export default function JobView({ jobId }: { jobId: string }) {
   return <Course job={job} />;
 }
 
-type Tab = "map" | "practice";
+type Tab = "map" | "notes" | "practice";
 
 function Course({ job }: { job: Job }) {
   const plan = usePlan(job);
   const [tab, setTab] = useState<Tab>("map");
-  const [playing, setPlaying] = useState<Moment>(() => videoMoment([...job.videos].sort((a, b) => a.position - b.position)[0]));
+  const [playing, setPlaying] = useState<Moment>(() => videoMoment(job, [...job.videos].sort((a, b) => a.position - b.position)[0]));
   const [autoplay, setAutoplay] = useState(false);
+  const [theatre, setTheatre] = useState(false);
+  const [noteTarget, setNoteTarget] = useState<number | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLElement>(null);
 
   function play(m: Moment) {
-    setPlaying(m);
+    setPlaying({ ...m });   // a new object, so clicking the same moment again seeks again
     setAutoplay(true);
     // Bring the player into view when a timestamp far down the page is clicked.
     const top = stageRef.current?.getBoundingClientRect().top ?? 0;
@@ -88,13 +92,22 @@ function Course({ job }: { job: Job }) {
     tabsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  function openNotes(week: number) {
+    setTab("notes");
+    setNoteTarget(week);
+  }
+
   return (
-    <div className="watch">
+    <div className={`watch ${theatre ? "theatre" : ""}`}>
       <div className="watch-main" ref={stageRef}>
-        <Player job={job} moment={playing} autoplay={autoplay} plan={plan} onPlay={play} />
+        <Player job={job} moment={playing} autoplay={autoplay} plan={plan} onPlay={play}
+          theatre={theatre} onTheatre={() => setTheatre(!theatre)} />
         <nav className="tabs" ref={tabsRef}>
           <button className={tab === "map" ? "on" : ""} onClick={() => setTab("map")}>
             <MapIcon size={15} strokeWidth={tab === "map" ? 2.2 : 1.8} /> Course map
+          </button>
+          <button className={tab === "notes" ? "on" : ""} onClick={() => { setTab("notes"); setNoteTarget(null); }}>
+            <NotebookPen size={15} strokeWidth={tab === "notes" ? 2.2 : 1.8} /> Study notes
           </button>
           <button className={tab === "practice" ? "on" : ""} onClick={() => setTab("practice")}>
             <PenLine size={15} strokeWidth={tab === "practice" ? 2.2 : 1.8} /> Practice
@@ -102,11 +115,13 @@ function Course({ job }: { job: Job }) {
           </button>
         </nav>
         <div className="tab-body" key={tab}>
-          {tab === "map" ? <CoverageTab job={job} playing={playing} onPlay={play} /> : <PracticeTab job={job} onPlay={play} />}
+          {tab === "map" && <CoverageTab job={job} playing={playing} onPlay={play} />}
+          {tab === "notes" && <NotesTab job={job} plan={plan} target={noteTarget} onPlay={play} onPractice={openPractice} />}
+          {tab === "practice" && <PracticeTab job={job} onPlay={play} />}
         </div>
       </div>
       <aside className="watch-side">
-        <CoursePanel job={job} plan={plan} currentVideo={playing.video_id} onPlay={play} onPractice={openPractice} />
+        <CoursePanel job={job} plan={plan} currentVideo={playing.video_id} onPlay={play} onPractice={openPractice} onNotes={openNotes} />
       </aside>
     </div>
   );
