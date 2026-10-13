@@ -32,8 +32,7 @@ html, body { height: 100%; overflow: hidden; background: var(--stage-bg); color:
 .bar .brandmark { display: flex; align-items: center; gap: 14px; color: var(--muted); font-weight: 600; font-size: 18px; }
 .bar .brandmark .lg { width: 40px; height: 40px; color: #4285F4; }
 .body { position: absolute; top: 124px; left: 0; right: 0; bottom: 48px; padding: 44px 70px; }
-.foot { position: absolute; left: 0; right: 0; bottom: 0; height: 48px; padding: 0 70px; display: flex; align-items: center;
-  justify-content: space-between; font-size: 16px; color: var(--muted); border-top: 1px solid var(--line); background: var(--panel); }
+.foot { position: absolute; right: 70px; bottom: 0; height: 48px; display: flex; align-items: center; font-size: 16px; color: var(--muted); }
 
 /* type */
 h3 { font-size: 28px; font-weight: 700; margin-bottom: 16px; }
@@ -73,7 +72,6 @@ b.blue { color: var(--blue); } b.green { color: var(--green); }
 .title-slide .tagline { font-size: 42px; font-weight: 500; margin-top: 28px; line-height: 1.25; }
 .title-slide .sub { font-size: 26px; color: var(--muted); margin-top: 14px; }
 .title-slide .meta { margin-top: 56px; display: flex; }
-.title-slide .meta .card { padding: 18px 26px; }
 .title-slide .meta .lbl { font-size: 15px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-weight: 700; }
 .title-slide .meta .val { font-size: 28px; font-weight: 700; margin-top: 4px; }
 .title-slide .stripe { position: absolute; left: 0; right: 0; bottom: 0; height: 14px;
@@ -248,7 +246,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
     <p class="tagline">Your YouTube playlist, run like <b class="blue">a college course</b>.</p>
     <p class="sub">For the industry skills you learn outside class.</p>
     <div class="meta">
-      <div class="card"><div class="lbl">Team</div><div class="val">v3as</div></div>
+      <div><div class="lbl">Team</div><div class="val">v3as</div></div>
     </div>
   </div>
   <div class="stripe"></div>
@@ -460,12 +458,9 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
         <div class="hd"><span class="lg c-gcp"><svg class="ico" fill="currentColor" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1.5 21.5 7v10L12 22.5 2.5 17V7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><rect x="8" y="11" width="8" height="6.5" rx="1.2"/><path d="M9.6 11V9.4a2.4 2.4 0 0 1 4.8 0V11" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><div><div class="nm">Secret Manager</div><div class="role">+ IAM · no keys in code</div></div></div>
         <ul class="clean"><li>Holds the YouTube API key</li><li>Service account for Vertex AI and Firestore</li></ul>
       </div>
-      <div class="card">
+      <div class="card" style="grid-column:span 2">
         <div class="hd"><span class="lg c-gcp"><svg class="ico" fill="currentColor" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1.5 21.5 7v10L12 22.5 2.5 17V7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><rect x="7" y="13" width="4.4" height="4.4" rx=".6"/><rect x="12.6" y="13" width="4.4" height="4.4" rx=".6"/><rect x="9.8" y="7.6" width="4.4" height="4.4" rx=".6"/></svg></span><div><div class="nm">Cloud Build</div><div class="role">Source to container</div></div></div>
         <ul class="clean"><li>One deploy command from source</li><li>Builds React + Python in one image</li></ul>
-      </div>
-      <div class="card blue" style="display:flex;flex-direction:column;justify-content:center">
-        <h3 style="font-size:23px;color:var(--blue);margin:0">Remove any one and the product stops working.</h3>
       </div>
     </div>
   </div>
@@ -479,7 +474,7 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
       <div class="card"><h3>Closed topic list</h3><p>Gemini may only cite topic IDs from the outline. Unknown IDs are dropped.</p></div>
       <div class="card"><h3>Checked timestamps</h3><p>Validated against each video's real duration.</p></div>
       <div class="card"><h3>No invented sources</h3><p>Questions can only cite moments we extracted.</p></div>
-      <div class="card"><h3>Partial failure is fine</h3><p>A failed, private or live video is skipped and listed.</p></div>
+      <div class="card"><h3>Missing videos replaced</h3><p>Private, deleted or unwatchable videos are skipped. A video on the same subject takes their place.</p></div>
       <div class="card"><h3>Typed JSON</h3><p>Pydantic validation on every response. Scores clamped to points.</p></div>
       <div class="card"><h3>Tested</h3><p>Unit tests with a fake model and a fake YouTube API.</p></div>
     </div>
@@ -588,12 +583,12 @@ table.risk td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertic
   const menuList = document.getElementById("menuList");
   let cur = 0;
 
-  // Footer on every slide except the title.
+  // Page number on every slide except the title.
   slides.forEach(function (s, i) {
     if (i === 0) return;
     const f = document.createElement("div");
     f.className = "foot";
-    f.innerHTML = "<span>CourseMap · v3as · Hack Sprint, GeeksforGeeks × Google Cloud</span><span>" + (i + 1) + " / " + slides.length + "</span>";
+    f.textContent = (i + 1) + " / " + slides.length;
     s.appendChild(f);
   });
 
