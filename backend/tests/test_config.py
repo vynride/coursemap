@@ -8,7 +8,7 @@ def test_defaults_without_env(monkeypatch):
     assert s.gemini_model == "gemini-2.5-flash"
     assert s.use_vertex is True
     assert s.store == "memory"
-    assert s.max_videos == 12
+    assert s.max_videos == 20
     assert s.video_fps == 0.2
 
 

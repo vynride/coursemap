@@ -12,7 +12,7 @@ class Settings:
     youtube_api_key: str = ""
     store: str = "memory"
     static_dir: str = ""
-    max_videos: int = 12
+    max_videos: int = 20
     video_concurrency: int = 4
     video_fps: float = 0.2
     video_timeout_s: float = 300
