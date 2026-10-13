@@ -104,7 +104,7 @@ textarea.input { resize: vertical; line-height: 1.6; }
 .brand-name { font-weight: 800; font-size: 1rem; color: var(--primary); letter-spacing: -.02em; line-height: 1.1; }
 .brand-by { font-size: .66rem; color: var(--text-subtle); }
 .topbar-title { font-size: .84rem; color: var(--text-subtle); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.page { max-width: 1440px; margin: 0 auto; padding: 28px; animation: rise .38s var(--ease) both; }
+.page { margin: 0 auto; padding: 16px 24px 28px; animation: rise .38s var(--ease) both; }
 
 /* ---------- New course ---------- */
 .home { max-width: 640px; margin: 40px auto 0; }
@@ -148,50 +148,51 @@ textarea.input { resize: vertical; line-height: 1.6; }
 }
 
 /* ---------- Course: YouTube-style watch page ---------- */
-.watch { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 24px; align-items: start; }
-.watch-main { min-width: 0; scroll-margin-top: 76px; }
-.watch-side { position: sticky; top: 76px; }
+/* Like YouTube's watch page: the player and panel fill the window, the player is capped so it fits
+   on screen, and the whole row centres on very wide screens. */
+.watch { display: grid; grid-template-columns: minmax(0, 1fr) 402px; gap: 24px; align-items: start;
+  max-width: max(980px, calc((100vh - 200px) * 16 / 9 + 426px)); margin: 0 auto; }
+.watch-main { min-width: 0; scroll-margin-top: 72px; }
+.watch-side { position: sticky; top: 72px; }
 
-/* The stage is a dark theatre: video, chapter bar, then what's playing and its topics. */
-.stage { background: linear-gradient(180deg, #121815 0%, #18211C 100%); border-radius: 18px; overflow: hidden; color: #E9EEEA; box-shadow: 0 24px 48px -24px rgba(15, 24, 19, .55); }
-.stage-video { background: #000; }
+/* The stage: video, chapter bar, then what's playing and its topics. */
+.stage-video { background: #000; border-radius: 12px; overflow: hidden; }
 .stage-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
 .stage-host { position: relative; width: 100%; aspect-ratio: 16 / 9; }
 .stage-host iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.chapters { padding: 10px 20px 0; }
-.chapter-track { position: relative; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, .08); }
-.chapter { position: absolute; top: 0; height: 100%; padding: 0; border-radius: 999px; background: rgba(140, 196, 160, .45); border-left: 2px solid #121815; transition: background .18s ease, transform .18s ease; }
-.chapter:hover { background: rgba(140, 196, 160, .8); transform: scaleY(1.6); }
-.chapter.is-current { background: #8CC4A0; }
-.playhead { position: absolute; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px rgba(255, 255, 255, .18); pointer-events: none; transition: left .5s linear; }
-.stage-meta { padding: 16px 20px 18px; }
+.chapters { padding: 12px 2px 0; }
+.chapter-track { position: relative; height: 6px; border-radius: 999px; background: var(--bg-subtle); }
+.chapter { position: absolute; top: 0; height: 100%; padding: 0; border-radius: 999px; background: var(--primary-border); border-left: 2px solid var(--bg-surface); transition: background .18s ease, transform .18s ease; }
+.chapter:hover { background: var(--primary); transform: scaleY(1.6); }
+.chapter.is-current { background: var(--primary); }
+.playhead { position: absolute; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--bg-surface); border: 2px solid var(--primary); pointer-events: none; transition: left .5s linear; }
+.stage-meta { padding: 14px 0 0; }
 .stage-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
-.stage-title h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.35; margin-top: 4px; color: #fff; }
-.stage-eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: rgba(233, 238, 234, .5); }
-.stage-eyebrow .now { color: #8CC4A0; }
+.stage-title h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.35; margin-top: 4px; }
+.stage-eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-subtle); }
+.stage-eyebrow .now { color: var(--primary); }
 .stage-actions { display: flex; gap: 8px; flex-shrink: 0; }
-.btn-ghost { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; font-size: .84rem; font-weight: 600; color: #E9EEEA; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .12); }
-.btn-ghost:hover { background: rgba(255, 255, 255, .14); }
-.btn-ghost.is-on { background: #8CC4A0; border-color: #8CC4A0; color: #10241A; }
+.btn-ghost { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; font-size: .84rem; font-weight: 600; background: var(--bg-surface); border: 1px solid var(--border-strong); }
+.btn-ghost:hover { background: var(--bg-subtle); border-color: var(--text-subtle); }
+.btn-ghost.is-on { background: var(--primary-subtle); border-color: var(--primary-border); color: var(--primary); }
 .btn-ghost.icon { padding: 8px 10px; }
-.stage-summary { margin-top: 10px; font-size: .88rem; line-height: 1.65; color: rgba(233, 238, 234, .68); max-width: 75ch; }
-.stage-topics { list-style: none; margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, .08); display: grid; gap: 2px; }
-.stage-topic { display: flex; align-items: center; gap: 12px; width: calc(100% + 16px); padding: 7px 8px; margin: 0 -8px; border-radius: 10px; text-align: left; color: inherit; }
-.stage-topic:hover { background: rgba(255, 255, 255, .06); }
-.stage-topic.is-current { background: rgba(140, 196, 160, .14); }
-.stamp-time { display: inline-flex; align-items: center; gap: 5px; min-width: 64px; font-family: var(--font-mono); font-size: .76rem; font-weight: 500; color: #8CC4A0; }
+.stage-summary { margin-top: 10px; font-size: .88rem; line-height: 1.65; color: var(--text-muted); max-width: 75ch; }
+.stage-topics { list-style: none; margin-top: 14px; padding: 10px 16px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); display: grid; gap: 2px; }
+.stage-topic { display: flex; align-items: center; gap: 12px; width: calc(100% + 16px); padding: 7px 8px; margin: 0 -8px; border-radius: var(--radius-md); text-align: left; }
+.stage-topic:hover { background: var(--bg-subtle); }
+.stage-topic.is-current { background: var(--primary-subtle); }
+.stamp-time { display: inline-flex; align-items: center; gap: 5px; min-width: 64px; font-family: var(--font-mono); font-size: .76rem; font-weight: 500; color: var(--primary); }
 .stage-topic-name { flex: 1; font-size: .88rem; font-weight: 500; }
-.stage-topic.is-current .stage-topic-name { color: #fff; font-weight: 600; }
-.stage-points { margin: 2px 0 8px 76px; padding-left: 16px; display: grid; gap: 3px; font-size: .82rem; color: rgba(233, 238, 234, .7); }
-.badge-dark { background: rgba(255, 255, 255, .1); color: #E8B9A6; }
+.stage-topic.is-current .stage-topic-name { color: var(--primary); font-weight: 600; }
+.stage-points { margin: 2px 0 8px 76px; padding-left: 16px; display: grid; gap: 3px; font-size: .82rem; color: var(--text-muted); }
 
 /* Theatre mode: the stage takes the full width, the panel moves below it. */
-.watch.theatre { grid-template-columns: 1fr; }
+.watch.theatre { grid-template-columns: 1fr; max-width: max(980px, calc((100vh - 170px) * 16 / 9)); }
 .watch.theatre .watch-side { position: static; }
-.watch.theatre .panel { max-height: 520px; }
+.watch.theatre .panel { height: auto; max-height: 520px; }
 
 /* Right panel: progress + playlist */
-.panel { display: flex; flex-direction: column; max-height: calc(100vh - 92px); overflow: hidden; }
+.panel { display: flex; flex-direction: column; height: calc(100vh - 88px); overflow: hidden; }
 .panel-head { padding: 16px 18px 12px; border-bottom: 1px solid var(--border); display: grid; gap: 10px; justify-items: start; }
 .panel-head h2 { font-size: 1.05rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.25; margin-top: -6px; }
 .panel-head > .muted { margin-top: -8px; }
@@ -304,7 +305,7 @@ textarea.input { resize: vertical; line-height: 1.6; }
 @media (max-width: 1080px) {
   .watch { grid-template-columns: 1fr; }
   .watch-side { position: static; }
-  .panel { max-height: 560px; }
+  .panel { height: auto; max-height: 560px; }
 }
 @media (max-width: 640px) {
   .page { padding: 20px 16px; }

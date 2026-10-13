@@ -155,7 +155,7 @@ export default function Player({ job, moment, autoplay, plan, theatre, onTheatre
                   <button className={`stage-topic ${isCurrent ? "is-current" : ""}`} onClick={() => onPlay(t.moment)}>
                     <span className="stamp-time"><Play size={9} fill="currentColor" /> {fmt(t.moment.start_s)}</span>
                     <span className="stage-topic-name">{t.name}</span>
-                    {t.moment.depth === "mentioned" && <span className="badge badge-dark">Mentioned</span>}
+                    {t.moment.depth === "mentioned" && <span className="badge badge-clay">Mentioned</span>}
                   </button>
                   {isCurrent && t.moment.key_points.length > 0 && (
                     <ul className="stage-points">{t.moment.key_points.map((p) => <li key={p}>{p}</li>)}</ul>
