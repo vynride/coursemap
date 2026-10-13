@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getJob, type Job, type Moment } from "./api";
 import CoverageTab from "./CoverageTab";
 import { fixtureJob } from "./fixture";
+import PlanTab from "./PlanTab";
 import Player from "./Player";
 import PracticeTab from "./PracticeTab";
 
@@ -18,7 +19,7 @@ const STEP_LABEL: Record<Job["status"], string> = {
 export default function JobView({ jobId }: { jobId: string }) {
   const [job, setJob] = useState<Job | null>(jobId === "fixture" ? fixtureJob : null);
   const [error, setError] = useState<string | null>(null);
-  const [tab, setTab] = useState<"map" | "practice">("map");
+  const [tab, setTab] = useState<"map" | "plan" | "practice">("map");
   const [playing, setPlaying] = useState<Moment | null>(null);
 
   useEffect(() => {
@@ -64,11 +65,14 @@ export default function JobView({ jobId }: { jobId: string }) {
         <Summary job={job} />
         <nav className="tabs">
           <button className={tab === "map" ? "on" : ""} onClick={() => setTab("map")}>Course map</button>
+          <button className={tab === "plan" ? "on" : ""} onClick={() => setTab("plan")}>Study plan</button>
           <button className={tab === "practice" ? "on" : ""} onClick={() => setTab("practice")}>
             Practice ({job.questions.length})
           </button>
         </nav>
-        {tab === "map" ? <CoverageTab job={job} onPlay={setPlaying} /> : <PracticeTab job={job} onPlay={setPlaying} />}
+        {tab === "map" && <CoverageTab job={job} onPlay={setPlaying} />}
+        {tab === "plan" && <PlanTab job={job} onPlay={setPlaying} onPractice={() => setTab("practice")} />}
+        {tab === "practice" && <PracticeTab job={job} onPlay={setPlaying} />}
       </div>
       <aside className="side">
         <Player moment={playing} />

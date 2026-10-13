@@ -60,3 +60,17 @@ button { font: inherit; cursor: pointer; }
   .side { position: static; order: -1; }
   .moments, .suggest { margin-left: 0; }
 }
+.plan-settings { display: flex; gap: 16px; flex-wrap: wrap; align-items: end; }
+.plan-settings input { width: 160px; }
+.plan-status { flex: 1; min-width: 220px; }
+.plan-status .ontrack { color: var(--green); font-weight: 700; }
+.plan-status .late { color: var(--red); font-weight: 700; }
+.week.complete { border-color: var(--green); }
+.week.complete h3 { color: var(--green); }
+.week.late { border-color: var(--red); }
+.week.late h3 { color: var(--red); }
+.plan-item { display: flex; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px solid var(--panel); }
+.plan-item input { width: 18px; height: 18px; }
+.plan-item .muted { margin-left: auto; font-size: 14px; }
+.plan-item.extra .chip { min-width: 56px; background: var(--red-soft); color: var(--red); }
+.plan-item.extra .chip.test { background: var(--blue-soft); color: var(--blue); }
